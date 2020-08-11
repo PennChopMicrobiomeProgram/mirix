@@ -1,11 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # abx.idx
-
-<!-- badges: start -->
-
-<!-- badges: end -->
 
 The goal of abx.idx is to calculate an index for a given bacterial
 community’s susceptibility to the specified antibiotics.
