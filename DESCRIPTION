@@ -1,0 +1,11 @@
+Package: abx.idx
+Title: Modeling the Susceptibility of a Bacterial Community to Antibiotics
+Version: 0.0.0.9000
+Author: Vincent Tu <tuv@email.chop.edu>
+Maintainer: Vincent Tu <tuv@email.chop.edu>
+Description: This package calculates an index for a given bacterial community's susceptibility to the specified antibiotics.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
