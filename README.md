@@ -3,6 +3,8 @@
 
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/tuv292/abx_idx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abx_idx)
+[![Travis build
+status](https://travis-ci.com/tuv292/abx_idx.svg?branch=master)](https://travis-ci.com/tuv292/abx_idx)
 <!-- badges: end -->
 
 # abx.idx
