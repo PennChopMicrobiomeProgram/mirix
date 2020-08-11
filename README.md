@@ -5,6 +5,8 @@
 status](https://ci.appveyor.com/api/projects/status/github/tuv292/abx_idx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abx_idx)
 [![Travis build
 status](https://travis-ci.com/tuv292/abx_idx.svg?branch=master)](https://travis-ci.com/tuv292/abx_idx)
+[![Codecov test
+coverage](https://codecov.io/gh/tuv292/abx_idx/branch/master/graph/badge.svg)](https://codecov.io/gh/tuv292/abx_idx?branch=master)
 <!-- badges: end -->
 
 # abx.idx

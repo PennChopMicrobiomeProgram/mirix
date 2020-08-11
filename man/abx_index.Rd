@@ -7,7 +7,7 @@
 abx_index(df, abx = NULL)
 }
 \arguments{
-\item{df}{A dataframe of samples as columns and bacterial taxons as rows. Phylogenetic classifications of taxons should be separated by double underscores (e.g. k__)}
+\item{df}{A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxons in rows should follow Greengenes annotations and be separated by double underscores (e.g. k__Bacteria;p__Bacteroidetes)}
 
 \item{abx}{Antibiotics of interest to calculate index}
 }
