@@ -1,4 +1,10 @@
 
+<!-- badges: start -->
+
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/tuv292/abx_idx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abx_idx)
+<!-- badges: end -->
+
 # abx.idx
 
 The goal of abx.idx is to calculate an index for a given bacterial
