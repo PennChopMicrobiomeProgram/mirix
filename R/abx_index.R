@@ -1,7 +1,8 @@
 #' Function to calculate antibiotics index for vancomycin
 #'
-#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxons in rows should follow Greengenes annotations and be separated by double underscores (e.g. k__Bacteria;p__Bacteroidetes)
-#' @param abx Antibiotics of interest to calculate index
+#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param delim How taxonomic levels are separated in row names
+#' @param weighted Calculate index based on weighted representation in LTP database
 #'
 #' @return The calculated antibiotics index for each sample
 #' @export
@@ -11,87 +12,114 @@
 #' vancomycin_index(test_df)
 #' }
 #'
-vancomycin_index <- function(df, delim = "; ", weighted = T, plot = F, plot_order = F) {
+vancomycin_index <- function(df, delim = "; ", weighted = T) {
   abx <- "vancomycin"
-  taxa <- split_levels(row.names(df), delim)
+  taxa <- split_levels(row.names(df), delim) ##use pull(unite(d_adf, col = "new", sep = "; ")) for taxa row names
   suscept_vector <- get_suscept_vector(taxa, abx)
+  abx_idx_vector <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
 
-  abx_idx_vactor <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
-
-  if(plot) {
-    abx_idx_plot(abx_idx_vactor, plot_order)
-  }
-  else {
-    return(abx_idx_vactor)
-  }
+  return(abx_idx_vector)
 }
 
-#have to use pull(unite(d_adf, col = "new", sep = "; ")) to generate the names and then do assignment
-#test on vancomycin dataset
-##make visializations functions?
-#make a plot
-
-nitroimidazoles_index <- function(df, delim = "; ", weighted = T, plot = F, plot_order = F) {
+#' Function to calculate antibiotics index for nitroimidazole
+#'
+#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param delim How taxonomic levels are separated in row names
+#' @param weighted Calculate index based on weighted representation in LTP database
+#'
+#' @return The calculated antibiotics index for each sample
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' nitroimidazoles_index(test_df)
+#' }
+#'
+nitroimidazoles_index <- function(df, delim = "; ", weighted = T) {
   abx <- "nitroimidazole"
   taxa <- split_levels(row.names(df), delim)
   suscept_vector <- get_suscept_vector(taxa, abx)
+  abx_idx_vector <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
 
-  abx_idx_vactor <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
-
-  if(plot) {
-    abx_idx_plot(abx_idx_vactor, plot_order)
-  }
-  else {
-    return(abx_idx_vactor)
-  }
+  return(abx_idx_vector)
 }
 
-fluoroquinolone_index <- function(df, delim = "; ", weighted = T, plot = F, plot_order = F) {
+#' Function to calculate antibiotics index for fluoroquinolone
+#'
+#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param delim How taxonomic levels are separated in row names
+#' @param weighted Calculate index based on weighted representation in LTP database
+#'
+#' @return The calculated antibiotics index for each sample
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' fluoroquinolone_index(test_df)
+#' }
+#'
+fluoroquinolone_index <- function(df, delim = "; ", weighted = T) {
   abx <- "fluoroquinolone"
   taxa <- split_levels(row.names(df), delim)
   suscept_vector <- get_suscept_vector(taxa, abx)
+  abx_idx_vector <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
 
-  abx_idx_vactor <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
-
-  if(plot) {
-    abx_idx_plot(abx_idx_vactor, plot_order)
-  }
-  else {
-    return(abx_idx_vactor)
-  }
+  return(abx_idx_vector)
 }
 
-polymyxin_n_aztreonam_index <- function(df, delim = "; ", weighted = T, plot = F, plot_order = F) {
+#' Function to calculate antibiotics index for polymyxin and aztreonam
+#'
+#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param delim How taxonomic levels are separated in row names
+#' @param weighted Calculate index based on weighted representation in LTP database
+#'
+#' @return The calculated antibiotics index for each sample
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' polymyxin_n_aztreonam_index(test_df)
+#' }
+#'
+polymyxin_n_aztreonam_index <- function(df, delim = "; ", weighted = T) {
   abx <- "polymyxin_n_aztreonam"
   taxa <- split_levels(row.names(df), delim)
   suscept_vector <- get_suscept_vector(taxa, abx)
+  abx_idx_vector <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
 
-  abx_idx_vactor <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
-
-  if(plot) {
-    abx_idx_plot(abx_idx_vactor, plot_order)
-  }
-  else {
-    return(abx_idx_vactor)
-  }
+  return(abx_idx_vector)
 }
 
-gram_pos_index <- function(df, delim = "; ", weighted = T, plot = F, plot_order = F) {
+#' Function to calculate antibiotics index for antibiotics that affect gram positive bacteria
+#'
+#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param delim How taxonomic levels are separated in row names
+#' @param weighted Calculate index based on weighted representation in LTP database
+#'
+#' @return The calculated antibiotics index for each sample
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' gram_pos_index(test_df)
+#' }
+#'
+gram_pos_index <- function(df, delim = "; ", weighted = T) {
   abx <- "glycopeptides_macrolides_oxazolidinones_lincosamides_lipopeptides_amoxicillin"
   taxa <- split_levels(row.names(df), delim)
   suscept_vector <- get_suscept_vector(taxa, abx)
+  abx_idx_vector <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
 
-  abx_idx_vactor <- lapply(as.data.frame(df), calc_index, suscept_vector, weighted)
-
-  if(plot) {
-    abx_idx_plot(abx_idx_vactor, plot_order)
-  }
-  else {
-    return(abx_idx_vactor)
-  }
+  return(abx_idx_vector)
 }
 
-##split taxa name using row names
+#' Split the taxonomic classifications in the row names into a dataframe
+#'
+#' @param row_names The row name of taxonomic levels from the abundance matrix
+#' @param delim What characters each taxonomic level are separated by
+#'
+#' @return A dataframe of taxonomic levels
+#'
 split_levels <- function(row_names, delim = delim) {
 
   taxa_df <- as.data.frame(do.call(rbind, strsplit(row_names, split = delim)))
@@ -106,21 +134,28 @@ split_levels <- function(row_names, delim = delim) {
 
 }
 
+#' Calculate the susceptiblity vector from taxonomic levels from the split_levels function
+#'
+#' @param row_names The row name of taxonomic levels from the abundance matrix
+#' @param abx What antibiotics to get the susceptibility for
+#'
+#' @return A vector of numbers for each taxon between 0 and 1, where 0 is resistant and 1 is susceptible. These numbers are calculated as what fractions of the species within the LTP database that are susceptible
+#'
 get_suscept_vector <- function(row_names, abx) {
 
-  #merge taxa levels by row with the LTP dataframe and count rows that were NA; TODO: combine both sapply functions
-  not_merged <- function(single_row_name) {
-    is_missing <- FALSE
-    each_taxa_row <- Filter(function(x) all(x!=""), single_row_name)
-    filteredsubset <- merge(each_taxa_row, LTP, by = colnames(each_taxa_row), all.x = TRUE)
-    if(is.na(any(filteredsubset[, abx]))) {
-      is_missing <- TRUE
-    }
-
-    return(is_missing)
-  }
-
-  missing_vector <- sapply(1:nrow(row_names), function(row_num){not_merged(row_names[row_num,])})
+  # #merge taxa levels by row with the LTP dataframe and count rows that were NA; TODO: combine both sapply functions
+  # not_merged <- function(single_row_name) {
+  #   is_missing <- FALSE
+  #   each_taxa_row <- Filter(function(x) all(x!=""), single_row_name)
+  #   filteredsubset <- merge(each_taxa_row, LTP, by = colnames(each_taxa_row), all.x = TRUE)
+  #   if(is.na(any(filteredsubset[, abx]))) {
+  #     is_missing <- TRUE
+  #   }
+  #
+  #   return(is_missing)
+  # }
+  #
+  # missing_vector <- sapply(1:nrow(row_names), function(row_num){not_merged(row_names[row_num,])})
 
   #merge taxa levels by row with the LTP dataframe and calculate weighted antibiotics index for that row
   merge_LTP <- function(single_row_name) {
@@ -137,13 +172,21 @@ get_suscept_vector <- function(row_names, abx) {
   #apply merge function with taxonomic row
   suscept_vector <- sapply(1:nrow(row_names), function(row_num){merge_LTP(row_names[row_num,])})
 
-  print("These taxa were treated as resistant because they were not found in LTP database")
-  print(row_names[missing_vector, ])
+  #print("These taxa were treated as resistant because they were not found in LTP database")
+  #print(row_names[missing_vector, ])
 
   return(suscept_vector)
 
 }
 
+#' Calculate the index based on the susceptible vector
+#'
+#' @param sample_vector The vector of taxonomic abundances for a sample
+#' @param suscept_vector The vector of how susceptible a species is to the specified antibiotics
+#' @param weighted If a taxa is susceptible, multiply it by its susceptibility weight from the LTP database (this is mainly for taxonomic levels above species)
+#'
+#' @return The calculated antibiotics index for a sample
+#'
 calc_index <- function(sample_vector, suscept_vector, weighted) {
 
   TF_suscept_vector <- suscept_vector > 0.5
@@ -156,6 +199,19 @@ calc_index <- function(sample_vector, suscept_vector, weighted) {
   return(log10(sum_suscept_taxa/(1-sum_suscept_taxa)))
 }
 
+#' Function to plot antibiotics indices for each sample
+#'
+#' @param abx_vector The antibiotics vector generated from any of the abx.idx functions
+#' @param order Order the samples from highest to lowest antibiotics index before plotting
+#'
+#' @return A plot for the antibiotics index for each sample
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' abx_idx_plot(vancomycin_index(test_df))
+#' }
+#'
 abx_idx_plot <- function(abx_vector, order = F) {
   ##infinite values are replaced to 10
   show_name <- TRUE
@@ -204,5 +260,3 @@ tetracycline <- function(taxa) { ##excluding resistance through acquired mobile 
 }
 
 ##review paper basing drug class: https://doi.org/10.1016/j.bcp.2017.01.003
-
-#TODO: Import library that can extend the full taxonomic levels in row names
