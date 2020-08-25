@@ -23,6 +23,8 @@ calc_index <- function(sample_vector, suscept_vector) {
   return(log10(sum_suscept_taxa/(1-sum_suscept_taxa)))
 }
 
+#write the antibiotis part as an option for user, not allowing user to pick an abx
+
 get_susceptibles <- function(taxa, abx) {
   taxa <- gsub(";", " ", taxa)
   if(is.null(abx)) {
@@ -49,8 +51,11 @@ get_susceptibles <- function(taxa, abx) {
   return(susceptible_vector)
 }
 
+#implement this as phylogenetic binary tree using greengenes nomenclature
+
 gram_pos <- c("p__Actinobacteria", "p__Firmicutes")
 firm_exceptions <- c("c__Mollicutes", "c__Negativicutes")
+##in LTP nomenclature, need to define the Negativicutes (Veillonella and Lactobacillus)
 
 oblig_anaero_gn <- c("o__Bacteroidales", "g__Bacteroides", "g__Fusobacterium", "g__Porphyromonas",
                      "g__Prevotella", "g__Veillonella", "g__Parabacteroides")
@@ -120,13 +125,6 @@ aerobes <- function(taxa) {
   return(susceptibles)
 }
 
-test_df <- data.frame(a = c(0.1, 0.5, 0.1, 0.3), b = c(0, 0.25, 0.5, 0.25), c = c(1, 0, 0, 0))
-row.names(test_df) <- c("p__Actinobacteria;g__Candidatus Nanopelagicus",
-                        "p__Actinobacteria;g__Gordonia s__terrae",
-                        "g__Enterococcus;s__gallinarum",
-                        "p__Firmicutes g__Enterococcus;s__gallinarum")
-
 ##review paper basing drug class: https://doi.org/10.1016/j.bcp.2017.01.003
-##anareobe classification DOI: 10.1128/microbiolspec.DMIH2-0015-2015
 
 #TODO: Import library that can extend the full taxonomic levels in row names

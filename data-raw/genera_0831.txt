@@ -1,0 +1,211 @@
+name	doi	aerobic_status	morphology	motility	spore_formation	gram_stain	bile_sensitive	saccharolytic	comments
+Bacteroides	10.1099/00207713-39-1-85	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	growth in 20% bile	saccharolytic	
+Prevotella	10.1099/00207713-40-2-205	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	no growth in 20% bile	saccharolytic	
+Akkermansia	10.1099/ijs.0.02873-0	obligate anaerobe	oval-shaped/ coccobaccili	non-motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Anaerostripes	10.1078/0723-2020-00096	obligate anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Anaerotruncas	10.1099/ijs.0.02653-0	facultative anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Barnesiella	10.1099/ijs.0.64709-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	growth in 20% bile	saccharolytic	
+Blautia	10.1099/ijs.0.65208-0	obligate anaerobe	cocci or oval-shaped	non-motile	mixed	Gram-positive	not indicated	saccharolytic	
+Roseburia	10.1099/00207713-33-3-618	obligate anaerobe	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Alloprevotella	10.1099/ijs.0.041376-0	obligate anaerobe	rod/ bacilli	non-motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Porphyromonas	10.1099/00207713-38-1-128	obligate anaerobe	rods or oval-shaped	non-motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Paraprevotella	10.1099/ijs.0.008169-0	obligate anaerobe	not indicated	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Parabacteroides	10.1099/ijs.0.64192-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	growth in 20% bile	saccharolytic	
+Oscillibacter	10.1099/ijs.0.64717-0	obligate anaerobe	rods or slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Odoribacter	10.1099/ijs.0.63458-0	anaerobe (unspecified)	fusiform	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Faecalibacterium	10.1099/00207713-52-6-2141	obligate anaerobe	not indicated	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Enterobacter	10.1099/0096266X-10-2-71	facultative anaerobe	rod/ bacilli	variable	not indicated	Gram-negative	not indicated	saccharolytic	
+Shuttleworthia	10.1099/00207713-52-5-1469	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	no growth in 20% bile	saccharolytic	
+Sediminibacterium	10.1099/ijs.0.65514-0	obligate anaerobe	rod/ bacilli	not indicated	not indicated	Gram-negative	not indicated	not indicated	
+Peptoniphilus	10.1099/00207713-51-4-1521	obligate anaerobe	cocci	non-motile	non-spore forming	Gram-positive	not indicated	asaccharolytic	
+Moryella	10.1099/ijs.0.64705-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-variable	not indicated	saccharolytic	
+Holdemania	10.1099/00207713-47-4-1201	obligate anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Gordonibacter	10.1099/ijs.0.005900-0	obligate anaerobe	oval-shaped/ coccobaccili	motile	non-spore forming	Gram-positive	not indicated	asaccharolytic	
+Dorea	10.1099/00207713-52-2-423	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Sutterella	10.1099/00207713-46-1-252	microaerobe or anaerobe	rod/ bacilli	not indicated	not indicated	Gram-negative	no growth in 20% bile	asaccharolytic	
+Sporobacter	10.1099/00207713-46-2-512	obligate anaerobe	rod/ bacilli	not indicated	spore forming	Gram-positive	not indicated	not indicated	
+Pseudoflavonifractor	10.1099/ijs.0.016725-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Flavonifractor	10.1099/ijs.0.016725-0	obligate anaerobe	rod/ bacilli	variable	mixed	Gram-variable	not indicated	asaccharolytic	
+Achromobacter	10.1099/00207713-31-4-477	aerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Aerococcus	10.1099/00221287-8-3-475	facultative anaerobe	cocci	non-motile	not indicated	Gram-positive	growth in 20% bile	mixed	
+Catenibacterium	10.1099/00207713-50-4-1595	obligate anaerobe	not indicated	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Collinsella	10.1099/00207713-49-2-557	obligate anaerobe	cocci	not indicated	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Aggregatibacter	10.1099/ijs.0.64207-0	facultative anaerobe	rods or oval-shaped	non-motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Anaerococcus	10.1099/00207713-51-4-1521	obligate anaerobe	cocci	non-motile	not indicated	Gram-positive	not indicated	mixed	
+Succinivibrio	N/A	anaerobe (unspecified)	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	http://jb.asm.org/content/72/1/22.full.pdf
+Lachnospira	N/A	anaerobe (unspecified)	slightly curved rods	motile	non-spore forming	Gram-positive	not indicated	saccharolytic	http://jb.asm.org/content/72/1/22.full.pdf
+Parasutterella	10.1099/ijs.0.002519-0	obligate anaerobe	cocci or oval-shaped	non-motile	non-spore forming	Gram-negative	growth in 20% bile	asaccharolytic	
+Paralactobacillus	10.1099/00207713-50-1-19	not indicated	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Oribacterium	10.1099/ijs.0.63060-0	obligate anaerobe	ovoid	motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Ochrobactrum	10.1099/00207713-38-4-406	obligate anaerobe	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Murdochiella	10.1099/ijs.0.015909-0	obligate anaerobe	cocci	non-motile	not indicated	Gram-positive	no growth in 20% bile	asaccharolytic	
+Mogibacterium	10.1099/00207713-50-2-679	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	asaccharolytic	
+Megasphaera	10.1099/00207713-21-2-187	obligate anaerobe	cocci	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Hallella	10.1099/00207713-44-2-187	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Johnsonella	10.1099/00207713-44-2-187	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Granulicatella	10.1099/00207713-50-1-365	facultative anaerobe	pleomorphic	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Gemmiger	10.1099/00207713-25-2-202	obligate anaerobe	not indicated	not indicated	not indicated	Gram-variable	not indicated	saccharolytic	
+Gardnerella	10.1099/00207713-30-1-170	facultative anaerobe	rod/ bacilli	not indicated	not indicated	Gram-variable	not indicated	saccharolytic	
+Facklamia	10.1099/00207713-47-3-880	facultative anaerobe	cocci	non-motile	non-spore forming	Gram-positive	not indicated	asaccharolytic	
+Enterococcus	10.1099/00207713-34-1-31	facultative anaerobe	ovoid	variable	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Dialister	10.1099/00207713-44-2-187	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Delftia	10.1099/00207713-49-2-567	obligate anaerobe	rods or slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Cronobacter	10.1099/ijs.0.65577-0	facultative anaerobe	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Citrobacter	N/A	not indicated	rod/ bacilli	not indicated	non-spore forming	Gram-negative	not indicated	saccharolytic	http://jb.asm.org/content/23/2/167.full.pdf
+Chryseobacterium	10.1099/00207713-44-4-827	aerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Centipeda	10.1099/00207713-33-3-628	anaerobe (unspecified)	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Butyricicoccus	10.1099/ijs.0.65730-0	obligate anaerobe	cocci	non-motile	not indicated	Gram-positive	not indicated	not indicated	
+Bulleidia	10.1099/00207713-50-3-979	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	no growth in 20% bile	saccharolytic	
+Brevundimonas	10.1099/00207713-44-3-499	aerobe	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	asaccharolytic	
+Anaeroglobus	10.1099/00207713-52-3-983	obligate anaerobe	cocci or oval-shaped	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Arthrobacter	10.1099/00207713-45-4-837	aerobe	not indicated	variable	non-spore forming	Gram-positive	not indicated	not indicated	
+Atopobium	10.1099/ijs.0.065243-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Bacillus	10.1099/ijs.0.64993-0	aerobe	rod/ bacilli	non-motile	not indicated	Gram-variable	not indicated	not indicated	
+Butyricimonas	10.1099/ijs.0.007674-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	no growth in 20% bile	saccharolytic	
+Deinococcus	10.1099/00207713-31-3-353	aerobe	oval-shaped/ coccobaccili	non-motile	not indicated	Gram-positive	not indicated	not indicated	
+Helicobacter	10.1099/00207713-39-4-397	microaerobe or anaerobe	not indicated	motile	not indicated	Gram-negative	not indicated	not indicated	
+Microbacterium	10.1099/00207713-48-3-739	aerobe	rod/ bacilli	variable	not indicated	Gram-positive	not indicated	not indicated	
+Pseudobutyrivibrio	10.1099/00207713-46-2-559	anaerobe (unspecified)	rod/ bacilli	not indicated	non-spore forming	Gram-negative	not indicated	not indicated	
+Schwartzia	10.1099/00207713-47-1-155	anaerobe (unspecified)	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Succiniclasticum	10.1099/00207713-45-2-297	not indicated	rods or slightly curved rods	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Tannerella	10.1099/00207713-52-3-841	anaerobe (unspecified)	not indicated	non-motile	not indicated	Gram-negative	no growth in 20% bile	not indicated	
+Alistipes	10.1099/ijs.0.014571-0	anaerobe (unspecified)	rods, cocci, or oval-shaped	non-motile	not indicated	Gram-negative	not indicated	not indicated	
+Catonella	10.1099/00207713-44-2-187	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Kingella	10.1099/00207713-26-4-447	aerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Eremococcus	10.1099/00207713-49-4-1381	facultative anaerobe	cocci	not indicated	not indicated	Gram-positive	not indicated	saccharolytic	
+Variovorax	10.1099/00207713-41-3-445	aerobe	rods or slightly curved rods	motile	not indicated	not indicated	not indicated	saccharolytic	
+Slackia	10.1099/00207713-49-2-595	obligate anaerobe	rods, cocci, or oval-shaped	non-motile	non-spore forming	Gram-positive	no growth in 20% bile	asaccharolytic	
+Pyramidobacter	10.1099/ijs.0.000364-0	obligate anaerobe	rod/ bacilli	non-motile	not indicated	not indicated	not indicated	asaccharolytic	
+Abiotrophia	10.1099/00207713-45-4-798	facultative anaerobe	rods, cocci, or oval-shaped	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Bordetella	10.1099/00207713-51-4-1257	not indicated	oval-shaped/ coccobaccili	not indicated	not indicated	Gram-negative	not indicated	asaccharolytic	aerobic status is not an option
+Parascardovia	10.1099/00207713-52-3-809	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Olsenella	10.1099/00207713-51-5-1797	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Jonquetella	10.1099/ijs.0.65213-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Xylanibacter	10.1099/ijs.0.64364-0	not indicated	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Eikenella	10.1099/00207713-22-2-73	facultative anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Christensenella	10.1099/ijs.0.026989-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Acidaminococcus	N/A	anaerobe (unspecified)	cocci or oval-shaped	not indicated	non-spore forming	Gram-negative	not indicated	mixed	http://jb.asm.org/content/98/2/756.full.pdf+html
+Oribaculum	10.1099/00207713-44-2-187	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Cellulosimicrobium	10.1099/00207713-51-3-1007	facultative anaerobe	slightly curved rods	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Enterorhabdus	10.1099/ijs.0.003087-0	not indicated	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Anarosalibacter	10.1099/ijs.0.036566-0	obligate anaerobe	rod/ bacilli	motile	spore forming	Gram-positive	not indicated	not indicated	
+Murimonas	10.1099/ijs.0.000030	obligate anaerobe	oval-shaped/ coccobaccili	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Terrisporobacter	10.1099/ijs.0.059543-0	anaerobe (unspecified)	rods or slightly curved rods	motile	spore forming	Gram-variable	not indicated	not indicated	
+Intestinimonas	10.1099/ijs.0.051441-0	obligate anaerobe	not indicated	non-motile	spore forming	Gram-positive	not indicated	saccharolytic	
+Stenotrophomonas	10.1099/00207713-43-3-606	not indicated	not indicated	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Aminobacter	10.1099/00207713-42-1-84	not indicated	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Bradyrhizobium	10.1099/00207713-32-1-136	aerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Curvibacter	10.1099/ijs.0.02975-0	not indicated	slightly curved rods	variable	not indicated	Gram-negative	not indicated	not indicated	
+Herbaspirillum	10.1099/00207713-36-1-86	microaerobe or anaerobe	slightly curved rods	motile	not indicated	Gram-negative	not indicated	not indicated	
+Turicibacter	10.1099/00207713-52-4-1263	anaerobe (unspecified)	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	not indicated	
+Rothia	10.1099/00207713-17-1-79	microaerobe or aerobe	rods or cocci	non-motile	non-spore forming	not indicated	not indicated	saccharolytic	
+Pedobacter	10.1099/00207713-48-1-165	obligate anaerobe	rod/ bacilli	variable	not indicated	Gram-negative	not indicated	saccharolytic	
+Parvibacter	10.1099/ijs.0.045344-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Acidovorax	10.1099/00207713-40-4-384	aerobe	rods or slightly curved rods	motile	not indicated	Gram-negative	not indicated	not indicated	
+Aeromicrobium	10.1099/00207713-41-3-363	aerobe	rods or cocci	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Afipia	10.1099/00207713-52-5-1773	not indicated	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	not indicated	
+Aquabacterium	10.1099/00207713-49-2-769	microaerobe	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	not indicated	
+Aurantimonas	10.1099/ijs.0.02359-0	obligate anaerobe	not indicated	not indicated	non-spore forming	Gram-negative	not indicated	not indicated	
+Azoarcus	10.1099/00207713-43-3-574	not indicated	rods or slightly curved rods	motile	not indicated	Gram-negative	not indicated	not indicated	
+Xanthomonas	10.1099/00207713-40-4-348	aerobe	rods or slightly curved rods	variable	not indicated	Gram-negative	not indicated	not indicated	
+Papillibacter	10.1099/00207713-50-3-1221	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Lachnobacterium	10.1099/00207713-51-6-1977	obligate anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	not indicated	
+Azospira	10.1099/00207713-50-2-649	microaerobe	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Beutenbergia	10.1099/00207713-49-4-1733	microaerobe or aerobe	rods or cocci	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Micrococcus	10.1099/00207713-45-4-682	aerobe	cocci	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Polaromonas	10.1099/00207713-46-3-822	aerobe	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	not indicated	
+Pseudoxanthomonas	10.1099/00207713-50-1-273	aerobe	rod/ bacilli	not indicated	not indicated	Gram-negative	not indicated	not indicated	
+Psychrobacter	10.1099/00207713-36-3-388	aerobe	oval-shaped/ coccobaccili	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Sphingobium	10.1099/00207713-51-4-1405	aerobe	rod/ bacilli	variable	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Sphingomonas	10.1099/00207713-51-4-1405	aerobe	rod/ bacilli	variable	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Sphingopyxis	10.1099/00207713-51-4-1405	aerobe	rod/ bacilli	variable	non-spore forming	Gram-positive	not indicated	not indicated	
+Sulfuritalea	10.1099/ijs.0.024968-0	facultative anaerobe	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Tsukamurella	10.1099/00207713-38-4-385	aerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Undibacterium	10.1099/ijs.0.64785-0	not indicated	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Bosea	10.1099/00207713-46-4-981	aerobe	rod/ bacilli	not indicated	not indicated	Gram-negative	not indicated	not indicated	
+Brevibacillus	10.1099/00207713-46-4-939	aerobe	rod/ bacilli	motile	spore forming	Gram-variable	not indicated	not indicated	
+Caulobacter	10.1099/00207713-49-2-483	not indicated	not indicated	motile	not indicated	Gram-negative	not indicated	not indicated	
+Comamonas	10.1099/00207713-35-4-443	aerobe	rods or slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Craurococcus	10.1099/00207713-48-3-1043	aerobe	cocci	non-motile	not indicated	Gram-negative	not indicated	not indicated	
+Cupriavidus	10.1099/ijs.0.63247-0	not indicated	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	not indicated	
+Devosia	10.1099/00207713-46-1-16	aerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Dietzia	10.1099/00207713-45-1-32	aerobe	rods or cocci	not indicated	non-spore forming	Gram-positive	not indicated	not indicated	
+Duganella	10.1099/00207713-47-4-	aerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Dyadobacter	10.1099/00207713-50-2-751	aerobe	rods or cocci	non-motile	not indicated	Gram-negative	not indicated	not indicated	
+Enhydrobacter	10.1099/00207713-37-3-289	facultative anaerobe	rods or cocci	not indicated	not indicated	Gram-negative	not indicated	not indicated	
+Hoeflea	10.1099/ijs.0.63291-0	aerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Hydrotalea	10.1099/ijs.0.023002-0	aerobe	rod/ bacilli	non-motile	not indicated	Gram-negative	not indicated	not indicated	
+Janthinobacterium	10.1099/00207713-49-4-1577	aerobe	rod/ bacilli	motile	not indicated	Gram-negative	not indicated	not indicated	
+Bifidobacterium	N/A	anaerobe (unspecified)	not indicated	not indicated	not indicated	not indicated	not indicated	saccharolytic	https://lait.dairy-journal.org/articles/lait/pdf/1924/36/lait_4_1924_36_27.pdf
+Kocuria	10.1099/00207713-45-4-682	aerobe	cocci	not indicated	non-spore forming	Gram-positive	not indicated	not indicated	
+Limnobacter	10.1099/00207713-51-4-1463	obligate anaerobe	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Mesorhizobium	10.1099/00207713-47-3-895	aerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Methylophilus	10.1099/00207713-37-4-446	aerobe	rods or slightly curved rods	variable	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Methyloversatilis	10.1099/ijs.0.64422-0	not indicated	rod/ bacilli	non-motile	not indicated	Gram-negative	not indicated	not indicated	
+Microlunatus	10.1099/00207713-45-1-17	aerobe	cocci	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Niastella	10.1099/ijs.0.64242-0	aerobe	not indicated	motile	not indicated	Gram-negative	not indicated	not indicated	
+Novosphingobium	10.1099/00207713-51-4-1405	obligate anaerobe	rod/ bacilli	variable	non-spore forming	Gram-negative	not indicated	not indicated	
+Olivibacter	10.1099/ijs.0.64561-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Paracoccus	10.1099/00207713-19-4-375	obligate anaerobe	cocci	non-motile	non-spore forming	Gram-negative	not indicated	asaccharolytic	
+Patulibacter	10.1099/ijs.0.63796-0	aerobe	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	not indicated	
+Wautersiella	10.1099/ijs.0.64393-0	not indicated	rod/ bacilli	non-motile	not indicated	Gram-negative	not indicated	not indicated	
+Actinobaculum	10.1099/00207713-47-3-899	facultative anaerobe	rods or slightly curved rods	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Anaerotruncus	10.1099/ijs.0.02653-0	obligate anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Propionimicrobium	10.1099/00207713-52-6-1925	anaerobe (unspecified)	cocci	non-motile	non-spore forming	Gram-positive	somewhat inhibited by 20% bile	saccharolytic	
+Granulicella	10.1099/ijs.0.021824-0	aerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Mobiluncus	10.1099/00207713-34-2-177	anaerobe (unspecified)	slightly curved rods	motile	non-spore forming	Gram-variable	not indicated	saccharolytic	
+Fusibacter	10.1099/00207713-49-3-1141	obligate anaerobe	fusiform	motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Alkaliphilus	10.1099/00207713-51-4-1245	anaerobe (unspecified)	rods or slightly curved rods	motile	spore forming	Gram-positive	not indicated	not indicated	
+Acetivibrio	10.1099/00207713-30-1-179	anaerobe (unspecified)	rods or slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Caloramator	10.1099/00207713-44-4-812	obligate anaerobe	rod/ bacilli	not indicated	spore forming	Gram-negative	not indicated	saccharolytic	
+Caloranaerobacter	10.1099/00207713-51-5-1789	anaerobe (unspecified)	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Caminicella	10.1099/00207713-52-5-1621	anaerobe (unspecified)	rod/ bacilli	motile	spore forming	Gram-negative	not indicated	not indicated	
+Cellulosibacter	10.1099/ijs.0.027854-0	obligate anaerobe	rods or slightly curved rods	motile	spore forming	Gram-positive	not indicated	not indicated	
+Garciella	10.1099/ijs.0.02662-0	obligate anaerobe	rod/ bacilli	motile	spore forming	Gram-positive	not indicated	not indicated	
+Guggenheimella	10.1099/ijs.0.63116-0	obligate anaerobe	rods or cocci	non-motile	non-spore forming	Gram-positive	not indicated	asaccharolytic	
+Hespellia	10.1099/ijs.0.02719-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Oxobacter	10.1099/00207713-44-4-812	obligate anaerobe	rod/ bacilli	not indicated	spore forming	Gram-positive	not indicated	not indicated	
+Soehngenia	10.1099/ijs.0.02668-0	anaerobe (unspecified)	rod/ bacilli	motile	spore forming	Gram-positive	not indicated	saccharolytic	
+Tepidibacter	10.1099/ijs.0.02600-0	anaerobe (unspecified)	rod/ bacilli	motile	spore forming	Gram-positive	not indicated	not indicated	
+Clostridium	10.1002/9781118960608.gbm00619	anaerobe (unspecified)	rod/ bacilli	variable	mixed	Gram-variable	not indicated	mixed	
+Corynebacterium	10.1002/9781118960608.gbm00026	facultative anaerobe	rods or slightly curved rods	non-motile	non-spore forming	Gram-positive	not indicated	mixed	
+Tepidimicrobium	10.1099/ijs.0.63694-0	anaerobe (unspecified)	rod/ bacilli	motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Desulfotomaculum	N/A	obligate anaerobe	rods or slightly curved rods	motile	spore forming	Gram-negative	not indicated	not indicated	http://mmbr.asm.org/content/29/3/359.full.pdf+html
+Thermincola	10.1099/ijs.0.63299-0	anaerobe (unspecified)	rod/ bacilli	motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Thermohalobacter	10.1099/00207713-50-2-559	obligate anaerobe	rod/ bacilli	motile	non-spore forming	Gram-negative	not indicated	not indicated	
+Thermoterrabacterium	10.1099/00207713-47-2-541	anaerobe (unspecified)	rod/ bacilli	motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Desulfosporosinus	10.1099/00207713-47-4-1134	obligate anaerobe	slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Pelotomaculum	10.1099/00207713-52-5-1729	obligate anaerobe	slightly curved rods	non-motile	spore forming	Gram-variable	not indicated	not indicated	
+Lachnoanaerobaculum	10.1099/ijs.0.033613-0	obligate anaerobe	rod/ bacilli	not indicated	spore forming	Gram-variable	not indicated	saccharolytic	
+Helcococcus	10.1099/00207713-43-3-425	facultative anaerobe	cocci	non-motile	not indicated	Gram-positive	no growth in 20% bile	saccharolytic	
+Stomatobaculum	10.1099/ijs.0.042812-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-variable	not indicated	saccharolytic	
+Abyssivirga	10.1099/ijsem.0.000934	obligate anaerobe	rods or cocci	motile	non-spore forming	not indicated	not indicated	saccharolytic	
+Cellulosilyticum	10.1099/ijs.0.014712-0	anaerobe (unspecified)	rods or slightly curved rods	not indicated	spore forming	not indicated	not indicated	not indicated	
+Filifactor	10.1099/00207713-44-4-812	not indicated	rod/ bacilli	not indicated	spore forming	Gram-variable	not indicated	saccharolytic	
+Mobilitalea	10.1099/ijs.0.057109-0	obligate anaerobe	rod/ bacilli	motile	spore forming	Gram-positive	not indicated	not indicated	
+Pelospora	10.1099/00207713-50-2-645	obligate anaerobe	not indicated	not indicated	spore forming	not indicated	not indicated	not indicated	
+Pseudoramibacter	10.1099/00207713-46-4-1083	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Robinsoniella	10.1099/ijs.0.65676-0	anaerobe (unspecified)	rods or oval-shaped	not indicated	spore forming	Gram-positive	not indicated	saccharolytic	
+Sporobacterium	10.1099/00207713-49-4-1741	obligate anaerobe	slightly curved rods	motile	spore forming	Gram-positive	not indicated	asaccharolytic	
+Syntrophothermus	10.1099/00207713-50-2-771	obligate anaerobe	slightly curved rods	motile	not indicated	Gram-negative	not indicated	not indicated	
+Thermosyntropha	10.1099/00207713-46-4-1131	obligate anaerobe	rod/ bacilli	not indicated	not indicated	Gram-variable	not indicated	not indicated	
+Tissierella	10.1099/00207713-36-3-461	obligate anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-negative	not indicated	mixed	
+Eggerthella	10.1002/9781118960608.gbm00219	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Eubacterium	10.1002/9781118960608.gbm00629	obligate anaerobe	pleomorphic rods	variable	non-spore forming	Gram-positive	not indicated	mixed	
+Eubacterium	10.1002/9781118960608.gbm00629	obligate anaerobe	pleomorphic rods	variable	non-spore forming	Gram-positive	not indicated	mixed	
+Fusobacterium	10.1002/9781118960608.gbm00768	obligate anaerobe	rod/ bacilli	not indicated	non-spore forming	Gram-negative	not indicated	saccharolytic	
+Gemella	10.1002/9781118960608.gbm00578	facultative anaerobe	ovoid	non-motile	non-spore forming	Gram-variable	no growth in 20% bile	saccharolytic	
+Escherichia	10.1002/9781118960608.gbm01147	facultative anaerobe	rod/ bacilli	variable	not indicated	Gram-negative	not indicated	saccharolytic	
+Escherichia	10.1002/9781118960608.gbm01147	facultative anaerobe	rod/ bacilli	variable	not indicated	Gram-negative	not indicated	saccharolytic	
+Lactobacillus	10.1002/9781118960608.gbm00604	facultative anaerobe	rods or oval-shaped	variable	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Lactococcus	10.1002/9781118960608.gbm00610	facultative anaerobe	cocci or oval-shaped	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Leptotrichia	10.1002/9781118960608.gbm00771	variable	rods or slightly curved rods	non-motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Neisseria	10.1002/9781118960608.gbm00981	aerobe	rods or cocci	variable	non-spore forming	Gram-negative	not indicated	mixed	
+Propionibacterium	10.1002/9781118960608.gbm00167	microaerobe or anaerobe	pleomorphic rods	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
+Pseudomonas	10.1002/9781118960608.gbm01210	variable	rods or slightly curved rods	variable	not indicated	Gram-negative	not indicated	mixed	
+Ralstonia	10.1002/9781118960608.gbm00941	aerobe	rod/ bacilli	variable	not indicated	Gram-negative	not indicated	not indicated	
+Ruminococcus	10.1002/9781118960608.gbm00678	obligate anaerobe	cocci	variable	not indicated	Gram-positive	not indicated	saccharolytic	
+Sneathia	10.1002/9781118960608.gbm00773	anaerobe (unspecified)	rod/ bacilli	non-motile	not indicated	Gram-negative	not indicated	saccharolytic	
+Veillonella	10.1002/9781118960608.gbm00710	anaerobe (unspecified)	cocci	non-motile	non-spore forming	Gram-negative	not indicated	mixed	
+Staphylococcus	10.1002/9781118960608.gbm00569	facultative anaerobe	cocci	non-motile	not indicated	Gram-positive	not indicated	saccharolytic	
+Streptococcus	10.1002/9781118960608.gbm00612	facultative anaerobe	cocci or ovoid	non-motile	non-spore forming	Gram-positive	not indicated	saccharolytic	
