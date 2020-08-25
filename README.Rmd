@@ -34,15 +34,16 @@ The goal of abx.idx is to calculate an index for a given bacterial community's s
 ```{r example}
 library(abx.idx)
 
-vanco_idx <- vancomycin_index(test_df)
-vanco_idx
+##this will work once
+# vanco_idx <- vancomycin_index(test_df)
+# vanco_idx
 
 ```
 
 Plot of the vancomycin index on test_df
 ```{r}
 
-abx_idx_plot(vanco_idx, T)
+# abx_idx_plot(vanco_idx, T)
 
 ```
 
