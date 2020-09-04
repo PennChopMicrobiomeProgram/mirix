@@ -130,7 +130,7 @@ LTP <- LTP_file %>%
   mutate_n_select() %>%
   merge(select(phenotypes_species, Species, anaerobe, aerobic_status, gram_positive, gram_stain, Phenotype_ref), by = "Species", all.x = TRUE) %>%
   mutate_n_select() %>%
-  mutate(Phenotype_ref = ifelse(is.na(Phenotype_ref.y), Phenotype_ref.x, Phenotype_ref.y)) %>%
+  #mutate(Phenotype_ref = ifelse(is.na(Phenotype_ref.y), Phenotype_ref.x, Phenotype_ref.y)) %>%
   select(-c(Phenotype_ref.x, Phenotype_ref.y)) %>%
   mutate(vancomycin = ((gram_positive) |
                       (grepl("^Bacteroidia$", Class)))& ##https://doi.org/10.1126/sciadv.aax2358; https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5161046/
@@ -142,23 +142,23 @@ LTP <- LTP_file %>%
                                     "Enterococcus gallinarum",
                                     "Enterococcus casseliflavus",
                                     "Enterococcus flavescens", sep = "|"), Species))) %>% ##https://doi.org/10.1016/j.jiac.2018.01.001
-  mutate(vancomycin_ref = ifelse(grepl("^Bacteroidia$", Class), "https://doi.org/10.1126/sciadv.aax2358; https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5161046/", NA)) %>%
-  mutate(vancomycin_ref = ifelse(grepl(paste("Lactobacillus rhamnosus",
-                                             "Lactobacillus paracasei",
-                                             "Lactobacillus plantarum",
-                                             "Lactobacillus reuteri",
-                                             "Lactobacillus fermentum", sep = "|"), Species), "https://doi.org/10.1093/jac/dkm035", vancomycin_ref)) %>%
-  mutate(vancomycin_ref = ifelse(grepl(paste("Enterococcus gallinarum",
-                                             "Enterococcus casseliflavus",
-                                             "Enterococcus flavescens", sep = "|"), Species), "https://doi.org/10.1016/j.jiac.2018.01.001", vancomycin_ref)) %>%
+  # mutate(vancomycin_ref = ifelse(grepl("^Bacteroidia$", Class), "https://doi.org/10.1126/sciadv.aax2358; https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5161046/", NA)) %>%
+  # mutate(vancomycin_ref = ifelse(grepl(paste("Lactobacillus rhamnosus",
+  #                                            "Lactobacillus paracasei",
+  #                                            "Lactobacillus plantarum",
+  #                                            "Lactobacillus reuteri",
+  #                                            "Lactobacillus fermentum", sep = "|"), Species), "https://doi.org/10.1093/jac/dkm035", vancomycin_ref)) %>%
+  # mutate(vancomycin_ref = ifelse(grepl(paste("Enterococcus gallinarum",
+  #                                            "Enterococcus casseliflavus",
+  #                                            "Enterococcus flavescens", sep = "|"), Species), "https://doi.org/10.1016/j.jiac.2018.01.001", vancomycin_ref)) %>%
   mutate(nitroimidazole = anaerobe) %>%
-  mutate(nitroimidazole_ref = NA) %>%
+  #mutate(nitroimidazole_ref = NA) %>%
   mutate(fluoroquinolone = !anaerobe) %>%
-  mutate(fluoroquinolone_ref = NA) %>%
+  #mutate(fluoroquinolone_ref = NA) %>%
   mutate(polymyxin_n_aztreonam = !gram_positive) %>%
-  mutate(polymyxin_n_aztreonam_ref = NA) %>%
-  mutate(glycopeptides_macrolides_oxazolidinones_lincosamides_lipopeptides_amoxicillin = gram_positive) %>%
-  mutate(glycopeptides_macrolides_oxazolidinones_lincosamides_lipopeptides_amoxicillin_ref = NA)
+  #mutate(polymyxin_n_aztreonam_ref = NA) %>%
+  mutate(glycopeptides_macrolides_oxazolidinones_lincosamides_lipopeptides_amoxicillin = gram_positive) #%>%
+  #mutate(glycopeptides_macrolides_oxazolidinones_lincosamides_lipopeptides_amoxicillin_ref = NA)
 
 #save this df as data to use in package
 usethis::use_data(LTP, overwrite = TRUE)

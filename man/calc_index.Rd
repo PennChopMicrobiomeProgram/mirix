@@ -10,8 +10,6 @@ calc_index(sample_vector, suscept_vector)
 \item{sample_vector}{The vector of taxonomic abundances for a sample}
 
 \item{suscept_vector}{The vector of how susceptible a species is to the specified antibiotics}
-
-\item{weighted}{If a taxa is susceptible, multiply it by its susceptibility weight from the LTP database (this is mainly for taxonomic levels above species)}
 }
 \value{
 The calculated antibiotics index for a sample

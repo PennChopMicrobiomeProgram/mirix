@@ -6,19 +6,18 @@
 \title{Antibiotics index table from based on taxonomic levels from the Living Tree Project}
 \format{
 A \code{data.frame} with columns which are:
+
 \describe{
-\item{Kingdom}
-\item{Phylum}
-\item{Class}
-\item{Order}
-\item{Family}
-\item{Genus}
-\item{Species}
+\item{Kingdom}{}
+\item{Phylum}{}
+\item{Class}{}
+\item{Order}{}
+\item{Family}{}
+\item{Genus}{}
+\item{Species}{}
 \item{gram_positive}{Index for gram positive bacteria}
 \item{anaerobe}{Index for anaerobes}
-\item{Phenotype_ref}{References for \code{gram_positive} and \code{anaerobe}}
 \item{vancomycin}{Index for vancomycin susceptibility}
-\item{vancomycin_ref}{References for \code{vancomycin}}
 }
 }
 \usage{

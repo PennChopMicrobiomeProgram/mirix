@@ -4,14 +4,12 @@
 \alias{gram_pos_index}
 \title{Function to calculate antibiotics index for antibiotics that affect gram positive bacteria}
 \usage{
-gram_pos_index(df, delim = "; ", weighted = T)
+gram_pos_index(df, delim = "; ")
 }
 \arguments{
 \item{df}{A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)}
 
 \item{delim}{How taxonomic levels are separated in row names}
-
-\item{weighted}{Calculate index based on weighted representation in LTP database}
 }
 \value{
 The calculated antibiotics index for each sample
