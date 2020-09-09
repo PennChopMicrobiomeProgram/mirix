@@ -1,172 +1,151 @@
-#' Function to calculate antibiotics index for vancomycin
+#' Function to calculate antibiotics index for Vancomycin
 #'
-#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#' @param delim How taxonomic levels are separated in row names
+#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
-#' @return The calculated antibiotics index for each sample
+#' @return The calculated antibiotics index for the sample
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' vancomycin_index(test_df)
-#' }
+#' apply(abx_test_df, 2, vancomycin_index, row.names(abx_test_df))
 #'
-vancomycin_index <- function(df, delim = "; ") {
-  abx <- "vancomycin"
-  taxa <- split_levels(row.names(df), delim) ##use pull(unite(d_adf, col = "new", sep = "; ")) for taxa row names
-  suscept_vector <- get_suscept_vector(taxa, abx)
-  lapply(as.data.frame(df), calc_index, suscept_vector)
-
+vancomycin_index <- function(abundance, lineage) {
+  idx <- c("gram_positive", "vancomycin")
+  suscept_vector <- is_susceptible(lineage, idx)
+  calc_index(abundance, suscept_vector)
 }
 
-#' Function to calculate antibiotics index for nitroimidazole
+#' Function to calculate antibiotics index for Tetracycline
 #'
-#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#' @param delim How taxonomic levels are separated in row names
+#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
-#' @return The calculated antibiotics index for each sample
+#' @return The calculated antibiotics index for the sample
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' nitroimidazoles_index(test_df)
-#' }
+#' apply(abx_test_df, 2, tetracycline_index, row.names(abx_test_df))
 #'
-nitroimidazoles_index <- function(df, delim = "; ") {
-  abx <- "nitroimidazole"
-  taxa <- split_levels(row.names(df), delim)
-  suscept_vector <- get_suscept_vector(taxa, abx)
-  lapply(as.data.frame(df), calc_index, suscept_vector)
-
+tetracycline_index <- function(abundance, lineage) {
+  idx <- "tetracycline"
+  suscept_vector <- is_susceptible(lineage, idx)
+  calc_index(abundance, suscept_vector)
 }
 
-#' Function to calculate antibiotics index for fluoroquinolone
+#' Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, Lipopeptides, and Amoxicillin aside from Vancomycin (see \code{vancomycin_index})
 #'
-#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#' @param delim How taxonomic levels are separated in row names
+#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
-#' @return The calculated antibiotics index for each sample
+#' @return The calculated antibiotics index for the sample
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' fluoroquinolone_index(test_df)
-#' }
+#' apply(abx_test_df, 2, gram_pos_index, row.names(abx_test_df))
 #'
-fluoroquinolone_index <- function(df, delim = "; ") {
-  abx <- "fluoroquinolone"
-  taxa <- split_levels(row.names(df), delim)
-  suscept_vector <- get_suscept_vector(taxa, abx)
-  lapply(as.data.frame(df), calc_index, suscept_vector)
-
+gram_pos_index <- function(abundance, lineage) {
+  idx <- "gram_positive"
+  suscept_vector <- is_susceptible(lineage, idx)
+  calc_index(abundance, suscept_vector)
 }
 
-#' Function to calculate antibiotics index for polymyxin and aztreonam
+#' Function to calculate antibiotics index targeting anaerobes such as Polymyxin and Aztreonam
 #'
-#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#' @param delim How taxonomic levels are separated in row names
+#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
-#' @return The calculated antibiotics index for each sample
+#' @return The calculated antibiotics index for the sample
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' polymyxin_n_aztreonam_index(test_df)
-#' }
+#' apply(abx_test_df, 2, gram_neg_index, row.names(abx_test_df))
 #'
-polymyxin_n_aztreonam_index <- function(df, delim = "; ") {
-  abx <- "polymyxin_n_aztreonam"
-  taxa <- split_levels(row.names(df), delim)
-  suscept_vector <- get_suscept_vector(taxa, abx)
-  lapply(as.data.frame(df), calc_index, suscept_vector)
-
+gram_neg_index <- function(abundance, lineage) {
+  idx <- "gram_negative"
+  suscept_vector <- is_susceptible(lineage, idx)
+  calc_index(abundance, suscept_vector)
 }
 
-#' Function to calculate antibiotics index for antibiotics that affect gram positive bacteria
+#' Function to calculate antibiotics index targeting anaerobes such as Nitroimidazole
 #'
-#' @param df A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#' @param delim How taxonomic levels are separated in row names
+#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
-#' @return The calculated antibiotics index for each sample
+#' @return The calculated antibiotics index for the sample
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' gram_pos_index(test_df)
-#' }
+#' apply(abx_test_df, 2, anaerobes_index, row.names(abx_test_df))
 #'
-gram_pos_index <- function(df, delim = "; ") {
-  abx <- "glycopeptides_macrolides_oxazolidinones_lincosamides_lipopeptides_amoxicillin"
-  taxa <- split_levels(row.names(df), delim)
-  suscept_vector <- get_suscept_vector(taxa, abx)
-  lapply(as.data.frame(df), calc_index, suscept_vector)
-
+anaerobes_index <- function(abundance, lineage) {
+  idx <- "anaerobe"
+  suscept_vector <- is_susceptible(lineage, idx)
+  calc_index(abundance, suscept_vector)
 }
 
-#' Split the taxonomic classifications in the row names into a dataframe
+#' Function to calculate antibiotics index targeting anaerobes such as Fluoroquinolone
 #'
-#' @param row_names The row name of taxonomic levels from the abundance matrix
-#' @param delim What characters each taxonomic level are separated by
+#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
-#' @return A dataframe of taxonomic levels
+#' @return The calculated antibiotics index for the sample
+#' @export
 #'
-split_levels <- function(row_names, delim = delim) {
-
-  taxa_df <- as.data.frame(do.call(rbind, strsplit(row_names, split = delim)))
-  colnames(taxa_df) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
-  ##if species is missiing or NA, keep as blank
-  taxa_df$Species <- ifelse(!(taxa_df$Species %in% c("s__", "", "s__NA", "NA") | is.na(taxa_df$Species)), as.character(taxa_df$Species), "")
-  ##add genus name if missing in species column
-  taxa_df$Species <- ifelse((mapply(grepl, taxa_df$Genus, taxa_df$Species) | taxa_df$Species == ""), as.character(taxa_df$Species), paste(as.character(taxa_df$Genus), as.character(taxa_df$Species)))
-
-  simplified_taxa_df <- as.data.frame(lapply(taxa_df, function(x) {gsub("[kpcofgs]__|NA", "", x)}))
-  return(simplified_taxa_df)
-
+#' @examples
+#' apply(abx_test_df, 2, aerobes_index, row.names(abx_test_df))
+#'
+aerobes_index <- function(abundance, lineage) {
+  idx <- "aerobe"
+  suscept_vector <- is_susceptible(lineage, idx)
+  calc_index(abundance, suscept_vector)
 }
 
-#' Calculate the susceptiblity vector from taxonomic levels from the split_levels function
+#' Calculate the susceptiblity vector from taxonomic lineage based on the given bacterial phenotype
 #'
-#' @param row_names The row name of taxonomic levels from the abundance matrix
-#' @param abx What antibiotics to get the susceptibility for
+#' @param taxa The lineage name of taxonomic levels
+#' @param idx The bacterial phenotype to calculate the susceptibility
 #'
-#' @return A vector of numbers for each taxon between 0 and 1, where 0 is resistant and 1 is susceptible. These numbers are calculated as what fractions of the species within the LTP database that are susceptible
+#' @return A vector of 0 and 1, where 0 is resistant and 1 is susceptible
 #'
-get_suscept_vector <- function(row_names, abx) {
+is_susceptible <- function(taxa, idx) {
+  suscept_vector <- rep(0, length(taxa))
 
-  # #merge taxa levels by row with the LTP dataframe and count rows that were NA; TODO: combine both sapply functions
-  # not_merged <- function(single_row_name) {
-  #   is_missing <- FALSE
-  #   each_taxa_row <- Filter(function(x) all(x!=""), single_row_name)
-  #   filteredsubset <- merge(each_taxa_row, LTP, by = colnames(each_taxa_row), all.x = TRUE)
-  #   if(is.na(any(filteredsubset[, abx]))) {
-  #     is_missing <- TRUE
-  #   }
-  #
-  #   return(is_missing)
-  # }
-  #
-  # missing_vector <- sapply(1:nrow(row_names), function(row_num){not_merged(row_names[row_num,])})
+  for(each_idx in idx) {
+    abx_df <- filter(grep_df, grepl(each_idx, attribute))
 
-  #merge taxa levels by row with the LTP dataframe and calculate antibiotics index for that row
-  merge_LTP <- function(single_row_name) {
-    each_taxa_row <- Filter(function(x) all(x!=""), single_row_name)
-    filteredsubset <- merge(each_taxa_row, LTP, by = colnames(each_taxa_row), all.x = TRUE)
+    for(lvl in c("Phylum", "Class", "Order", "Family", "Genus", "Species")) {
+      taxon_df <- abx_df %>%
+        filter(grepl(lvl, level))
 
-    if(is.na(any(filteredsubset[, abx]))) {
-      filteredsubset[, abx] <- 0
+      if (dim(taxon_df)[1] != 0) {
+        pos_suscept_vector <- rep(0, length(taxa))
+        neg_suscept_vector <- rep(0, length(taxa))
+        pos_level <- taxon_df %>%
+          filter(boo)
+        neg_level <- taxon_df %>%
+          filter(!boo)
+
+        if ((dim(pos_level)[1] != 0)) {
+          pos_suscept_vector <- grepl(paste0(pos_level$name, collapse = "|"), taxa)
+          pos_suscept_vector <- pos_suscept_vector*1
+        }
+
+        if ((dim(neg_level)[1] != 0)) {
+          neg_suscept_vector <- grepl(paste0(neg_level$name, collapse = "|"), taxa)
+          neg_suscept_vector <- neg_suscept_vector*-1
+        }
+
+        new_vector <- pos_suscept_vector + neg_suscept_vector
+        #print(new_vector)
+        zero_vector_idx <- which(new_vector == 0)
+        old_suscept_vector <- suscept_vector[zero_vector_idx]
+        suscept_vector <- new_vector
+        suscept_vector[zero_vector_idx] <- old_suscept_vector
+      }
     }
-
-    return(sum(filteredsubset[, abx])/nrow(filteredsubset))
   }
-
-  #apply merge function with taxonomic row
-  suscept_vector <- sapply(1:nrow(row_names), function(row_num){merge_LTP(row_names[row_num,])})
-
-  #print("These taxa were treated as resistant because they were not found in LTP database")
-  #print(row_names[missing_vector, ])
-
-  return(suscept_vector)
-
+  suscept_vector[which(suscept_vector == -1)] <- 0
+  suscept_vector
 }
 
 #' Calculate the index based on the susceptible vector
@@ -193,9 +172,8 @@ calc_index <- function(sample_vector, suscept_vector) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' abx_idx_plot(vancomycin_index(test_df))
-#' }
+#' vanco_idx <- apply(abx_test_df, 2, vancomycin_index, row.names(abx_test_df))
+#' abx_idx_plot(vanco_idx)
 #'
 abx_idx_plot <- function(abx_vector, order = F) {
   ##infinite values are replaced to 10
@@ -217,31 +195,3 @@ abx_idx_plot <- function(abx_vector, order = F) {
   barplot(unlist(plotting_vector), xlab = "Samples", ylab = "Antibiotics index", names.arg = show_name, col = vector_cols, border = NA, space = 0)
 
 }
-
-
-##tetracycline isn't implemented yet
-tetracycline <- function(taxa) { ##excluding resistance through acquired mobile elements, only trying to get intrinsic resistance
-  ##All bacteria are theoretically susceptible to tetracycline except these bacteria for which some resistant clinical strains were isolated
-  resistance <- c("g__Acinetobacter s__baumannii",
-                      "g__Bacteroides s__fragilis",
-                      "g__Escherichia s__coli",
-                      "g__Enterobacter",
-                      "g__Enterococcus s__faecalis",
-                      "g__Klebsiella pneumoniae", ##Klebsiella generally susceptible
-                      "g__Pseudomonas s__aeruginosa",
-                      "g__Proteus s__mirabilis",
-                      "g__Staphylococcus s__aureus",
-                      "g__Stenotrophomonas s__maltophilia",
-                      "g__Serratia s__marcescens", ##Intrinsic bacterial multidrug efflux pumps: doi:10.1101/cshperspect.a025387, Table 2
-                      "g__Salmonella s__typhimurium", "g__Campylobacter s__jejuni", ##DOI: 10.1038/nrmicro1464
-                      "g__Bacteroides") #80% of Bacteroides are resistant to tetracyclines due to mobile elements: DOI: 10.1128/mBio.00569-13
-
-  tetra_resist <- !grepl(paste0(resistance, collapse = "|"), taxa)
-
-  return(tetra_resist)
-
-  ##Include distribution of tet protection genes on mobile elements? http://faculty.washington.edu/marilynr/, https://doi.org/10.1016/j.femsle.2005.02.034
-  ##Can use the Clinical and Laboratory Standards Institute (CLSI) guideline for assessing resistance?
-}
-
-##review paper basing drug class: https://doi.org/10.1016/j.bcp.2017.01.003

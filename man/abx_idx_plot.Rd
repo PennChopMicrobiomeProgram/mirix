@@ -18,8 +18,7 @@ A plot for the antibiotics index for each sample
 Function to plot antibiotics indices for each sample
 }
 \examples{
-\dontrun{
-abx_idx_plot(vancomycin_index(test_df))
-}
+vanco_idx <- apply(abx_test_df, 2, vancomycin_index, row.names(abx_test_df))
+abx_idx_plot(vanco_idx)
 
 }

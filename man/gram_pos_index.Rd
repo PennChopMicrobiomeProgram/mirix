@@ -2,24 +2,22 @@
 % Please edit documentation in R/abx_index.R
 \name{gram_pos_index}
 \alias{gram_pos_index}
-\title{Function to calculate antibiotics index for antibiotics that affect gram positive bacteria}
+\title{Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, Lipopeptides, and Amoxicillin aside from Vancomycin (see \code{vancomycin_index})}
 \usage{
-gram_pos_index(df, delim = "; ")
+gram_pos_index(abundance, lineage)
 }
 \arguments{
-\item{df}{A dataframe of samples as columns and bacterial taxons as rows. Labeling of taxon levels in rows needs to include full taxonomic classifications (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)}
+\item{abundance}{A list of relative abundances of bacterial taxons for a single sample}
 
-\item{delim}{How taxonomic levels are separated in row names}
+\item{lineage}{Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)}
 }
 \value{
-The calculated antibiotics index for each sample
+The calculated antibiotics index for the sample
 }
 \description{
-Function to calculate antibiotics index for antibiotics that affect gram positive bacteria
+Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, Lipopeptides, and Amoxicillin aside from Vancomycin (see \code{vancomycin_index})
 }
 \examples{
-\dontrun{
-gram_pos_index(test_df)
-}
+apply(abx_test_df, 2, gram_pos_index, row.names(abx_test_df))
 
 }
