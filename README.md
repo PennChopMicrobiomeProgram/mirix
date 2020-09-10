@@ -2,33 +2,33 @@
 <!-- badges: start -->
 
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/tuv292/abx_idx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abx_idx)
+status](https://ci.appveyor.com/api/projects/status/github/tuv292/abxidx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abxidx)
 [![Travis build
-status](https://travis-ci.com/tuv292/abx_idx.svg?branch=master)](https://travis-ci.com/tuv292/abx_idx)
+status](https://travis-ci.com/tuv292/abxidx.svg?branch=master)](https://travis-ci.com/tuv292/abxidx)
 [![Codecov test
-coverage](https://codecov.io/gh/tuv292/abx_idx/branch/master/graph/badge.svg)](https://codecov.io/gh/tuv292/abx_idx?branch=master)
+coverage](https://codecov.io/gh/tuv292/abxidx/branch/master/graph/badge.svg)](https://codecov.io/gh/tuv292/abxidx?branch=master)
 <!-- badges: end -->
 
-# abx.idx
+# abxidx
 
-The goal of abx.idx is to calculate an index for a given bacterial
+The goal of abxidx is to calculate an index for a given bacterial
 community’s susceptibility to the given
 antibiotics.
 
 <!-- ## Installation -->
 
-<!-- You can install the released version of abx.idx from [CRAN](https://CRAN.R-project.org) with: -->
+<!-- You can install the released version of abxidx from [CRAN](https://CRAN.R-project.org) with: -->
 
 <!-- ``` r -->
 
-<!-- install.packages("abx.idx") -->
+<!-- install.packages("abxidx") -->
 
 <!-- ``` -->
 
 ## Example
 
 ``` r
-library(abx.idx)
+library(abxidx)
 
 # vanco_idx <- vancomycin_index(test_df)
 # vanco_idx

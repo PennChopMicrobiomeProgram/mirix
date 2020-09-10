@@ -1,6 +1,6 @@
 testthat::context("Testing abx_indx functionality")
 
-testthat::test_that("Testing abx_idx on test df", {
+testthat::test_that("Testing abxidx on test df", {
 
   idx_outcome <- vancomycin_index(test_df)
 

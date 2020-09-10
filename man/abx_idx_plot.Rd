@@ -7,7 +7,7 @@
 abx_idx_plot(abx_vector, order = F)
 }
 \arguments{
-\item{abx_vector}{The antibiotics vector generated from any of the abx.idx functions}
+\item{abx_vector}{The antibiotics vector generated from any of the abxidx functions}
 
 \item{order}{Order the samples from highest to lowest antibiotics index before plotting}
 }

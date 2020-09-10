@@ -165,7 +165,7 @@ calc_index <- function(sample_vector, suscept_vector) {
 
 #' Function to plot antibiotics indices for each sample
 #'
-#' @param abx_vector The antibiotics vector generated from any of the abx.idx functions
+#' @param abx_vector The antibiotics vector generated from any of the abxidx functions
 #' @param order Order the samples from highest to lowest antibiotics index before plotting
 #'
 #' @return A plot for the antibiotics index for each sample
