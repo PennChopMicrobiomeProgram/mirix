@@ -193,5 +193,4 @@ abx_idx_plot <- function(abx_vector, order = F) {
   }
 
   barplot(unlist(plotting_vector), xlab = "Samples", ylab = "Antibiotics index", names.arg = show_name, col = vector_cols, border = NA, space = 0)
-
 }
