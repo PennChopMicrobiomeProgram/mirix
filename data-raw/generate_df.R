@@ -5,7 +5,7 @@ library(tidyr)
 phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"), sep = "\t", header = TRUE) %>%
   select(name, aerobic_status, gram_stain, doi) %>%
   unique() %>%
-  mutate(level = "Genus") %>%
+  mutate(rank = "Genus") %>%
   mutate(anaerobe = ifelse(grepl("anaerobe", aerobic_status), ifelse(grepl("microaerobe or anaerobe|facultative anaerobe", aerobic_status), FALSE, TRUE), FALSE)) %>%
   mutate(aerobe = ifelse(grepl("anaerobe|not indicated|variable", aerobic_status), FALSE, TRUE)) %>%
   mutate(gram_positive = ifelse(gram_stain == "Gram-positive", TRUE, FALSE)) %>%
@@ -22,7 +22,7 @@ phenotypes_genus <- phenotypes_genus[-which(phenotypes_genus$name=="Bifidobacter
 phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt"), sep = "\t", header = TRUE) %>%
   select(name, aerobic_status, gram_stain, doi) %>%
   unique() %>%
-  mutate(level = "Species") %>%
+  mutate(rank = "Species") %>%
   mutate(anaerobe = ifelse(grepl("anaerobe", aerobic_status), ifelse(grepl("aerobe, microaerobe, or anaerobe|microaerobe or anaerobe|facultative anaerobe", aerobic_status), FALSE, TRUE), FALSE)) %>%
   mutate(aerobe = ifelse(grepl("anaerobe|not indicated|aerotolerant|variable", aerobic_status), FALSE, TRUE)) %>%
   mutate(gram_positive = ifelse(gram_stain == "Gram-positive", TRUE, FALSE)) %>%
@@ -32,23 +32,23 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   select(-c(aerobic_status, gram_stain)) %>%
   pivot_longer(cols = c("anaerobe", "aerobe", "gram_positive", "gram_negative", "tetracycline"), values_to = "boo", names_to = "attribute")
 
-grep_df <- rbind(phenotypes_genus, phenotypes_species)
-grep_df <- grep_df[c("attribute", "boo", "name", "level", "doi")]
+abx_idx_df <- rbind(phenotypes_genus, phenotypes_species)
+abx_idx_df <- abx_idx_df[c("attribute", "boo", "name", "rank", "doi")]
 
 ##gram_positive
-grep_df[nrow(grep_df)+1,] <- list("gram_positive", TRUE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
-grep_df[nrow(grep_df)+1,] <- list("gram_positive", TRUE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
-grep_df[nrow(grep_df)+1,] <- list("gram_positive", FALSE, "Negativicutes", "Class", "10.4056/sigs.2981345")
-grep_df[nrow(grep_df)+1,] <- list("gram_positive", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Negativicutes", "Class", "10.4056/sigs.2981345")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
 
 ##gram_negative
-grep_df[nrow(grep_df)+1,] <- list("gram_negative", FALSE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
-grep_df[nrow(grep_df)+1,] <- list("gram_negative", FALSE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
-grep_df[nrow(grep_df)+1,] <- list("gram_negative", TRUE, "Negativicutes", "Class", "10.4056/sigs.2981345")
-grep_df[nrow(grep_df)+1,] <- list("gram_negative", TRUE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", FALSE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", FALSE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", TRUE, "Negativicutes", "Class", "10.4056/sigs.2981345")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", TRUE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
 
 ##vancomycin
-grep_df[nrow(grep_df)+1,] <- list("vancomycin", TRUE, "Bacteroidia", "Class", "10.1126/sciadv.aax2358; 10.1093/jac/dkw383") ##susceptible
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", TRUE, "Bacteroidia", "Class", "10.1126/sciadv.aax2358; 10.1093/jac/dkw383") ##susceptible
 
 vanco_lacto_except <- c("Lactobacillus rhamnosus",
                         "Lactobacillus paracasei",
@@ -56,36 +56,36 @@ vanco_lacto_except <- c("Lactobacillus rhamnosus",
                         "Lactobacillus reuteri",
                         "Lactobacillus fermentum")
 for(lacto in vanco_lacto_except){
-  grep_df[nrow(grep_df)+1,] <- list("vancomycin", FALSE, lacto, "Species", "10.1093/jac/dkm035") ##resistant
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, lacto, "Species", "10.1093/jac/dkm035") ##resistant
 }
 
 vanco_entero_except <- c("Enterococcus gallinarum",
                          "Enterococcus casseliflavus",
                          "Enterococcus flavescens")
 for(entero in vanco_entero_except){
-  grep_df[nrow(grep_df)+1,] <- list("vancomycin", FALSE, entero, "Species", "10.1016/j.jiac.2018.01.001") ##resistant
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, entero, "Species", "10.1016/j.jiac.2018.01.001") ##resistant
 }
 
 
 ##anaerobes
-grep_df[nrow(grep_df)+1,] <- list("anaerobe", TRUE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
-grep_df[nrow(grep_df)+1,] <- list("anaerobe", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
-grep_df[nrow(grep_df)+1,] <- list("anaerobe", FALSE, "Listeria", "Genus", "10.1002/9781118960608.gbm00547")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", TRUE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", FALSE, "Listeria", "Genus", "10.1002/9781118960608.gbm00547")
 anaerobe <- c("Actinomyces",
               "Peptostreptococcus",
               "Finegoldia",
               "Parvimonas",
               "Bifidobacterium")
 for(ana in anaerobe){
-  grep_df[nrow(grep_df)+1,] <- list("anaerobe", TRUE, ana, "Genus", "10.1128/microbiolspec.dmih2-0015-2015")
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", TRUE, ana, "Genus", "10.1128/microbiolspec.dmih2-0015-2015")
 }
 
 ##aerobes
-grep_df[nrow(grep_df)+1,] <- list("aerobe", FALSE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
-grep_df[nrow(grep_df)+1,] <- list("aerobe", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
-grep_df[nrow(grep_df)+1,] <- list("aerobe", FALSE, "Listeria", "Genus", "10.1002/9781118960608.gbm00547")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, "Listeria", "Genus", "10.1002/9781118960608.gbm00547")
 for(ana in anaerobe){
-  grep_df[nrow(grep_df)+1,] <- list("aerobe", FALSE, ana, "Genus", "10.1128/microbiolspec.dmih2-0015-2015")
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, ana, "Genus", "10.1128/microbiolspec.dmih2-0015-2015")
 }
 
 ##tetracycline
@@ -97,8 +97,8 @@ tet_intrins_resist_replace <- c("Bacteroides fragilis",
                                 "Staphylococcus aureus",
                                 "Stenotrophomonas maltophilia")
 for(tet_replace in tet_intrins_resist_replace){
-  grep_df[grep_df$name==tet_replace&grep_df$attribute=="tetracycline", "boo"] <- FALSE
-  grep_df[grep_df$name==tet_replace&grep_df$attribute=="tetracycline", "doi"] <- "10.1101/cshperspect.a025387"
+  abx_idx_df[abx_idx_df$name==tet_replace&abx_idx_df$attribute=="tetracycline", "boo"] <- FALSE
+  abx_idx_df[abx_idx_df$name==tet_replace&abx_idx_df$attribute=="tetracycline", "doi"] <- "10.1101/cshperspect.a025387"
 }
 
 tet_intrins_resist_species <- c("Acinetobacter baumannii",
@@ -106,17 +106,19 @@ tet_intrins_resist_species <- c("Acinetobacter baumannii",
                                 "Proteus mirabilis",
                                 "Serratia marcescens")
 for(tet_species in tet_intrins_resist_species){
-  grep_df[nrow(grep_df)+1,] <- list("tetracycline", FALSE, tet_species, "Species", "10.1101/cshperspect.a025387")
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, tet_species, "Species", "10.1101/cshperspect.a025387")
 }
 
-grep_df[nrow(grep_df)+1,] <- list("tetracycline", FALSE, "Salmonella typhimurium", "Species", "10.1038/nrmicro1464")
-grep_df[nrow(grep_df)+1,] <- list("tetracycline", FALSE, "Campylobacter jejuni", "Species", "10.1038/nrmicro1464")
-grep_df[grep_df$name=="Bacteroides"&grep_df$attribute=="tetracycline", "boo"] <- FALSE
-grep_df[grep_df$name=="Bacteroides"&grep_df$attribute=="tetracycline", "doi"] <- "10.1128/mBio.00569-13"
-grep_df[nrow(grep_df)+1,] <- list("tetracycline", TRUE, "Klebsiella", "Genus", "10.1101/cshperspect.a025387")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Salmonella typhimurium", "Species", "10.1038/nrmicro1464")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Campylobacter jejuni", "Species", "10.1038/nrmicro1464")
+abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="tetracycline", "boo"] <- FALSE
+abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="tetracycline", "doi"] <- "10.1128/mBio.00569-13"
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", TRUE, "Klebsiella", "Genus", "10.1101/cshperspect.a025387")
+
+abx_idx_df <- as.data.frame(abx_idx_df)
 
 #save this df as data to use in package
-usethis::use_data(grep_df, overwrite = TRUE)
+usethis::use_data(abx_idx_df, overwrite = TRUE)
 
 
 ##review paper on drug class: https://doi.org/10.1016/j.bcp.2017.01.003

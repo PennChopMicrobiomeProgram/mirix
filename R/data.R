@@ -1,17 +1,17 @@
-#' A dataframe of bacterial taxonomy levels and their cell wall, oxygen tolerance, and antibiotics characteristics
+#' A dataframe of bacterial taxonomy ranks and their cell wall, oxygen tolerance, and antibiotics characteristics
 #'
-#' @description A dataframe of taxonomic levels, their phenotypes, and their antibiotics indices with references
+#' @description A dataframe of taxonomic ranks, their phenotypes, and their antibiotics indices with references
 #'
 #' @format A \code{data.frame} with columns which are:
 #'
 #' \describe{
-#'   \item{attribute}{A characteristic of the bacteria taxonomic level}
+#'   \item{attribute}{A characteristic of the bacteria taxonomic rank}
 #'   \item{boo}{A boolean determinant about the attribute}
 #'   \item{name}{Name of the taxon}
-#'   \item{level}{Level of the taxon}
+#'   \item{rank}{Rank of the taxon}
 #'   \item{doi}{Reference of the attribute}
 #' }
-"grep_df"
+"abx_idx_df"
 
 #' A test dataframe
 #'

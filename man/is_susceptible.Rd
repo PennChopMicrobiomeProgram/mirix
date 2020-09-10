@@ -7,7 +7,7 @@
 is_susceptible(taxa, idx)
 }
 \arguments{
-\item{taxa}{The lineage name of taxonomic levels}
+\item{taxa}{The lineage name of taxonomic ranks}
 
 \item{idx}{The bacterial phenotype to calculate the susceptibility}
 }

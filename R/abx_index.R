@@ -102,7 +102,7 @@ aerobes_index <- function(abundance, lineage) {
 
 #' Calculate the susceptiblity vector from taxonomic lineage based on the given bacterial phenotype
 #'
-#' @param taxa The lineage name of taxonomic levels
+#' @param taxa The lineage name of taxonomic ranks
 #' @param idx The bacterial phenotype to calculate the susceptibility
 #'
 #' @return A vector of 0 and 1, where 0 is resistant and 1 is susceptible
@@ -111,27 +111,26 @@ is_susceptible <- function(taxa, idx) {
   suscept_vector <- rep(0, length(taxa))
 
   for(each_idx in idx) {
-    abx_df <- filter(grep_df, grepl(each_idx, attribute))
+
+    abx_df <- abx_idx_df[abx_idx_df$attribute == each_idx, ]
 
     for(lvl in c("Phylum", "Class", "Order", "Family", "Genus", "Species")) {
-      taxon_df <- abx_df %>%
-        filter(grepl(lvl, level))
+
+      taxon_df <- abx_df[abx_df$rank == lvl, ]
 
       if (dim(taxon_df)[1] != 0) {
         pos_suscept_vector <- rep(0, length(taxa))
         neg_suscept_vector <- rep(0, length(taxa))
-        pos_level <- taxon_df %>%
-          filter(boo)
-        neg_level <- taxon_df %>%
-          filter(!boo)
+        pos_rank <- taxon_df[taxon_df$boo, ]
+        neg_rank <- taxon_df[!taxon_df$boo, ]
 
-        if ((dim(pos_level)[1] != 0)) {
-          pos_suscept_vector <- grepl(paste0(pos_level$name, collapse = "|"), taxa)
+        if ((dim(pos_rank)[1] != 0)) {
+          pos_suscept_vector <- grepl(paste0(pos_rank$name, collapse = "|"), taxa)
           pos_suscept_vector <- pos_suscept_vector*1
         }
 
-        if ((dim(neg_level)[1] != 0)) {
-          neg_suscept_vector <- grepl(paste0(neg_level$name, collapse = "|"), taxa)
+        if ((dim(neg_rank)[1] != 0)) {
+          neg_suscept_vector <- grepl(paste0(neg_rank$name, collapse = "|"), taxa)
           neg_suscept_vector <- neg_suscept_vector*-1
         }
 
