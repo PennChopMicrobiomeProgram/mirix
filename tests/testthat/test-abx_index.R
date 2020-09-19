@@ -58,3 +58,11 @@ testthat::test_that("Testing abx_idx_plot to plot antibiotics indices", {
   testthat::expect_type(abx_idx_plot(apply(abx_test_df, 2, vancomycin_index, row.names(abx_test_df))), "double")
 
 })
+
+testthat::context("Testing abx_idx_plot order")
+
+testthat::test_that("Testing abx_idx_plot to plot antibiotics indices", {
+
+  testthat::expect_type(abx_idx_plot(apply(abx_test_df, 2, vancomycin_index, row.names(abx_test_df)), order = TRUE), "double")
+
+})
