@@ -176,20 +176,20 @@ calc_index <- function(sample_vector, suscept_vector) {
 #'
 abx_idx_plot <- function(abx_vector, order = F) {
   ##infinite values are replaced to 10
-  show_name <- TRUE
+  show_name <- NULL
 
-  plotting_vector <- gsub(-Inf, -10, abx_vector)
-  plotting_vector <- as.numeric(gsub(Inf, 10, plotting_vector))
+  abx_vector[abx_vector > 10] <- 10
+  abx_vector[abx_vector < -10] <- -10
 
   if(order) {
-    plotting_vector <- sort(plotting_vector, decreasing = TRUE)
+    abx_vector <- sort(abx_vector, decreasing = TRUE)
   }
 
-  vector_cols <- ifelse(plotting_vector > 0, "green", "red")
+  vector_cols <- ifelse(abx_vector > 0, "green", "red")
 
-  if(length(plotting_vector) > 50) {
+  if(length(abx_vector) > 50) {
     show_name <- FALSE
   }
 
-  barplot(unlist(plotting_vector), xlab = "Samples", ylab = "Antibiotics index", names.arg = show_name, col = vector_cols, border = NA, space = 0)
+  barplot(abx_vector, xlab = "Samples", ylab = "Antibiotics index", names.arg = show_name, col = vector_cols, border = NA, space = 0)
 }
