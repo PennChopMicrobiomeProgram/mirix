@@ -12,7 +12,7 @@ phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"),
   mutate(gram_negative = ifelse(gram_stain == "Gram-negative", TRUE, FALSE)) %>%
   mutate(tetracycline = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
-  select(-c(aerobic_status, gram_stain)) %>%
+  select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
   pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute")
 
 phenotypes_genus <- phenotypes_genus[-which(phenotypes_genus$name=="Bifidobacterium"&phenotypes_genus$attribute=="anaerobe"), ]
@@ -28,10 +28,20 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   mutate(gram_negative = ifelse(gram_stain == "Gram-negative", TRUE, FALSE)) %>%
   mutate(tetracycline = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
-  select(-c(aerobic_status, gram_stain)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute")
+  select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
+  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute") %>%
+  filter(!grepl("^Lactobacillus", name))
 
-abx_idx_df <- rbind(phenotypes_genus, phenotypes_species)
+##manually curated lactobacillus database from paper
+lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus_data.csv"), sep = ",", header = TRUE) %>%
+  mutate(anaerobe = ifelse(grepl("^Anaerobic|^Strictly anaerobic", Growth.conditions), TRUE, FALSE)) %>%
+  mutate(aerobe = ifelse(grepl("^Aerobic", Growth.conditions), TRUE, FALSE)) %>%
+  mutate(tetracycline = TRUE) %>%
+  mutate(doi = as.character(doi), name = as.character(name)) %>%
+  select(-Growth.conditions) %>%
+  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline", "vancomycin"), values_to = "boo", names_to = "attribute")
+
+abx_idx_df <- rbind(phenotypes_genus, phenotypes_species, lactobacillus_species)
 abx_idx_df <- abx_idx_df[c("attribute", "boo", "name", "rank", "doi")]
 
 ##gram_positive
@@ -42,14 +52,7 @@ abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Salmonella", "G
 
 ##vancomycin
 
-vanco_lacto_except <- c("Lactobacillus rhamnosus",
-                        "Lactobacillus paracasei",
-                        "Lactobacillus plantarum",
-                        "Lactobacillus reuteri",
-                        "Lactobacillus fermentum")
-for(lacto in vanco_lacto_except){
-  abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, lacto, "Species", "10.1093/jac/dkm035") ##resistant
-}
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, "Lactobacillus", "Genus", "10.1128/AEM.01738-18")
 
 vanco_entero_except <- c("Enterococcus gallinarum",
                          "Enterococcus casseliflavus",
