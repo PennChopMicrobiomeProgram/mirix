@@ -160,9 +160,9 @@ gram_pos_list <- function(abundance, lineage) {
 #' apply(abx_test_df, 2, gram_neg_index, row.names(abx_test_df))
 #'
 gram_neg_index <- function(abundance, lineage) {
-  idx <- "gram_negative"
+  idx <- "gram_positive"
   suscept_vector <- is_susceptible(lineage, idx)
-  calc_index(abundance, suscept_vector)
+  calc_index(abundance, !suscept_vector)
 }
 
 #' Function to return susceptibility or resistance to antibiotics targeting gram negative bacteria
@@ -177,8 +177,8 @@ gram_neg_index <- function(abundance, lineage) {
 #' do.call(rbind, apply(abx_test_df, 2, gram_neg_list, row.names(abx_test_df)))
 #'
 gram_neg_list <- function(abundance, lineage) {
-  idx <- "gram_negative"
-  suscept_vector <- is_susceptible(lineage, idx)
+  idx <- "gram_positive"
+  suscept_vector <- !is_susceptible(lineage, idx)
 
   sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
   susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())

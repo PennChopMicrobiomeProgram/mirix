@@ -13,9 +13,8 @@ phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"),
   mutate(tetracycline = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-c(aerobic_status, gram_stain)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "gram_positive", "gram_negative", "tetracycline"), values_to = "boo", names_to = "attribute")
-phenotypes_genus[phenotypes_genus$name=="Gemella"&phenotypes_genus$attribute=="gram_positive", "boo"] <- TRUE
-phenotypes_genus[phenotypes_genus$name=="Gemella"&phenotypes_genus$attribute=="gram_negative", "boo"] <- FALSE
+  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute")
+
 phenotypes_genus <- phenotypes_genus[-which(phenotypes_genus$name=="Bifidobacterium"&phenotypes_genus$attribute=="anaerobe"), ]
 
 ##manually curated species phenotypes from Ceylan
@@ -30,7 +29,7 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   mutate(tetracycline = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-c(aerobic_status, gram_stain)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "gram_positive", "gram_negative", "tetracycline"), values_to = "boo", names_to = "attribute")
+  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute")
 
 abx_idx_df <- rbind(phenotypes_genus, phenotypes_species)
 abx_idx_df <- abx_idx_df[c("attribute", "boo", "name", "rank", "doi")]
@@ -41,14 +40,7 @@ abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Firmicutes", "Ph
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Negativicutes", "Class", "10.4056/sigs.2981345")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
 
-##gram_negative
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", FALSE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", FALSE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", TRUE, "Negativicutes", "Class", "10.4056/sigs.2981345")
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_negative", TRUE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
-
 ##vancomycin
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", TRUE, "Bacteroidia", "Class", "10.1126/sciadv.aax2358; 10.1093/jac/dkw383") ##susceptible
 
 vanco_lacto_except <- c("Lactobacillus rhamnosus",
                         "Lactobacillus paracasei",
@@ -65,7 +57,6 @@ vanco_entero_except <- c("Enterococcus gallinarum",
 for(entero in vanco_entero_except){
   abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, entero, "Species", "10.1016/j.jiac.2018.01.001") ##resistant
 }
-
 
 ##anaerobes
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", TRUE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
