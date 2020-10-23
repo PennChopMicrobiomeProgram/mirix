@@ -15,7 +15,7 @@ phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"),
   select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
   pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute")
 
-phenotypes_genus <- phenotypes_genus[-which(phenotypes_genus$name=="Bifidobacterium"&phenotypes_genus$attribute=="anaerobe"), ]
+phenotypes_genus <- phenotypes_genus[!(grepl("Bifidobacterium", phenotypes_genus$name)&grepl("anaerobe|aerobe", phenotypes_genus$attribute)), ]
 
 ##manually curated species phenotypes from Ceylan
 phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt"), sep = "\t", header = TRUE) %>%
@@ -31,7 +31,8 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
   pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute") %>%
   filter(!grepl("^Lactobacillus", name)) %>% #found a better Lactobacillus db
-  filter(!grepl("^Bacteroides", name)) #Assuming all Bacteroides are obligate anaerobes
+  filter(!grepl("^Bacteroides", name)) %>% #Assuming all Bacteroides are obligate anaerobes
+  filter(!grepl("^Bifidobacterium", name))
 
 ##manually curated lactobacillus database from paper
 lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus_data.csv"), sep = ",", header = TRUE) %>%
