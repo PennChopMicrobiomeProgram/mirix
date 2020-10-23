@@ -98,7 +98,7 @@ tetracycline_list <- function(abundance, lineage) {
   rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
-#' Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, Lipopeptides, and Amoxicillin aside from Vancomycin (see \code{vancomycin_index})
+#' Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, and Lipopeptides aside from Vancomycin (see \code{vancomycin_index})
 #'
 #' @param abundance A list of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
@@ -248,7 +248,7 @@ anaerobe_list <- function(abundance, lineage) {
   rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
-#' Function to calculate antibiotics index targeting anaerobes such as Fluoroquinolone
+#' Function to calculate antibiotics index targeting aerobes such as Fluoroquinolone
 #'
 #' @param abundance A list of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)

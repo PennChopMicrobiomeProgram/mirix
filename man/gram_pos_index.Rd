@@ -2,7 +2,7 @@
 % Please edit documentation in R/abx_index.R
 \name{gram_pos_index}
 \alias{gram_pos_index}
-\title{Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, Lipopeptides, and Amoxicillin aside from Vancomycin (see \code{vancomycin_index})}
+\title{Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, and Lipopeptides aside from Vancomycin (see \code{vancomycin_index})}
 \usage{
 gram_pos_index(abundance, lineage)
 }
@@ -15,7 +15,7 @@ gram_pos_index(abundance, lineage)
 The calculated antibiotics index for the sample
 }
 \description{
-Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, Lipopeptides, and Amoxicillin aside from Vancomycin (see \code{vancomycin_index})
+Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, and Lipopeptides aside from Vancomycin (see \code{vancomycin_index})
 }
 \examples{
 apply(abx_test_df, 2, gram_pos_index, row.names(abx_test_df))

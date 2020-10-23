@@ -2,7 +2,7 @@
 % Please edit documentation in R/abx_index.R
 \name{aerobes_index}
 \alias{aerobes_index}
-\title{Function to calculate antibiotics index targeting anaerobes such as Fluoroquinolone}
+\title{Function to calculate antibiotics index targeting aerobes such as Fluoroquinolone}
 \usage{
 aerobes_index(abundance, lineage)
 }
@@ -15,7 +15,7 @@ aerobes_index(abundance, lineage)
 The calculated antibiotics index for the sample
 }
 \description{
-Function to calculate antibiotics index targeting anaerobes such as Fluoroquinolone
+Function to calculate antibiotics index targeting aerobes such as Fluoroquinolone
 }
 \examples{
 apply(abx_test_df, 2, aerobes_index, row.names(abx_test_df))

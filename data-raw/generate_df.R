@@ -30,7 +30,8 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
   pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute") %>%
-  filter(!grepl("^Lactobacillus", name))
+  filter(!grepl("^Lactobacillus", name)) %>% #found a better Lactobacillus db
+  filter(!grepl("^Bacteroides", name)) #Assuming all Bacteroides are obligate anaerobes
 
 ##manually curated lactobacillus database from paper
 lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus_data.csv"), sep = ",", header = TRUE) %>%
