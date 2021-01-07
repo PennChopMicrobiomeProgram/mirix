@@ -8,11 +8,9 @@ phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"),
   mutate(rank = "Genus") %>%
   mutate(anaerobe = ifelse(grepl("anaerobe", aerobic_status), ifelse(grepl("microaerobe or anaerobe|facultative anaerobe", aerobic_status), FALSE, TRUE), FALSE)) %>%
   mutate(aerobe = ifelse(grepl("anaerobe|not indicated|variable", aerobic_status), FALSE, TRUE)) %>%
-  mutate(tetracycline = TRUE) %>%
-  mutate(penicillin = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-c(aerobic_status, gram_stain)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline", "penicillin"), values_to = "boo", names_to = "attribute") %>%
+  pivot_longer(cols = c("anaerobe", "aerobe"), values_to = "boo", names_to = "attribute") %>%
   rowwise() %>%
   filter(!(grepl("Bifidobacterium", name) & grepl("anaerobe|aerobe", attribute)))
 
@@ -25,24 +23,21 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   mutate(aerobe = ifelse(grepl("anaerobe|not indicated|aerotolerant|variable", aerobic_status), FALSE, TRUE)) %>%
   mutate(gram_positive = ifelse(gram_stain == "Gram-positive", TRUE, FALSE)) %>%
   mutate(gram_negative = ifelse(gram_stain == "Gram-negative", TRUE, FALSE)) %>%
-  mutate(tetracycline = TRUE) %>%
-  mutate(penicillin = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline", "penicillin"), values_to = "boo", names_to = "attribute") %>%
+  pivot_longer(cols = c("anaerobe", "aerobe"), values_to = "boo", names_to = "attribute") %>%
   rowwise() %>%
   filter(!(grepl("^Lactobacillus", name) & grepl("anaerobe|aerobe", attribute))) %>% #found a better Lactobacillus db for anaerobicity
-  filter(!(grepl("^Bacteroides", name) & grepl("anaerobe|aerobe|tetracycline|penicillin", attribute))) %>% #Remove Bacteroides from this dataset; assuming all Bacteroides are resistant to tetracycline and penicillin and are obligate anaerobes
-  filter(!(grepl("^Bifidobacterium", name) & grepl("anaerobe|aerobe|tetracycline", attribute))) #Remove Bifidobacterium from this dataset; assuming all Bifidobacterium are resistant to tetracycline and are obligate anaerobes
+  filter(!(grepl("^Bacteroides", name) & grepl("anaerobe|aerobe", attribute))) %>% #Remove Bacteroides from this dataset; assuming all Bacteroides are resistant to tetracycline and penicillin and are obligate anaerobes
+  filter(!(grepl("^Bifidobacterium", name) & grepl("anaerobe|aerobe", attribute))) #Remove Bifidobacterium from this dataset; assuming all Bifidobacterium are resistant to tetracycline and are obligate anaerobes
 
 ##manually curated lactobacillus database from paper
 lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus_data.csv"), sep = ",", header = TRUE) %>%
   mutate(anaerobe = ifelse(grepl("^Anaerobic|^Strictly anaerobic", Growth.conditions), TRUE, FALSE)) %>%
   mutate(aerobe = ifelse(grepl("^Aerobic", Growth.conditions), TRUE, FALSE)) %>%
-  mutate(tetracycline = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-Growth.conditions) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline", "vancomycin"), values_to = "boo", names_to = "attribute")
+  pivot_longer(cols = c("anaerobe", "aerobe", "vancomycin"), values_to = "boo", names_to = "attribute")
 
 abx_idx_df <- rbind(phenotypes_genus, phenotypes_species, lactobacillus_species)
 abx_idx_df <- abx_idx_df[c("attribute", "boo", "name", "rank", "doi")]
