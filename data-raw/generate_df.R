@@ -8,14 +8,13 @@ phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"),
   mutate(rank = "Genus") %>%
   mutate(anaerobe = ifelse(grepl("anaerobe", aerobic_status), ifelse(grepl("microaerobe or anaerobe|facultative anaerobe", aerobic_status), FALSE, TRUE), FALSE)) %>%
   mutate(aerobe = ifelse(grepl("anaerobe|not indicated|variable", aerobic_status), FALSE, TRUE)) %>%
-  mutate(gram_positive = ifelse(gram_stain == "Gram-positive", TRUE, FALSE)) %>%
-  mutate(gram_negative = ifelse(gram_stain == "Gram-negative", TRUE, FALSE)) %>%
   mutate(tetracycline = TRUE) %>%
+  mutate(penicillin = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
-  select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute")
-
-phenotypes_genus <- phenotypes_genus[!(grepl("Bifidobacterium", phenotypes_genus$name)&grepl("anaerobe|aerobe", phenotypes_genus$attribute)), ]
+  select(-c(aerobic_status, gram_stain)) %>%
+  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline", "penicillin"), values_to = "boo", names_to = "attribute") %>%
+  rowwise() %>%
+  filter(!(grepl("Bifidobacterium", name) & grepl("anaerobe|aerobe", attribute)))
 
 ##manually curated species phenotypes from Ceylan
 phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt"), sep = "\t", header = TRUE) %>%
@@ -27,12 +26,14 @@ phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt
   mutate(gram_positive = ifelse(gram_stain == "Gram-positive", TRUE, FALSE)) %>%
   mutate(gram_negative = ifelse(gram_stain == "Gram-negative", TRUE, FALSE)) %>%
   mutate(tetracycline = TRUE) %>%
+  mutate(penicillin = TRUE) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
   select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline"), values_to = "boo", names_to = "attribute") %>%
-  filter(!grepl("^Lactobacillus", name)) %>% #found a better Lactobacillus db
-  filter(!grepl("^Bacteroides", name)) %>% #Assuming all Bacteroides are obligate anaerobes
-  filter(!grepl("^Bifidobacterium", name))
+  pivot_longer(cols = c("anaerobe", "aerobe", "tetracycline", "penicillin"), values_to = "boo", names_to = "attribute") %>%
+  rowwise() %>%
+  filter(!(grepl("^Lactobacillus", name) & grepl("anaerobe|aerobe", attribute))) %>% #found a better Lactobacillus db for anaerobicity
+  filter(!(grepl("^Bacteroides", name) & grepl("anaerobe|aerobe|tetracycline|penicillin", attribute))) %>% #Remove Bacteroides from this dataset; assuming all Bacteroides are resistant to tetracycline and penicillin and are obligate anaerobes
+  filter(!(grepl("^Bifidobacterium", name) & grepl("anaerobe|aerobe|tetracycline", attribute))) #Remove Bifidobacterium from this dataset; assuming all Bifidobacterium are resistant to tetracycline and are obligate anaerobes
 
 ##manually curated lactobacillus database from paper
 lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus_data.csv"), sep = ",", header = TRUE) %>%
@@ -46,22 +47,28 @@ lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus
 abx_idx_df <- rbind(phenotypes_genus, phenotypes_species, lactobacillus_species)
 abx_idx_df <- abx_idx_df[c("attribute", "boo", "name", "rank", "doi")]
 
-##gram_positive
+##gram_positive; gram negative bacteria may be intrinsically resistant to any antibiotics due to their low permiability in their outer membrane
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Negativicutes", "Class", "10.4056/sigs.2981345")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
 
-##vancomycin
+##vancomycin resistance
 
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, "Lactobacillus", "Genus", "10.1128/AEM.01738-18")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, "Leuconostoc", "Genus", "10.1053/jhin.1998.0605")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, "Pediococcus", "Genus", "10.1053/jhin.1998.0605")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, "Erysipelothrix", "Genus", "10.1053/jhin.1998.0605")
 
+#vancomycin resistance for enterococci are due to intrinsic expression of van genes
 vanco_entero_except <- c("Enterococcus gallinarum",
                          "Enterococcus casseliflavus",
                          "Enterococcus flavescens")
 for(entero in vanco_entero_except){
   abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, entero, "Species", "10.1016/j.jiac.2018.01.001") ##resistant
 }
+
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("vancomycin", FALSE, "Mycoplasma", "Genus", "10.1038/nrmicro1464")
 
 ##anaerobes
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", TRUE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
@@ -85,11 +92,10 @@ for(ana in anaerobe){
 }
 
 ##tetracycline
-tet_intrins_resist_replace <- c("Bacteroides fragilis",
-                                "Escherichia coli",
-                                "Enterobacter",
+tet_intrins_resist_replace <- c("Escherichia coli",
                                 "Enterococcus faecalis",
                                 "Pseudomonas aeruginosa",
+                                "Pseudomonas",
                                 "Staphylococcus aureus",
                                 "Stenotrophomonas maltophilia")
 for(tet_replace in tet_intrins_resist_replace){
@@ -97,7 +103,9 @@ for(tet_replace in tet_intrins_resist_replace){
   abx_idx_df[abx_idx_df$name==tet_replace&abx_idx_df$attribute=="tetracycline", "doi"] <- "10.1101/cshperspect.a025387"
 }
 
-tet_intrins_resist_species <- c("Acinetobacter baumannii",
+tet_intrins_resist_species <- c("Bacteroides fragilis",
+                                "Enterobacter cloacae",
+                                "Acinetobacter baumannii",
                                 "Klebsiella pneumoniae", ##Klebsiella generally susceptible
                                 "Proteus mirabilis",
                                 "Serratia marcescens")
@@ -105,11 +113,59 @@ for(tet_species in tet_intrins_resist_species){
   abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, tet_species, "Species", "10.1101/cshperspect.a025387")
 }
 
+enterobacter_resist_species <- c("Enterobacter asburiae",
+                                "Enterobacter bugandensis",
+                                "Enterobacter aerogenes")
+for(ent_tet_species in enterobacter_resist_species){
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, ent_tet_species, "Species", "10.1128/CMR.00002-19")
+}
+
+
+tet_gtpase_species <- c("Agrobacterium tumefaciens",
+                       "Bacillus anthracis",
+                       "Bacillus cereus",
+                       "Bacillus thuringiensis",
+                       "Bacteroides fragilis",
+                       "Bifidobacterium longum",
+                       "Clostridium acetobutylicum",
+                       "Clostridium perfringens",
+                       "Lactobacillus johnsonii",
+                       "Lactobacillus plantarum",
+                       "Streptococcus agalactiae",
+                       "Streptomyces avermitilis",
+                       "Streptomyces coelicolor")
+
+for(gtpase_species in tet_gtpase_species){
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, gtpase_species, "Species", "10.1186/1471-2164-8-15")
+}
+
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Salmonella typhimurium", "Species", "10.1038/nrmicro1464")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Campylobacter jejuni", "Species", "10.1038/nrmicro1464")
 abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="tetracycline", "boo"] <- FALSE
 abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="tetracycline", "doi"] <- "10.1128/mBio.00569-13"
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", TRUE, "Klebsiella", "Genus", "10.1101/cshperspect.a025387")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Mycobacterium abscessus", "Species", "10.1128/AAC.00119-18")
+
+##penicillin; these resistant organisms usually do not have a permeable outer membrane
+abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
+abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.3934/microbiol.2018.3.482"
+
+abx_idx_df[abx_idx_df$name=="Stenotrophomonas maltophilia"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
+abx_idx_df[abx_idx_df$name=="Stenotrophomonas maltophilia"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.1186/s13054-019-2371-3"
+
+abx_idx_df[abx_idx_df$name=="Enterococcus faecalis"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
+abx_idx_df[abx_idx_df$name=="Enterococcus faecalis"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.4161/viru.21282"
+
+abx_idx_df[abx_idx_df$name=="Enterococcus faecium"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
+abx_idx_df[abx_idx_df$name=="Enterococcus faecium"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.4161/viru.21282"
+
+abx_idx_df[abx_idx_df$name=="Escherichia coli"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
+abx_idx_df[abx_idx_df$name=="Escherichia coli"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.1016/j.ijmm.2013.02.009"
+
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Mycoplasma", "Genus", "10.1038/nrmicro1464")
+
+##aminoglycoside
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aminoglycoside", TRUE, "Staphylococcus", "Genus", "10.1136/archdischild-2015-309069")
 
 abx_idx_df <- as.data.frame(abx_idx_df)
 
