@@ -90,13 +90,13 @@ for(ana in anaerobe){
 tet_intrins_resist_replace <- c("Escherichia coli",
                                 "Enterococcus faecalis",
                                 "Pseudomonas aeruginosa",
-                                "Pseudomonas",
                                 "Staphylococcus aureus",
                                 "Stenotrophomonas maltophilia")
 for(tet_replace in tet_intrins_resist_replace){
-  abx_idx_df[abx_idx_df$name==tet_replace&abx_idx_df$attribute=="tetracycline", "boo"] <- FALSE
-  abx_idx_df[abx_idx_df$name==tet_replace&abx_idx_df$attribute=="tetracycline", "doi"] <- "10.1101/cshperspect.a025387"
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, tet_replace, "Species", "10.1101/cshperspect.a025387")
 }
+
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Pseudomonas", "Genus", "10.1101/cshperspect.a025387")
 
 tet_intrins_resist_species <- c("Bacteroides fragilis",
                                 "Enterobacter cloacae",
@@ -136,26 +136,18 @@ for(gtpase_species in tet_gtpase_species){
 
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Salmonella typhimurium", "Species", "10.1038/nrmicro1464")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Campylobacter jejuni", "Species", "10.1038/nrmicro1464")
-abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="tetracycline", "boo"] <- FALSE
-abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="tetracycline", "doi"] <- "10.1128/mBio.00569-13"
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Bacteroides", "Genus", "10.1128/mBio.00569-13") ##tetracycline resistance among Bacteroides is widely distributed
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", TRUE, "Klebsiella", "Genus", "10.1101/cshperspect.a025387")
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("tetracycline", FALSE, "Mycobacterium abscessus", "Species", "10.1128/AAC.00119-18")
 
-##penicillin; these resistant organisms usually do not have a permeable outer membrane
-abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
-abx_idx_df[abx_idx_df$name=="Bacteroides"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.3934/microbiol.2018.3.482"
+##penicillin
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Bacteroides", "Genus", "10.3934/microbiol.2018.3.482")
 
-abx_idx_df[abx_idx_df$name=="Stenotrophomonas maltophilia"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
-abx_idx_df[abx_idx_df$name=="Stenotrophomonas maltophilia"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.1186/s13054-019-2371-3"
-
-abx_idx_df[abx_idx_df$name=="Enterococcus faecalis"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
-abx_idx_df[abx_idx_df$name=="Enterococcus faecalis"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.4161/viru.21282"
-
-abx_idx_df[abx_idx_df$name=="Enterococcus faecium"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
-abx_idx_df[abx_idx_df$name=="Enterococcus faecium"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.4161/viru.21282"
-
-abx_idx_df[abx_idx_df$name=="Escherichia coli"&abx_idx_df$attribute=="penicillin", "boo"] <- FALSE
-abx_idx_df[abx_idx_df$name=="Escherichia coli"&abx_idx_df$attribute=="penicillin", "doi"] <- "10.1016/j.ijmm.2013.02.009"
+##these resistant organisms usually do not have a permeable outer membrane
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Stenotrophomonas maltophilia", "Species", "10.1186/s13054-019-2371-3")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Enterococcus faecalis", "Species", "10.4161/viru.21282")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Enterococcus faecium", "Species", "10.4161/viru.21282")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Escherichia coli", "Species", "10.1016/j.ijmm.2013.02.009")
 
 abx_idx_df[nrow(abx_idx_df)+1,] <- list("penicillin", FALSE, "Mycoplasma", "Genus", "10.1038/nrmicro1464")
 
