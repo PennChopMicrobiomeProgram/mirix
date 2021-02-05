@@ -1,6 +1,6 @@
 #' Function to calculate antibiotics index for Vancomycin
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -17,7 +17,7 @@ vancomycin_index <- function(abundance, lineage) {
 
 #' Function to return taxon susceptible or resistant to Vancomycin
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to vancomycin
@@ -50,7 +50,7 @@ vancomycin_list <- function(abundance, lineage) {
 
 #' Function to calculate antibiotics index for Tetracycline
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -67,7 +67,7 @@ tetracycline_index <- function(abundance, lineage) {
 
 #' Function to return taxon susceptible or resistant to Tetracycline
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to tetracycline
@@ -100,7 +100,7 @@ tetracycline_list <- function(abundance, lineage) {
 
 #' Function to calculate antibiotics index for Penicillin-like antibiotics
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -117,7 +117,7 @@ penicillin_index <- function(abundance, lineage) {
 
 #' Function to return taxon susceptible or resistant to Penicillin-like antibiotics
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to penicillin-like antibiotics
@@ -150,7 +150,7 @@ penicillin_list <- function(abundance, lineage) {
 
 #' Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, and Lipopeptides aside from Vancomycin (see \code{vancomycin_index})
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -167,7 +167,7 @@ gram_pos_index <- function(abundance, lineage) {
 
 #' Function to return susceptibility or resistance to antibiotics targeting gram positive bacteria
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-gram positive antibiotics
@@ -200,7 +200,7 @@ gram_pos_list <- function(abundance, lineage) {
 
 #' Function to calculate antibiotics index targeting gram negatives such as Polymyxin and Aztreonam
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -217,7 +217,7 @@ gram_neg_index <- function(abundance, lineage) {
 
 #' Function to return susceptibility or resistance to antibiotics targeting gram negative bacteria
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-gram negative antibiotics
@@ -250,7 +250,7 @@ gram_neg_list <- function(abundance, lineage) {
 
 #' Function to calculate antibiotics index targeting anaerobes such as Nitroimidazole
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -267,7 +267,7 @@ anaerobes_index <- function(abundance, lineage) {
 
 #' Function to return susceptibility or resistance to antibiotics targeting anaerobes
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-anaerobic antibiotics
@@ -300,7 +300,7 @@ anaerobe_list <- function(abundance, lineage) {
 
 #' Function to calculate antibiotics index targeting aerobes such as Fluoroquinolone
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -317,7 +317,7 @@ aerobes_index <- function(abundance, lineage) {
 
 #' Function to return susceptibility or resistance to antibiotics targeting aerobes
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-aerobic antibiotics
@@ -351,7 +351,7 @@ aerobe_list <- function(abundance, lineage) {
 #this has not been tested yet
 #' Function to calculate antibiotics index targeting gram-negative aerobes such as aminoglycoside
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return The calculated antibiotics index for the sample
@@ -373,7 +373,7 @@ aminoglycoside_index <- function(abundance, lineage) {
 
 #' Function to return taxon susceptible or resistant to antibiotics targeting gram-negative aerobes
 #'
-#' @param abundance A list of relative abundances of bacterial taxons for a single sample
+#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
 #' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
 #'
 #' @return A dataframe of taxa abundances and whether they are susceptible or resistant to antibiotics targeting gram-negative aerobes
