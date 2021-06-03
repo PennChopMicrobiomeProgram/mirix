@@ -1,38 +1,89 @@
-library(dplyr)
-library(tidyr)
+```{r}
+library(tidyverse)
+library(usethis)
+```
 
+```{r}
+refine_aerobic_status_values <- function (df) {
+  df %>%
+    mutate(aerobic_status = case_when(
+      aerobic_status == "anaerobe (unspecified)" ~ "obligate anaerobe",
+      # Assume that organisms filed under "microaerobe" and "microaerobe or
+      # anaerobe" have genes to neutralize O2 but do not carry out aerobic
+      # respiration
+      aerobic_status == "microaerobe" ~ "obligate anaerobe",
+      aerobic_status == "microaerobe or anaerobe" ~ "obligate anaerobe",
+      # Assume that organisms filed under "microaerobe or aerobe" can carry out
+      # aerobic respiration
+      aerobic_status == "microaerobe or aerobe" ~ "aerobe",
+      # This is a facultative anaerobe if I ever saw one
+      aerobic_status == "aerobe, microaerobe, or anaerobe" ~ "facultative anaerobe",
+      # Likewise, assume "aerotolerant" means facultative anaerobe
+      aerobic_status == "aerotolerant" ~ "facultative anaerobe",
+      # The labels "variable" and "not indicated" do not help us here; we need
+      # definite answers
+      aerobic_status == "variable" ~ NA_character_,
+      aerobic_status == "not indicated" ~ NA_character_,
+      TRUE ~ aerobic_status))
+}
+refine_gram_stain_values <- function (df) {
+  df %>%
+    mutate(gram_stain = case_when(
+      gram_stain == "Gram-variable" ~ NA_character_,
+      gram_stain == "not indicated" ~ NA_character_,
+      TRUE ~ gram_stain))
+}
+```
+
+
+```{r message=FALSE}
 ##manually curated genus phenotypes from Ceylan
-phenotypes_genus <- utils::read.delim(here::here("data-raw", "genera_0831.txt"), sep = "\t", header = TRUE) %>%
-  select(name, aerobic_status, gram_stain, doi) %>%
-  unique() %>%
+genus_phenotypes <- read_tsv("genera_0831.txt", na = "N/A") %>%
   mutate(rank = "Genus") %>%
-  mutate(anaerobe = ifelse(grepl("anaerobe", aerobic_status), ifelse(grepl("microaerobe or anaerobe|facultative anaerobe", aerobic_status), FALSE, TRUE), FALSE)) %>%
-  mutate(aerobe = ifelse(grepl("anaerobe|not indicated|variable", aerobic_status), FALSE, TRUE)) %>%
-  mutate(doi = as.character(doi), name = as.character(name)) %>%
-  select(-c(aerobic_status, gram_stain)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe"), values_to = "boo", names_to = "attribute") %>%
-  rowwise() %>%
-  filter(!(grepl("Bifidobacterium", name) & grepl("anaerobe|aerobe", attribute)))
+  select(taxon = name, rank, aerobic_status, gram_stain, doi) %>%
+  refine_aerobic_status_values() %>%
+  refine_gram_stain_values() %>%
+  filter(!(is.na(aerobic_status) & is.na(gram_stain)))
 
-##manually curated species phenotypes from Ceylan
-phenotypes_species <- utils::read.delim(here::here("data-raw", "species_0831.txt"), sep = "\t", header = TRUE) %>%
-  select(name, aerobic_status, gram_stain, doi) %>%
-  unique() %>%
+genus_phenotypes %>%
+  count(aerobic_status)
+genus_phenotypes %>%
+  count(gram_stain)
+```
+
+```{r message=FALSE}
+species_phenotypes <- read_tsv("species_0831.txt", na = "N/A") %>%
   mutate(rank = "Species") %>%
-  mutate(anaerobe = ifelse(grepl("anaerobe", aerobic_status), ifelse(grepl("aerobe, microaerobe, or anaerobe|microaerobe or anaerobe|facultative anaerobe", aerobic_status), FALSE, TRUE), FALSE)) %>%
-  mutate(aerobe = ifelse(grepl("anaerobe|not indicated|aerotolerant|variable", aerobic_status), FALSE, TRUE)) %>%
-  mutate(gram_positive = ifelse(gram_stain == "Gram-positive", TRUE, FALSE)) %>%
-  mutate(gram_negative = ifelse(gram_stain == "Gram-negative", TRUE, FALSE)) %>%
-  mutate(doi = as.character(doi), name = as.character(name)) %>%
-  select(-c(aerobic_status, gram_stain, gram_positive, gram_negative)) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe"), values_to = "boo", names_to = "attribute") %>%
-  rowwise() %>%
-  filter(!(grepl("^Lactobacillus", name) & grepl("anaerobe|aerobe", attribute))) %>% #found a better Lactobacillus db for anaerobicity
-  filter(!(grepl("^Bacteroides", name) & grepl("anaerobe|aerobe", attribute))) %>% #Remove Bacteroides from this dataset; assuming all Bacteroides are resistant to tetracycline and penicillin and are obligate anaerobes
-  filter(!(grepl("^Bifidobacterium", name) & grepl("anaerobe|aerobe", attribute))) #Remove Bifidobacterium from this dataset; assuming all Bifidobacterium are resistant to tetracycline and are obligate anaerobes
+  select(taxon = name, rank, aerobic_status, gram_stain, doi) %>%
+  refine_aerobic_status_values() %>%
+  refine_gram_stain_values() %>%
+  filter(!(is.na(aerobic_status) & is.na(gram_stain)))
 
+species_phenotypes %>%
+  count(taxon) %>%
+  filter(n > 1)
+species_phenotypes %>%
+  count(aerobic_status)
+species_phenotypes %>%
+  count(gram_stain)
+```
+```{r}
+taxon_phenotypes <- bind_rows(genus_phenotypes, species_phenotypes)
+```
+
+TODO: Check for consistency between genus and species
+
+```{r eval=FALSE}
+usethis::use_data(taxon_phenotypes, overwrite = T)
+```
+
+Include Lactobacillus species that are vancomycin-sensitive here. All
+Lactobacillus strains are considered facultative anaerobes, though they might
+be grown under various conditions
+
+```{r eval=FALSE}
 ##manually curated lactobacillus database from paper
-lactobacillus_species <- utils::read.delim(here::here("data-raw", "Lactobacillus_data.csv"), sep = ",", header = TRUE) %>%
+lactobacillus_species <- utils::read.delim( "Lactobacillus_data.csv", sep = ",", header = TRUE) %>%
   mutate(anaerobe = ifelse(grepl("^Anaerobic|^Strictly anaerobic", Growth.conditions), TRUE, FALSE)) %>%
   mutate(aerobe = ifelse(grepl("^Aerobic", Growth.conditions), TRUE, FALSE)) %>%
   mutate(doi = as.character(doi), name = as.character(name)) %>%
@@ -177,3 +228,4 @@ row.names(abx_test_df) <- c("k__Bacteria; p__Actinobacteria; c__; o__; f__; g__;
 )
 
 usethis::use_data(abx_test_df, overwrite = TRUE)
+```
