@@ -67,8 +67,21 @@ species_phenotypes %>%
 species_phenotypes %>%
   count(gram_stain)
 ```
+
 ```{r}
-taxon_phenotypes <- bind_rows(genus_phenotypes, species_phenotypes)
+misc_phenotypes <- read_csv("phenotype_misc.csv")
+```
+
+
+```{r}
+taxon_phenotypes <- bind_rows(
+  misc_phenotypes, genus_phenotypes, species_phenotypes)
+taxon_phenotypes %>%
+  count(rank)
+taxon_phenotypes %>%
+  count(aerobic_status)
+taxon_phenotypes %>%
+  count(gram_stain)
 ```
 
 TODO: Check for consistency between genus and species.
@@ -83,21 +96,9 @@ be grown under various conditions
 
 ```{r eval=FALSE}
 ##manually curated lactobacillus database from paper
-lactobacillus_species <- utils::read.delim( "Lactobacillus_data.csv", sep = ",", header = TRUE) %>%
-  mutate(anaerobe = ifelse(grepl("^Anaerobic|^Strictly anaerobic", Growth.conditions), TRUE, FALSE)) %>%
-  mutate(aerobe = ifelse(grepl("^Aerobic", Growth.conditions), TRUE, FALSE)) %>%
-  mutate(doi = as.character(doi), name = as.character(name)) %>%
-  select(-Growth.conditions) %>%
-  pivot_longer(cols = c("anaerobe", "aerobe", "vancomycin"), values_to = "boo", names_to = "attribute")
-
-abx_idx_df <- rbind(phenotypes_genus, phenotypes_species, lactobacillus_species)
-abx_idx_df <- abx_idx_df[c("attribute", "boo", "name", "rank", "doi")]
-
-##gram_positive; gram negative bacteria may be intrinsically resistant to any antibiotics due to their low permiability in their outer membrane
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Actinobacteria", "Phylum", "10.1128/MMBR.00019-15")
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", TRUE, "Firmicutes", "Phylum", "10.1099/00207713-28-1-1")
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Negativicutes", "Class", "10.4056/sigs.2981345")
-abx_idx_df[nrow(abx_idx_df)+1,] <- list("gram_positive", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+lactobacillus_species <- read_csv( "Lactobacillus_data.csv") %>%
+  select(taxon = name, rank, vancomycin, doi) %>%
+  mutate(vancomycin = if_else(vancomycin, "sensitive", "resistant"))
 
 ##vancomycin resistance
 
