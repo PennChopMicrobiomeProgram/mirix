@@ -18,3 +18,18 @@
 #' @description A dataframe with samples as columns and relative abundances of bacteria as rows
 #'
 "abx_test_df"
+
+#' Gram stain and aerobic status of bacterial taxa
+#' @format A data frame with the following columns:
+#' \describe{
+#'   \item{taxon}{The name of the taxon}
+#'   \item{rank}{The rank of the taxon}
+#'   \item{aerobic_status}{
+#'     The aerobic status. One of "aerobe", "facultative anaerobe", or
+#'     "obligate anaerobe".}
+#'   \item{gram_stain}{
+#'     How the taxon appears when Gram-stained. One of "Gram-positive" or
+#'     "Gram-negative".}
+#'   \item{doi}{DOI of the publication from which the information was obtained.}
+#' }
+"taxon_phenotypes"

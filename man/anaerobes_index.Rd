@@ -7,7 +7,7 @@
 anaerobes_index(abundance, lineage)
 }
 \arguments{
-\item{abundance}{A list of relative abundances of bacterial taxons for a single sample}
+\item{abundance}{A vector of relative abundances of bacterial taxons for a single sample}
 
 \item{lineage}{Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)}
 }

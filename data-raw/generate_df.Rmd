@@ -71,9 +71,9 @@ species_phenotypes %>%
 taxon_phenotypes <- bind_rows(genus_phenotypes, species_phenotypes)
 ```
 
-TODO: Check for consistency between genus and species
+TODO: Check for consistency between genus and species.
 
-```{r eval=FALSE}
+```{r}
 usethis::use_data(taxon_phenotypes, overwrite = T)
 ```
 
