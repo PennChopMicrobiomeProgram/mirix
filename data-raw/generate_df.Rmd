@@ -5,13 +5,25 @@ library(tidyverse)
 library(usethis)
 ```
 
-### Vancomycin
+## Allowed values
 
-Manually curated Lactobacillus database from abx susceptibility paper. Don't take
-phenotype info from this paper. The info in table 1 indicates the conditions
-under which the strain was grown for the experiment, not all conditions under
-which it can be grown. There is more good info on other abx to take from this
-paper.
+```{r}
+allowed_taxonomic_rank_values <- c(
+  "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+```
+
+```{r}
+allowed_susceptibility_values <- c("susceptible", "resistant")
+```
+
+
+## Vancomycin
+
+Manually curated Lactobacillus database from abx susceptibility paper. Don't
+take phenotype info from this paper. The info in table 1 indicates the
+conditions under which the strain was grown for the experiment, not all
+conditions under which it can be grown. There is more good info on other abx
+to take from this paper.
 
 ```{r message=FALSE}
 susceptibility_lactobacillus <- read_csv( "Lactobacillus_data.csv") %>%
@@ -25,13 +37,23 @@ susceptibility_lactobacillus <- read_csv( "Lactobacillus_data.csv") %>%
   mutate(value = if_else(value, "susceptible", "resistant"))
 ```
 
-### Other info
+```{r}
+susceptibility_lactobacillus %>%
+  count(antibiotic, value)
+```
+
+## Other info
 
 ```{r message=FALSE}
 susceptibility_misc <- read_csv("susceptibility_misc.csv")
 ```
 
-### Export
+```{r}
+susceptibility_misc %>%
+  count(antibiotic, value)
+```
+
+## Final checks
 
 ```{r}
 taxon_susceptibility <- bind_rows(
@@ -39,6 +61,22 @@ taxon_susceptibility <- bind_rows(
 taxon_susceptibility %>%
   count(antibiotic, value)
 ```
+
+Check for unexpected taxonomic rank values
+
+```{r}
+taxon_susceptibility %>%
+  filter(!(rank %in% allowed_taxonomic_rank_values))
+```
+
+Check for unexpected susceptibility values
+
+```{r}
+taxon_susceptibility %>%
+  filter(!(value %in% allowed_susceptibility_values))
+```
+
+## Export
 
 ```{r}
 taxon_susceptibility <- as.data.frame(taxon_susceptibility)
@@ -49,7 +87,8 @@ Review paper on drug class:
 https://doi.org/10.1016/j.bcp.2017.01.003
 
 Tet protection genes on mobile elements:
-http://faculty.washington.edu/marilynr/ https://doi.org/10.1016/j.femsle.2005.02.034
+http://faculty.washington.edu/marilynr/
+https://doi.org/10.1016/j.femsle.2005.02.034
 
 The Clinical and Laboratory Standards Institute (CLSI) guidelines assesses abx
 resistance.
