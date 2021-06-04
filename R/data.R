@@ -34,6 +34,19 @@
 #' }
 "taxon_phenotypes"
 
+#' Antibiotic susceptibility of bacterial taxa
+#' @format A data frame with the following columns:
+#' \describe{
+#'   \item{taxon}{The name of the taxon}
+#'   \item{rank}{The rank of the taxon}
+#'   \item{antibiotic}{The antibiotic or antibiotic class}
+#'   \item{value}{
+#'     The susceptibility of the taxon to the antibiotic, one of "susceptible"
+#'     or "resistant".
+#'   \item{doi}{DOI of the publication from which the information was obtained.}
+#' }
+"taxon_susceptibility"
+
 #' Example data from Weiss et al.
 #'
 #' @format A data frame with the following columns:
