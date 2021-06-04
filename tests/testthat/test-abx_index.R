@@ -1,4 +1,40 @@
-testthat::context("Testing abxindx functionality")
+weiss_sepsis <- subset(weiss2021_data, sample_id %in% "Sepsis.22441.C")
+weiss_sepsis$proportion <- round(weiss_sepsis$proportion, 3)
+
+weiss_healthy <- subset(weiss2021_data, sample_id %in% "Healthy.148")
+weiss_healthy$proportion <- round(weiss_healthy$proportion, 3)
+
+test_that("vancomycin_index works on Weiss examples", {
+  expect_equal(
+    vancomycin_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    0.5675951, tolerance = 1e-5)
+
+  weiss_sepsis_list <- vancomycin_list(
+    weiss_sepsis$proportion, weiss_sepsis$lineage)
+  weiss_sepsis_list <- weiss_sepsis_list[order(weiss_sepsis_list$abundance, decreasing = T),]
+
+  expect_equal(
+    weiss_sepsis_list$phenotype,
+    c("resistant", "susceptible", "resistant", "resistant", "resistant"))
+
+  expect_equal(
+    vancomycin_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    0.2367376, tolerance = 1e-5)
+
+  weiss_healthy_list <- vancomycin_list(
+    weiss_healthy$proportion, weiss_healthy$lineage)
+  weiss_healthy_list <- weiss_healthy_list[order(weiss_healthy_list$abundance, decreasing = T),]
+
+  expect_equal(
+    weiss_healthy_list$phenotype,
+    c("resistant", "susceptible", "resistant", "susceptible", "susceptible",
+      "susceptible", "resistant", "susceptible", "susceptible", "susceptible",
+      "susceptible", "susceptible", "susceptible", "resistant", "susceptible",
+      "susceptible", "susceptible", "resistant", "susceptible", "susceptible",
+      "susceptible", "susceptible", "resistant", "susceptible", "susceptible",
+      "susceptible"))
+
+})
 
 testthat::test_that("Testing abxidx on abx_test_df", {
 
@@ -41,8 +77,6 @@ testthat::test_that("Testing abxidx on abx_test_df", {
 
 })
 
-testthat::context("Testing list of susceptible or resistant bacteria")
-
 testthat::test_that("Testing list of susceptible or resistant bacteria", {
 
   ##vanco
@@ -83,9 +117,6 @@ testthat::test_that("Testing list of susceptible or resistant bacteria", {
 
 })
 
-
-testthat::context("Testing abx_idx_df")
-
 testthat::test_that("Testing abx_idx_df contains the required columns", {
 
   testthat::expect_equal(paste0(colnames(abx_idx_df), collapse = ", "), "attribute, boo, name, rank, doi")
@@ -93,8 +124,6 @@ testthat::test_that("Testing abx_idx_df contains the required columns", {
   testthat::expect_equal(class(abx_idx_df), "data.frame")
 
 })
-
-testthat::context("Testing abx_idx_plot")
 
 testthat::test_that("Testing abx_idx_plot to plot antibiotics indices", {
 
