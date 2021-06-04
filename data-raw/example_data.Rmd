@@ -1,0 +1,63 @@
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(usethis)
+```
+
+
+```{r}
+weiss_feces_healthy_s208 <- tibble(
+  assignment = c("Bacteroidetes - Prevotella", "Bacteroidetes - Bacteroides", 
+"Firmicutes - Dialister", "Firmicutes - Faecalibacterium", "Firmicutes - Coprococcus", 
+"Firmicutes - Ruminococcaceae", "Firmicutes - Lachnospiraceae", "Bacteroidetes - Parabacteroides", 
+"Bacteroidetes - Paraprevotella", "Firmicutes - Oscillospira", "Bacteroidetes - Rikenellaceae", 
+"Firmicutes - Lachnospira", "Firmicutes - Ruminococcus", "Firmicutes - Clostridiales", 
+"Firmicutes - Roseburia", "Bacteroidetes - Odoribacter", "Firmicutes - Streptococcus", 
+"Firmicutes - Blautia", "Firmicutes - Erysipelotrichaceae", "Firmicutes - Megamonas", 
+"Firmicutes - Anaerostipes", "Bacteroidetes - Butyricimonas", "Firmicutes - Turicibacter", 
+"Firmicutes - Clostridium", "Firmicutes - SMB53", "Proteobacteria - Sutterella", 
+"Actinobacteria - Collinsella", "Bacteroidetes - [Barnesiellaceae]", 
+"Firmicutes - [Ruminococcus]"), proportion = c(0.507979597923087, 
+0.159179022872044, 0.103004488762799, 0.0567021740294102, 0.0236214451216248, 
+0.0209832455207959, 0.0179779920624603, 0.0128315911020027, 0.00995633588486744, 
+0.00967339853637274, 0.00961986984881969, 0.00819753615098149, 
+0.00689755373897883, 0.0063546199080836, 0.00516169487118704, 
+0.00510051922826927, 0.00467228972784486, 0.0045805262634682, 
+0.00366289161970162, 0.00334936644974803, 0.00242408485061673, 
+0.00223291096649869, 0.0018811510197215, 0.00162880149268569, 
+0.00161350758195624, 0.0014911562961207, 0.00148350934075598, 
+0.00142998065320293, 0.00118527808153184))
+```
+
+```{r}
+weiss_feces_sepsis_s22441.C <- tibble(
+  assignment = c("Proteobacteria - Enterobacteriaceae", 
+"Firmicutes - Streptococcus", "Bacteroidetes - Bacteroides", 
+"Proteobacteria - Sutterella", "Firmicutes - Lactobacillus"), 
+proportion = c(0.769221919118827, 
+0.212730140756372, 0.0130189804624463, 0.00273095822723873, 0.00137153445336934
+))
+```
+
+```{r}
+weiss_feces_sepsis_X18314.A <- tibble(
+  assignment = c("Proteobacteria - Klebsiella", "Proteobacteria - Enterobacteriaceae", 
+"Firmicutes - Veillonella", "Firmicutes - Lactobacillus", "Bacteroidetes - Bacteroides", 
+"Firmicutes - Ruminococcaceae", "Bacteroidetes - Parabacteroides", 
+"Firmicutes - Clostridium", "Proteobacteria - Sutterella", "Firmicutes - Pseudoramibacter_Eubacterium", 
+"Firmicutes - Lachnospiraceae", "Firmicutes - Megasphaera", "Firmicutes - Enterococcus"
+), proportion = c(0.521592701159154, 0.213224397183341, 0.179640700779006, 
+0.0436813766108027, 0.0154821196812697, 0.00470730091977987, 
+0.00429448399369192, 0.0041578683203103, 0.00415489841436722, 
+0.00179976300150574, 0.00141664513484858, 0.00105134670384989, 
+0.00102461755036218))
+```
+
+```{r}
+weiss2021_data <- bind_rows(
+  weiss_feces_healthy_s208,
+  weis
+)
+```
+
+
