@@ -1,4 +1,4 @@
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 library(usethis)
 ```
@@ -6,6 +6,11 @@ library(usethis)
 ## Phenotypes
 
 ```{r}
+allowed_aerobic_status_values <- c(
+  "obligate anaerobe",
+  "facultative anaerobe",
+  "aerobe",
+  NA)
 refine_aerobic_status_values <- function (df) {
   df %>%
     mutate(aerobic_status = case_when(
@@ -28,6 +33,10 @@ refine_aerobic_status_values <- function (df) {
       aerobic_status == "not indicated" ~ NA_character_,
       TRUE ~ aerobic_status))
 }
+```
+
+```{r}
+allowed_gram_stain_values <- c("Gram-positive", "Gram-negative", NA)
 refine_gram_stain_values <- function (df) {
   df %>%
     mutate(gram_stain = case_when(
@@ -40,7 +49,6 @@ refine_gram_stain_values <- function (df) {
 ### Curated database from Celeste Gaughain
 
 ```{r message=FALSE}
-##manually curated genus phenotypes from Ceylan
 phenotype_genus <- read_tsv("genera_0831.txt", na = "N/A") %>%
   mutate(rank = "Genus") %>%
   select(taxon = name, rank, aerobic_status, gram_stain, doi) %>%
@@ -89,6 +97,29 @@ taxon_phenotypes %>%
 taxon_phenotypes %>%
   count(gram_stain)
 ```
+
+Check for duplicate rows
+
+```{r}
+taxon_phenotypes %>%
+  count(taxon) %>%
+  filter(n > 1)
+```
+
+Check for unexpected aerobic status values
+
+```{r}
+taxon_phenotypes %>%
+  filter(!(aerobic_status %in% allowed_aerobic_status_values))
+```
+
+Check for unexpected Gram stain values
+
+```{r}
+taxon_phenotypes %>%
+  filter(!(gram_stain %in% allowed_gram_stain_values))
+```
+
 
 ```{r eval=FALSE}
 ##anaerobes
