@@ -1,0 +1,168 @@
+# Taxon phenotypes data
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(usethis)
+```
+
+## Allowed values
+
+```{r}
+allowed_taxonomic_rank_values <- c(
+  "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+```
+
+
+```{r}
+allowed_aerobic_status_values <- c(
+  "obligate anaerobe",
+  "facultative anaerobe",
+  "aerobe",
+  NA)
+refine_aerobic_status_values <- function (df) {
+  df %>%
+    mutate(aerobic_status = case_when(
+      aerobic_status == "anaerobe (unspecified)" ~ "obligate anaerobe",
+      # Assume that organisms filed under "microaerobe" and "microaerobe or
+      # anaerobe" have genes to neutralize O2 but do not carry out aerobic
+      # respiration
+      aerobic_status == "microaerobe" ~ "obligate anaerobe",
+      aerobic_status == "microaerobe or anaerobe" ~ "obligate anaerobe",
+      # Assume that organisms filed under "microaerobe or aerobe" can carry out
+      # aerobic respiration
+      aerobic_status == "microaerobe or aerobe" ~ "aerobe",
+      # This is a facultative anaerobe if I ever saw one
+      aerobic_status == "aerobe, microaerobe, or anaerobe" ~ "facultative anaerobe",
+      # Likewise, assume "aerotolerant" means facultative anaerobe
+      aerobic_status == "aerotolerant" ~ "facultative anaerobe",
+      # The labels "variable" and "not indicated" do not help us here; we need
+      # definite answers
+      aerobic_status == "variable" ~ NA_character_,
+      aerobic_status == "not indicated" ~ NA_character_,
+      TRUE ~ aerobic_status))
+}
+```
+
+```{r}
+allowed_gram_stain_values <- c("Gram-positive", "Gram-negative", NA)
+refine_gram_stain_values <- function (df) {
+  df %>%
+    mutate(gram_stain = case_when(
+      gram_stain == "Gram-variable" ~ NA_character_,
+      gram_stain == "not indicated" ~ NA_character_,
+      TRUE ~ gram_stain))
+}
+```
+
+## Curated database from Celeste Gaughan
+
+```{r message=FALSE}
+phenotype_genus <- read_tsv("genera_0831.txt", na = "N/A") %>%
+  mutate(rank = "Genus") %>%
+  select(taxon = name, rank, aerobic_status, gram_stain, doi) %>%
+  refine_aerobic_status_values() %>%
+  refine_gram_stain_values() %>%
+  filter(!(is.na(aerobic_status) & is.na(gram_stain)))
+
+phenotype_genus %>%
+  count(aerobic_status)
+phenotype_genus %>%
+  count(gram_stain)
+```
+
+```{r message=FALSE}
+phenotype_species <- read_tsv("species_0831.txt", na = "N/A") %>%
+  mutate(rank = "Species") %>%
+  select(taxon = name, rank, aerobic_status, gram_stain, doi) %>%
+  refine_aerobic_status_values() %>%
+  refine_gram_stain_values() %>%
+  filter(!(is.na(aerobic_status) & is.na(gram_stain)))
+
+phenotype_species %>%
+  count(taxon) %>%
+  filter(n > 1)
+phenotype_species %>%
+  count(aerobic_status)
+phenotype_species %>%
+  count(gram_stain)
+```
+
+## Misc database
+
+```{r}
+phenotype_misc <- read_csv("phenotype_misc.csv")
+```
+
+## Final check
+
+```{r}
+taxon_phenotypes <- bind_rows(
+  phenotype_misc, phenotype_genus, phenotype_species)
+taxon_phenotypes %>%
+  count(rank)
+taxon_phenotypes %>%
+  count(aerobic_status)
+taxon_phenotypes %>%
+  count(gram_stain)
+```
+
+Check for duplicate rows
+
+```{r}
+taxon_phenotypes %>%
+  count(taxon) %>%
+  filter(n > 1)
+```
+
+Check for expected taxonomic ranks
+
+```{r}
+taxon_phenotypes %>%
+  filter(!(rank %in% allowed_taxonomic_rank_values))
+```
+
+Check for unexpected aerobic status values
+
+```{r}
+taxon_phenotypes %>%
+  filter(!(aerobic_status %in% allowed_aerobic_status_values))
+```
+
+Check for unexpected Gram stain values
+
+```{r}
+taxon_phenotypes %>%
+  filter(!(gram_stain %in% allowed_gram_stain_values))
+```
+
+## Code still to adapt
+
+```{r eval=FALSE}
+##anaerobes
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", TRUE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", FALSE, "Listeria", "Genus", "10.1002/9781118960608.gbm00547")
+anaerobe <- c("Actinomyces",
+              "Peptostreptococcus",
+              "Finegoldia",
+              "Parvimonas",
+              "Bifidobacterium")
+for(ana in anaerobe){
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("anaerobe", TRUE, ana, "Genus", "10.1128/microbiolspec.dmih2-0015-2015")
+}
+
+##aerobes
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, "Bacteroidales", "Order", "10.1128/microbiolspec.dmih2-0015-2015")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, "Salmonella", "Genus", "10.1002/9781118960608.gbm01166")
+abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, "Listeria", "Genus", "10.1002/9781118960608.gbm00547")
+for(ana in anaerobe){
+  abx_idx_df[nrow(abx_idx_df)+1,] <- list("aerobe", FALSE, ana, "Genus", "10.1128/microbiolspec.dmih2-0015-2015")
+}
+```
+
+## Export
+
+```{r}
+taxon_phenotypes <- as.data.frame(taxon_phenotypes)
+usethis::use_data(taxon_phenotypes, overwrite = T)
+```
