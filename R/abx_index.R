@@ -413,7 +413,7 @@ aminoglycoside_list <- function(abundance, lineage) {
 #'
 is_susceptible <- function(taxa, idx) {
   suscept_vector <- rep(0, length(taxa))
-  if(grepl("tetracycline|penicillin", idx)) { ##assume all taxa is susceptible for tetracyclines and penicillins
+  if(any(grepl("tetracycline|penicillin", idx))) { ##assume all taxa is susceptible for tetracyclines and penicillins
     suscept_vector <- rep(1, length(taxa))
   }
 
