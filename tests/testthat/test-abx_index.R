@@ -36,6 +36,20 @@ test_that("vancomycin_index works on Weiss examples", {
 
 })
 
+test_that("is_susceptible returns correct values for taxa", {
+  expect_equal(
+    is_susceptible(
+      "k__Bacteria; p__Firmicutes; c__Negativicutes; o__Veillonellales; f__Veillonellaceae; g__Veillonella",
+      c("gram_positive", "vancomycin")),
+    0.0)
+
+  expect_equal(
+    is_susceptible(
+      "k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__Clostridium; s__Clostridium perfringens",
+      c("gram_positive", "vancomycin")),
+    1.0)
+})
+
 testthat::test_that("Testing abxidx on abx_test_df", {
 
   ##vanco test
