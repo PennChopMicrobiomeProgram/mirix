@@ -27,7 +27,7 @@ name specified in \code{phenotype}}
 }
 \value{
 A vector of assigned susceptibility values, which should be either
-"susceptible" or "resistant"
+"susceptible", "resistant", or \code{NA}
 }
 \description{
 This is the main engine for determining antibiotic susceptibility based on
