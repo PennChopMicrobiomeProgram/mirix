@@ -8,7 +8,7 @@
 #' @param db A data frame with columns named "taxon", "rank", "antibiotic",
 #'   and "value"
 #' @return A vector of assigned susceptibility values, which should be either
-#'   "susceptible" or "resistant"
+#'   "susceptible", "resistant", or \code{NA}
 #' @details
 #' To determine susceptibility, the database is first filtered to include only
 #' rows relevant to the antibiotic of interest. Then, the filtered database is
@@ -51,7 +51,7 @@ antibiotic_susceptibility <- function (lineage,
 #' @param db A data frame with columns named "taxon", "rank", and the column
 #'   name specified in \code{phenotype}
 #' @return A vector of assigned susceptibility values, which should be either
-#'   "susceptible" or "resistant"
+#'   "susceptible", "resistant", or \code{NA}
 #' @details
 #' This function operates much like \code{antibiotic_susceptibility}, except
 #' that it pulls phenotype values from the database instead of susceptibility
