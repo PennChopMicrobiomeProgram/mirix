@@ -15,15 +15,65 @@ vanco_db <- data.frame(
   rank = c("Genus", "Species", "Species", "Species", "Species"),
   value = c(
     "resistant", "resistant", "susceptible", "susceptible", "resistant"),
+  antibiotic = "vancomycin",
   stringsAsFactors = FALSE)
 
-test_that("match_annotation works for antibiotic susceptibility", {
+tetra_db <- data.frame(
+  taxon = c("Escherichia coli", "Enterococcus faecalis", "Klebsiella"),
+  rank = c("Species", "Species", "Genus"),
+  value = c("resistant", "resistant", "susceptible"),
+  antibiotic = "tetracycline",
+  stringsAsFactors = FALSE)
+
+test_that("antibiotic_susceptibility works for vancomycin data", {
   expect_equal(
-    match_annotation(
-      c("Enterococcus", "Lactobacillus",
-        "Lactobacillus delbrueckii subsp. lactis"),
-      vanco_db),
+    antibiotic_susceptibility(
+      c("Enterococcus faecalis",
+        "Lactobacillus",
+        "Lactobacillus delbrueckii"),
+      "vancomycin", db = vanco_db),
     c(NA, "resistant", "susceptible"))
+})
+
+test_that("antibiotic_susceptibility works for tetracycline data", {
+  expect_equal(
+    antibiotic_susceptibility(
+      c("Enterococcus faecalis",
+        "Lactobacillus",
+        "Lactobacillus delbrueckii"),
+      "tetracycline", db = tetra_db),
+    c("resistant", NA, NA))
+})
+
+test_that("antibiotic_susceptibility works for multi-abx data", {
+  mixed_db <- rbind(vanco_db, tetra_db)
+  expect_equal(
+    antibiotic_susceptibility(
+      c("Enterococcus faecalis",
+        "Lactobacillus",
+        "Lactobacillus delbrueckii"),
+      "vancomycin", db = mixed_db),
+    c(NA, "resistant", "susceptible"))
+  expect_equal(
+    antibiotic_susceptibility(
+      c("Enterococcus faecalis",
+        "Lactobacillus",
+        "Lactobacillus delbrueckii"),
+      "tetracycline", db = mixed_db),
+    c("resistant", NA, NA))
+})
+
+test_that("phenotype_susceptibility works for normal input", {
+  pheno_db <- gram_stain_db
+  colnames(pheno_db)[3] <- "gram_stain"
+
+  expect_equal(
+    phenotype_susceptibility(
+      c("Bacteroidetes", "Firmicutes", "Firmicutes Negativicutes"),
+      "gram_stain",
+      c("Gram-positive" = "susceptible", "Gram-negative" = "resistant"),
+      pheno_db),
+    c("resistant", "susceptible", "resistant"))
 })
 
 test_that("match_annotation works for normal input", {
