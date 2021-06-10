@@ -83,7 +83,7 @@ test_that("tetracycline_susceptibility works for selected taxa", {
     tetracycline_susceptibility(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db),
-    c("resistant", NA, "susceptible"))
+    c("resistant", "susceptible", "susceptible"))
 })
 
 test_that("penicillin_susceptibility works for selected taxa", {
@@ -95,7 +95,7 @@ test_that("penicillin_susceptibility works for selected taxa", {
     penicillin_susceptibility(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db),
-    c("resistant", NA, NA))
+    c("resistant", "susceptible", "susceptible"))
 })
 
 test_that("aminoglycoside_susceptibility works for selected taxa", {

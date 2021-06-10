@@ -36,10 +36,12 @@ vancomycin_susceptibility <- function (lineage,
 #' @export
 tetracycline_susceptibility <- function (lineage,
                                          antibiotic_db = taxon_susceptibility) {
-  antibiotic_susceptibility(
+  intrinsic_sus <- rep("susceptible", length(lineage))
+  abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
     antibiotic = "tetracycline",
     db = antibiotic_db)
+  ifelse(is.na(abx_sus), intrinsic_sus, abx_sus)
 }
 
 #' Determine susceptibility to penicillin-like antibiotics
@@ -52,10 +54,12 @@ tetracycline_susceptibility <- function (lineage,
 #' @export
 penicillin_susceptibility <- function(lineage,
                                       antibiotic_db = taxon_susceptibility) {
-  antibiotic_susceptibility(
+  intrinsic_sus <- rep("susceptible", length(lineage))
+  abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
     antibiotic = "penicillin",
     db = antibiotic_db)
+  ifelse(is.na(abx_sus), intrinsic_sus, abx_sus)
 }
 
 
@@ -86,11 +90,11 @@ aminoglycoside_susceptibility <- function (lineage,
     paste(gram_stain_phenotype, aerobic_status_phenotype))
   susceptibility <- c(
     "Gram-positive aerobe" = "susceptible",
-    "Gram-positive obligate anaerobe" = "resistant",    # ????
-    "Gram-positive facultative anaerobe" = "resistant", # ????
-    "Gram-negative aerobe" = "resistant",               # ????
-    "Gram-negative obligate anaerobe" = "resistant",    # ????
-    "Gram-negative facultative anaerobe" = "resistant") # ????
+    "Gram-positive facultative anaerobe" = "susceptible",
+    "Gram-positive obligate anaerobe" = "resistant",
+    "Gram-negative aerobe" = "resistant",
+    "Gram-negative facultative anaerobe" = "resistant",
+    "Gram-negative obligate anaerobe" = "resistant")
   ph_sus <- susceptibility[combined_phenotype]
 
   abx_sus <- antibiotic_susceptibility(
