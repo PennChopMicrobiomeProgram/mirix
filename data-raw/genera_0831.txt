@@ -12,7 +12,7 @@ Porphyromonas	10.1099/00207713-38-1-128	obligate anaerobe	rods or oval-shaped	no
 Paraprevotella	10.1099/ijs.0.008169-0	obligate anaerobe	not indicated	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
 Parabacteroides	10.1099/ijs.0.64192-0	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-negative	growth in 20% bile	saccharolytic	
 Oscillibacter	10.1099/ijs.0.64717-0	obligate anaerobe	rods or slightly curved rods	motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
-Odoribacter	10.1099/ijs.0.63458-0	anaerobe (unspecified)	fusiform	non-motile	non-spore forming	Gram-positive	not indicated	not indicated	
+Odoribacter	10.1099/ijs.0.63458-0	anaerobe (unspecified)	fusiform	non-motile	non-spore forming	Gram-negative	not indicated	not indicated	
 Faecalibacterium	10.1099/00207713-52-6-2141	obligate anaerobe	not indicated	non-motile	non-spore forming	Gram-negative	not indicated	saccharolytic	
 Enterobacter	10.1099/0096266X-10-2-71	facultative anaerobe	rod/ bacilli	variable	not indicated	Gram-negative	not indicated	saccharolytic	
 Shuttleworthia	10.1099/00207713-52-5-1469	obligate anaerobe	rod/ bacilli	non-motile	non-spore forming	Gram-positive	no growth in 20% bile	saccharolytic	

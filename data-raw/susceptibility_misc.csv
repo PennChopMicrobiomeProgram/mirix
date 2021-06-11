@@ -4,6 +4,8 @@ Leuconostoc,Genus,vancomycin,resistant,10.1053/jhin.1998.0605
 Pediococcus,Genus,vancomycin,resistant,10.1053/jhin.1998.0605
 Erysipelothrix,Genus,vancomycin,resistant,10.1053/jhin.1998.0605
 Mycoplasma,Genus,vancomycin,resistant,10.1038/nrmicro1464
+Faecalibacterium,Genus,vancomycin,susceptible,10.3389/fmicb.2017.01226
+Roseburia,Genus,vancomycin,susceptible,10.1099/00207713-33-3-618
 Enterococcus gallinarum,Species,vancomycin,resistant,10.1016/j.jiac.2018.01.001
 Enterococcus casseliflavus,Species,vancomycin,resistant,10.1016/j.jiac.2018.01.001
 Enterococcus flavescens,Species,vancomycin,resistant,10.1016/j.jiac.2018.01.001
