@@ -78,6 +78,31 @@ test_that("tetracycline_index works on Weiss examples", {
     -1.045228, tolerance = 1e-5)
 })
 
+test_that("penicillin_susceptibility works on Weiss examples", {
+  expect_equal(
+    penicillin_susceptibility(weiss_sepsis$lineage),
+    c("susceptible", "susceptible", "resistant", "susceptible", "susceptible"))
+
+  expect_equal(
+    penicillin_susceptibility(weiss_healthy$lineage),
+    c("susceptible", "susceptible", "resistant", "susceptible", "susceptible",
+      "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
+      "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
+      "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
+      "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
+      "susceptible"))
+})
+
+test_that("penicillin_index works on Weiss examples", {
+  expect_equal(
+    penicillin_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    -1.879934, tolerance = 1e-5)
+
+  expect_equal(
+    penicillin_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    -1.045228, tolerance = 1e-5)
+})
+
 test_that("is_susceptible returns correct values for taxa", {
   expect_equal(
     is_susceptible(

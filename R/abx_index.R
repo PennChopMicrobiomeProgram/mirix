@@ -109,21 +109,25 @@ tetracycline_list <- function(abundance, lineage) {
   rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
-#' Function to calculate antibiotics index for Penicillin-like antibiotics
+#' Calculate the antibiotic index for penicillin-like antibiotics
 #'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param abundance A vector of taxon abundances in a sample
+#' @param lineage A character vector of taxonomic assignments or lineages
+#' @param antibiotic_db A data frame with columns named "taxon", "rank",
+#'   "antibiotic", and "value"
 #'
-#' @return The calculated antibiotics index for the sample
+#' @return The penicillin antibiotic index for the sample
 #' @export
 #'
 #' @examples
-#' apply(abx_test_df, 2, penicillin_index, row.names(abx_test_df))
-#'
-penicillin_index <- function(abundance, lineage) {
-  idx <- "penicillin"
-  suscept_vector <- is_susceptible(lineage, idx)
-  calc_index(abundance, suscept_vector)
+#' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
+#' penicillin_index(h22$proportion, h22$lineage)
+penicillin_index <- function(abundance,
+                             lineage,
+                             antibiotic_db = taxon_susceptibility) {
+  susceptibility <- penicillin_susceptibility(
+    lineage, antibiotic_db)
+  antibiotic_index(abundance, susceptibility)
 }
 
 #' Function to return taxon susceptible or resistant to Penicillin-like antibiotics
