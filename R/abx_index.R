@@ -363,28 +363,32 @@ aerobe_list <- function(abundance, lineage) {
   rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
-#this has not been tested yet
-#' Function to calculate antibiotics index targeting gram-negative aerobes such as aminoglycoside
+
+#' Calculate the antibiotic index for aminoglycoside antibiotics
 #'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' @param abundance A vector of taxon abundances in a sample
+#' @param lineage A character vector of taxonomic assignments or lineages
+#' @param antibiotic_db A data frame with columns named "taxon", "rank",
+#'   "antibiotic", and "value"
+#' @param phenotype_db A data frame with columns named "taxon", "rank", and
+#'   "gram_stain"
 #'
-#' @return The calculated antibiotics index for the sample
+#' @return The aminoglycoside antibiotic index for the sample
 #' @export
 #'
 #' @examples
-#' apply(abx_test_df, 2, aminoglycoside_index, row.names(abx_test_df))
-#'
-aminoglycoside_index <- function(abundance, lineage) {
-  gram_neg_idx <- "gram_positive"
-  aerobe_idx <- "aerobe"
-  aminoglycoside_idx <- "aminoglycoside"
-  gram_neg_vector <- !is_susceptible(lineage, gram_neg_idx)
-  aerobe_vector <- is_susceptible(lineage, aerobe_idx)
-  aminoglycoside_vector <- is_susceptible(lineage, aminoglycoside_idx)
-  suscept_vector <- gram_neg_vector&aerobe_vector|aminoglycoside_vector
-  calc_index(abundance, suscept_vector)
+#' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
+#' aminoglycoside_index(h22$proportion, h22$lineage)
+aminoglycoside_index <- function(abundance,
+                                 lineage,
+                                 antibiotic_db = taxon_susceptibility,
+                                 phenotype_db = taxon_phenotypes) {
+  susceptibility <- aminoglycoside_susceptibility(
+    lineage, antibiotic_db, phenotype_db)
+  antibiotic_index(abundance, susceptibility)
 }
+
+
 
 #' Function to return taxon susceptible or resistant to antibiotics targeting gram-negative aerobes
 #'

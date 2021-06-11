@@ -103,6 +103,30 @@ test_that("penicillin_index works on Weiss examples", {
     -1.045228, tolerance = 1e-5)
 })
 
+test_that("aminoglycoside_susceptibility works on Weiss examples", {
+  expect_equal(
+    aminoglycoside_susceptibility(weiss_sepsis$lineage),
+    c("resistant", "susceptible", "resistant", "resistant", "susceptible"))
+
+  expect_equal(
+    aminoglycoside_susceptibility(weiss_healthy$lineage),
+    c("resistant", "resistant", "resistant", "resistant", "resistant",
+      "resistant", "resistant", "resistant", "resistant", "resistant",
+      "resistant", "resistant", "susceptible", "resistant", "resistant",
+      "resistant", "resistant", "resistant", "resistant", "resistant",
+      NA, NA, "resistant", "resistant", "resistant", "resistant"))
+})
+
+test_that("aminoglycoside_index works on Weiss examples", {
+  expect_equal(
+    aminoglycoside_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    0.5644559, tolerance = 1e-5)
+
+  expect_equal(
+    aminoglycoside_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    2.21396, tolerance = 1e-5)
+})
+
 test_that("is_susceptible returns correct values for taxa", {
   expect_equal(
     is_susceptible(
