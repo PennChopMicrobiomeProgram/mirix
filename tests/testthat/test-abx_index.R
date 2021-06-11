@@ -4,10 +4,26 @@ weiss_sepsis$proportion <- round(weiss_sepsis$proportion, 3)
 weiss_healthy <- subset(weiss2021_data, sample_id %in% "Healthy.148")
 weiss_healthy$proportion <- round(weiss_healthy$proportion, 3)
 
+test_that("vancomycin_susceptibility works on Weiss examples", {
+  expect_equal(
+    vancomycin_susceptibility(weiss_sepsis$lineage),
+    c("resistant", "susceptible", "resistant", "resistant", "resistant"))
+
+  expect_equal(
+    vancomycin_susceptibility(weiss_healthy$lineage),
+    c("resistant", "susceptible", "resistant", "resistant", "susceptible",
+      "susceptible", "resistant", "susceptible", "susceptible", "susceptible",
+      "susceptible", "susceptible", "susceptible", "resistant", "susceptible",
+      "susceptible", "resistant", "susceptible", "resistant", "susceptible",
+      "susceptible", "resistant", "susceptible", "susceptible", "susceptible",
+      "resistant"))
+
+})
+
 test_that("vancomycin_index works on Weiss examples", {
   expect_equal(
     vancomycin_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
-    0.5675951, tolerance = 1e-5)
+    0.5670429, tolerance = 1e-5)
 
   weiss_sepsis_list <- vancomycin_list(
     weiss_sepsis$proportion, weiss_sepsis$lineage)
@@ -19,7 +35,7 @@ test_that("vancomycin_index works on Weiss examples", {
 
   expect_equal(
     vancomycin_index(weiss_healthy$proportion, weiss_healthy$lineage),
-    0.2367376, tolerance = 1e-5)
+    0.3609116, tolerance = 1e-5)
 
   weiss_healthy_list <- vancomycin_list(
     weiss_healthy$proportion, weiss_healthy$lineage)

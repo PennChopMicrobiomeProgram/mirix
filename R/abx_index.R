@@ -9,10 +9,13 @@
 #' @examples
 #' apply(abx_test_df, 2, vancomycin_index, row.names(abx_test_df))
 #'
-vancomycin_index <- function(abundance, lineage) {
-  idx <- c("gram_positive", "vancomycin")
-  suscept_vector <- is_susceptible(lineage, idx)
-  calc_index(abundance, suscept_vector)
+vancomycin_index <- function(abundance,
+                             lineage,
+                             antibiotic_db = taxon_susceptibility,
+                             phenotype_db = taxon_phenotypes) {
+  susceptibility <- vancomycin_susceptibility(
+    lineage, antibiotic_db, phenotype_db)
+  antibiotic_index(abundance, susceptibility)
 }
 
 #' Function to return taxon susceptible or resistant to Vancomycin
@@ -452,6 +455,12 @@ is_susceptible <- function(taxa, idx) {
   }
   suscept_vector[which(suscept_vector == -1)] <- 0
   suscept_vector
+}
+
+antibiotic_index <- function (abundance, susceptibility) {
+  x_resistant <- sum(abundance[susceptibility %in% "resistant"])
+  x_susceptible <- sum(abundance[susceptibility %in% "susceptible"])
+  log10(x_resistant / x_susceptible)
 }
 
 #' Calculate the index based on the susceptible vector
