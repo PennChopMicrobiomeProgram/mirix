@@ -103,7 +103,7 @@ test_that("aminoglycoside_susceptibility works for selected taxa", {
     "Staphylococcus epidermidis",
     "Rothia", # Not enough info to determine both phenotypes, should be NA
     "Actinobacteria; Rothia",
-    "Enterococcus faecalis")
+    "Bacteroides vulgatus")
   expect_equal(
     aminoglycoside_susceptibility(
       lineage = lineage,
