@@ -25,31 +25,9 @@ test_that("vancomycin_index works on Weiss examples", {
     vancomycin_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
     0.5670429, tolerance = 1e-5)
 
-  weiss_sepsis_list <- vancomycin_list(
-    weiss_sepsis$proportion, weiss_sepsis$lineage)
-  weiss_sepsis_list <- weiss_sepsis_list[order(weiss_sepsis_list$abundance, decreasing = T),]
-
-  expect_equal(
-    weiss_sepsis_list$phenotype,
-    c("resistant", "susceptible", "resistant", "resistant", "resistant"))
-
   expect_equal(
     vancomycin_index(weiss_healthy$proportion, weiss_healthy$lineage),
     0.3609116, tolerance = 1e-5)
-
-  weiss_healthy_list <- vancomycin_list(
-    weiss_healthy$proportion, weiss_healthy$lineage)
-  weiss_healthy_list <- weiss_healthy_list[order(weiss_healthy_list$abundance, decreasing = T),]
-
-  expect_equal(
-    weiss_healthy_list$phenotype,
-    c("resistant", "susceptible", "resistant", "susceptible", "susceptible",
-      "susceptible", "resistant", "susceptible", "susceptible", "susceptible",
-      "susceptible", "susceptible", "susceptible", "resistant", "susceptible",
-      "susceptible", "susceptible", "resistant", "susceptible", "susceptible",
-      "susceptible", "susceptible", "resistant", "susceptible", "susceptible",
-      "susceptible"))
-
 })
 
 test_that("tetracycline_susceptibility works on Weiss examples", {
@@ -179,46 +157,6 @@ testthat::test_that("Testing abxidx on abx_test_df", {
 
   testthat::expect_type(aero_idx_outcome, "double")
   testthat::expect_equal(length(aero_idx_outcome), 4)
-
-})
-
-testthat::test_that("Testing list of susceptible or resistant bacteria", {
-
-  ##vanco
-  vanco_list <- do.call(rbind, apply(abx_test_df, 2, vancomycin_list, row.names(abx_test_df)))
-  testthat::expect_equal(paste0(colnames(vanco_list), collapse = ", "), "lineage, abundance, phenotype")
-  testthat::expect_equal(ncol(vanco_list), 3)
-  testthat::expect_equal(class(vanco_list), "data.frame")
-
-  ##tet
-  tet_list <- do.call(rbind, apply(abx_test_df, 2, tetracycline_list, row.names(abx_test_df)))
-  testthat::expect_equal(paste0(colnames(tet_list), collapse = ", "), "lineage, abundance, phenotype")
-  testthat::expect_equal(ncol(tet_list), 3)
-  testthat::expect_equal(class(tet_list), "data.frame")
-
-  ##gram_pos
-  gp_list <- do.call(rbind, apply(abx_test_df, 2, gram_pos_list, row.names(abx_test_df)))
-  testthat::expect_equal(paste0(colnames(gp_list), collapse = ", "), "lineage, abundance, phenotype")
-  testthat::expect_equal(ncol(gp_list), 3)
-  testthat::expect_equal(class(gp_list), "data.frame")
-
-  ##gram_neg
-  gn_list <- do.call(rbind, apply(abx_test_df, 2, gram_neg_list, row.names(abx_test_df)))
-  testthat::expect_equal(paste0(colnames(gn_list), collapse = ", "), "lineage, abundance, phenotype")
-  testthat::expect_equal(ncol(gn_list), 3)
-  testthat::expect_equal(class(gn_list), "data.frame")
-
-  ##anaerobe
-  anaero_list <- do.call(rbind, apply(abx_test_df, 2, anaerobe_list, row.names(abx_test_df)))
-  testthat::expect_equal(paste0(colnames(anaero_list), collapse = ", "), "lineage, abundance, phenotype")
-  testthat::expect_equal(ncol(anaero_list), 3)
-  testthat::expect_equal(class(anaero_list), "data.frame")
-
-  ##aerobe
-  aero_list <- do.call(rbind, apply(abx_test_df, 2, aerobe_list, row.names(abx_test_df)))
-  testthat::expect_equal(paste0(colnames(aero_list), collapse = ", "), "lineage, abundance, phenotype")
-  testthat::expect_equal(ncol(aero_list), 3)
-  testthat::expect_equal(class(aero_list), "data.frame")
 
 })
 

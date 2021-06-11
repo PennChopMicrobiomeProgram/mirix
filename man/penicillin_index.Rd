@@ -2,22 +2,25 @@
 % Please edit documentation in R/abx_index.R
 \name{penicillin_index}
 \alias{penicillin_index}
-\title{Function to calculate antibiotics index for Penicillin-like antibiotics}
+\title{Calculate the antibiotic index for penicillin-like antibiotics}
 \usage{
-penicillin_index(abundance, lineage)
+penicillin_index(abundance, lineage, antibiotic_db = taxon_susceptibility)
 }
 \arguments{
-\item{abundance}{A vector of relative abundances of bacterial taxons for a single sample}
+\item{abundance}{A vector of taxon abundances in a sample}
 
-\item{lineage}{Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)}
+\item{lineage}{A character vector of taxonomic assignments or lineages}
+
+\item{antibiotic_db}{A data frame with columns named "taxon", "rank",
+"antibiotic", and "value"}
 }
 \value{
-The calculated antibiotics index for the sample
+The penicillin antibiotic index for the sample
 }
 \description{
-Function to calculate antibiotics index for Penicillin-like antibiotics
+Calculate the antibiotic index for penicillin-like antibiotics
 }
 \examples{
-apply(abx_test_df, 2, penicillin_index, row.names(abx_test_df))
-
+h22 <- weiss2021_data[weiss2021_data$sample_id \%in\% "Healthy.22",]
+penicillin_index(h22$proportion, h22$lineage)
 }

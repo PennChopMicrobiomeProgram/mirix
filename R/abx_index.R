@@ -22,39 +22,6 @@ vancomycin_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
-#' Function to return taxon susceptible or resistant to Vancomycin
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to vancomycin
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, vancomycin_list, row.names(abx_test_df)))
-#'
-vancomycin_list <- function(abundance, lineage) {
-  idx <- c("gram_positive", "vancomycin")
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
-}
-
 #' Calculate the antibiotic index for tetracycline
 #'
 #' @param abundance A vector of taxon abundances in a sample
@@ -74,39 +41,6 @@ tetracycline_index <- function(abundance,
   susceptibility <- tetracycline_susceptibility(
     lineage, antibiotic_db)
   antibiotic_index(abundance, susceptibility)
-}
-
-#' Function to return taxon susceptible or resistant to Tetracycline
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to tetracycline
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, tetracycline_list, row.names(abx_test_df)))
-#'
-tetracycline_list <- function(abundance, lineage) {
-  idx <- "tetracycline"
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
 #' Calculate the antibiotic index for penicillin-like antibiotics
@@ -130,39 +64,6 @@ penicillin_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
-#' Function to return taxon susceptible or resistant to Penicillin-like antibiotics
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to penicillin-like antibiotics
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, penicillin_list, row.names(abx_test_df)))
-#'
-penicillin_list <- function(abundance, lineage) {
-  idx <- "penicillin"
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
-}
-
 #' Function to calculate antibiotics index targeting gram positive bacteria such as Glycopeptides, Macrolides, Oxazolidinones, Lincosamides, and Lipopeptides aside from Vancomycin (see \code{vancomycin_index})
 #'
 #' @param abundance A vector of relative abundances of bacterial taxons for a single sample
@@ -178,39 +79,6 @@ gram_pos_index <- function(abundance, lineage) {
   idx <- "gram_positive"
   suscept_vector <- is_susceptible(lineage, idx)
   calc_index(abundance, suscept_vector)
-}
-
-#' Function to return susceptibility or resistance to antibiotics targeting gram positive bacteria
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-gram positive antibiotics
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, gram_pos_list, row.names(abx_test_df)))
-#'
-gram_pos_list <- function(abundance, lineage) {
-  idx <- "gram_positive"
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
 #' Function to calculate antibiotics index targeting gram negatives such as Polymyxin and Aztreonam
@@ -230,39 +98,6 @@ gram_neg_index <- function(abundance, lineage) {
   calc_index(abundance, !suscept_vector)
 }
 
-#' Function to return susceptibility or resistance to antibiotics targeting gram negative bacteria
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-gram negative antibiotics
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, gram_neg_list, row.names(abx_test_df)))
-#'
-gram_neg_list <- function(abundance, lineage) {
-  idx <- "gram_positive"
-  suscept_vector <- !is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
-}
-
 #' Function to calculate antibiotics index targeting anaerobes such as Nitroimidazole
 #'
 #' @param abundance A vector of relative abundances of bacterial taxons for a single sample
@@ -278,39 +113,6 @@ anaerobes_index <- function(abundance, lineage) {
   idx <- "anaerobe"
   suscept_vector <- is_susceptible(lineage, idx)
   calc_index(abundance, suscept_vector)
-}
-
-#' Function to return susceptibility or resistance to antibiotics targeting anaerobes
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-anaerobic antibiotics
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, anaerobe_list, row.names(abx_test_df)))
-#'
-anaerobe_list <- function(abundance, lineage) {
-  idx <- "anaerobe"
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
 }
 
 #' Function to calculate antibiotics index targeting aerobes such as Fluoroquinolone
@@ -329,40 +131,6 @@ aerobes_index <- function(abundance, lineage) {
   suscept_vector <- is_susceptible(lineage, idx)
   calc_index(abundance, suscept_vector)
 }
-
-#' Function to return susceptibility or resistance to antibiotics targeting aerobes
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to anti-aerobic antibiotics
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, aerobe_list, row.names(abx_test_df)))
-#'
-aerobe_list <- function(abundance, lineage) {
-  idx <- "aerobe"
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
-}
-
 
 #' Calculate the antibiotic index for aminoglycoside antibiotics
 #'
@@ -390,38 +158,6 @@ aminoglycoside_index <- function(abundance,
 
 
 
-#' Function to return taxon susceptible or resistant to antibiotics targeting gram-negative aerobes
-#'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
-#'
-#' @return A dataframe of taxa abundances and whether they are susceptible or resistant to antibiotics targeting gram-negative aerobes
-#' @export
-#'
-#' @examples
-#' do.call(rbind, apply(abx_test_df, 2, aminoglycoside_list, row.names(abx_test_df)))
-#'
-aminoglycoside_list <- function(abundance, lineage) {
-  idx <- "penicillin"
-  suscept_vector <- is_susceptible(lineage, idx)
-
-  sorted_abundance_suscept <- sort(abundance[suscept_vector > 0.5], index.return=TRUE, decreasing = TRUE)
-  susceptibles <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_suscept$x) != 0) {
-    susceptibles <- data.frame(lineage = lineage[suscept_vector > 0.5][sorted_abundance_suscept$ix],
-                               abundance = sorted_abundance_suscept$x,
-                               phenotype = "susceptible")
-  }
-
-  sorted_abundance_resist <- sort(abundance[suscept_vector < 0.5], index.return=TRUE, decreasing = TRUE)
-  resistances <- data.frame(lineage = character(), abundance = numeric(), phenotype = character())
-  if(length(sorted_abundance_resist$x) != 0) {
-    resistances <- data.frame(lineage = lineage[suscept_vector < 0.5][sorted_abundance_resist$ix],
-                              abundance = sorted_abundance_resist$x,
-                              phenotype = "resistant")
-  }
-  rbind(susceptibles, resistances, make.row.names = FALSE)
-}
 
 #' Calculate the susceptiblity vector from taxonomic lineage based on the given bacterial phenotype
 #'
