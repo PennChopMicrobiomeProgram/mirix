@@ -79,8 +79,8 @@ penicillin_index <- function(abundance,
 #'
 #' @examples
 #' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
-#' gram_pos_index(h22$proportion, h22$lineage)
-gram_pos_index <- function(abundance,
+#' gram_positive_index(h22$proportion, h22$lineage)
+gram_positive_index <- function(abundance,
                            lineage,
                            phenotype_db = taxon_phenotypes) {
   susceptibility <- phenotype_susceptibility(
@@ -107,8 +107,8 @@ gram_pos_index <- function(abundance,
 #'
 #' @examples
 #' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
-#' gram_neg_index(h22$proportion, h22$lineage)
-gram_neg_index <- function(abundance,
+#' gram_negative_index(h22$proportion, h22$lineage)
+gram_negative_index <- function(abundance,
                            lineage,
                            phenotype_db = taxon_phenotypes) {
   susceptibility <- phenotype_susceptibility(

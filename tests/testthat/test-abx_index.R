@@ -105,24 +105,24 @@ test_that("aminoglycoside_index works on Weiss examples", {
     2.21396, tolerance = 1e-5)
 })
 
-test_that("gram_pos_index works on Weiss examples", {
+test_that("gram_positive_index works on Weiss examples", {
   expect_equal(
-    gram_pos_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    gram_positive_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
     0.5644559, tolerance = 1e-5)
 
   expect_equal(
-    gram_pos_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    gram_positive_index(weiss_healthy$proportion, weiss_healthy$lineage),
     0.9650513, tolerance = 1e-5)
 })
 
-test_that("gram_pos_index and gram_neg_index are inverses", {
+test_that("gram_positive_index and gram_negative_index are inverses", {
   expect_equal(
-    gram_pos_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
-    -gram_neg_index(weiss_sepsis$proportion, weiss_sepsis$lineage))
+    gram_positive_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    -gram_negative_index(weiss_sepsis$proportion, weiss_sepsis$lineage))
 
   expect_equal(
-    gram_pos_index(weiss_healthy$proportion, weiss_healthy$lineage),
-    -gram_neg_index(weiss_healthy$proportion, weiss_healthy$lineage))
+    gram_positive_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    -gram_negative_index(weiss_healthy$proportion, weiss_healthy$lineage))
 })
 
 test_that("is_susceptible returns correct values for taxa", {
@@ -155,13 +155,13 @@ testthat::test_that("Testing abxidx on abx_test_df", {
   testthat::expect_equal(length(tet_idx_outcome), 4)
 
   ##gram positive test
-  gram_pos_idx_outcome <- apply(abx_test_df, 2, gram_pos_index, row.names(abx_test_df))
+  gram_pos_idx_outcome <- apply(abx_test_df, 2, gram_positive_index, row.names(abx_test_df))
 
   testthat::expect_type(gram_pos_idx_outcome, "double")
   testthat::expect_equal(length(gram_pos_idx_outcome), 4)
 
   ##gram negative test
-  gram_neg_idx_outcome <- apply(abx_test_df, 2, gram_neg_index, row.names(abx_test_df))
+  gram_neg_idx_outcome <- apply(abx_test_df, 2, gram_negative_index, row.names(abx_test_df))
 
   testthat::expect_type(gram_neg_idx_outcome, "double")
   testthat::expect_equal(length(gram_neg_idx_outcome), 4)
