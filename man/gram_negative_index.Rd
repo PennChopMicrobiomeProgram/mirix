@@ -2,7 +2,7 @@
 % Please edit documentation in R/abx_index.R
 \name{gram_negative_index}
 \alias{gram_negative_index}
-\title{Function to calculate antibiotics index targeting Gram-negative bacteria}
+\title{Calculate the antibiotic index for Gram-negative bacteria}
 \usage{
 gram_negative_index(abundance, lineage, phenotype_db = taxon_phenotypes)
 }

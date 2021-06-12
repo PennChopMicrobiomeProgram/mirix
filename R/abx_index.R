@@ -64,7 +64,7 @@ penicillin_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
-#' Function to calculate antibiotics index targeting Gram-positive bacteria
+#' Calculate the antibiotic index for Gram-positive bacteria
 #'
 #' Antibiotics such as glycopeptides, macrolides, oxazolidinones, lincosamides,
 #' and lipopeptides aside from vancomycin.
@@ -93,7 +93,7 @@ gram_positive_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
-#' Function to calculate antibiotics index targeting Gram-negative bacteria
+#' Calculate the antibiotic index for Gram-negative bacteria
 #'
 #' Antibiotics such as polymyxin and aztreonam.
 #'
@@ -121,38 +121,62 @@ gram_negative_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
-#' Function to calculate antibiotics index targeting anaerobes such as Nitroimidazole
+#' Calculate the antibiotic index for obligate anaerboes
 #'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' Antibiotics such as nitroimidazole.
 #'
-#' @return The calculated antibiotics index for the sample
+#' @param abundance A vector of taxon abundances in a sample
+#' @param lineage A character vector of taxonomic assignments or lineages
+#' @param phenotype_db A data frame with columns named "taxon", "rank", and
+#'   "aerobic_status"
+#'
+#' @return The obligate anaerobe antibiotic index for the sample
 #' @export
 #'
 #' @examples
-#' apply(abx_test_df, 2, anaerobes_index, row.names(abx_test_df))
-#'
-anaerobes_index <- function(abundance, lineage) {
-  idx <- "anaerobe"
-  suscept_vector <- is_susceptible(lineage, idx)
-  calc_index(abundance, suscept_vector)
+#' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
+#' anaerobes_index(h22$proportion, h22$lineage)
+anaerobes_index <- function(abundance,
+                            lineage,
+                            phenotype_db = taxon_phenotypes) {
+  susceptibility <- phenotype_susceptibility(
+    lineage = lineage,
+    phenotype = "aerobic_status",
+    susceptibility = c(
+      "aerobe" = "resistant",
+      "facultative anaerobe" = "resistant",
+      "obligate anaerobe" = "susceptible"),
+    db = phenotype_db)
+  antibiotic_index(abundance, susceptibility)
 }
 
-#' Function to calculate antibiotics index targeting aerobes such as Fluoroquinolone
+#' Calculate the antibiotic index for aerobes and facultative anaerobes
 #'
-#' @param abundance A vector of relative abundances of bacterial taxons for a single sample
-#' @param lineage Name of taxonomy lineage for each relative abundance in a sample (e.g. k__Bacteria; p__Bacteroidetes; c__Bacteroidia etc.)
+#' Antibiotics such as fluoroquinolones.
 #'
-#' @return The calculated antibiotics index for the sample
+#' @param abundance A vector of taxon abundances in a sample
+#' @param lineage A character vector of taxonomic assignments or lineages
+#' @param phenotype_db A data frame with columns named "taxon", "rank", and
+#'   "aerobic_status"
+#'
+#' @return The aerobe antibiotic index for the sample
 #' @export
 #'
 #' @examples
-#' apply(abx_test_df, 2, aerobes_index, row.names(abx_test_df))
-#'
-aerobes_index <- function(abundance, lineage) {
-  idx <- "aerobe"
-  suscept_vector <- is_susceptible(lineage, idx)
-  calc_index(abundance, suscept_vector)
+#' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
+#' aerobes_index(h22$proportion, h22$lineage)
+aerobes_index <- function(abundance,
+                          lineage,
+                          phenotype_db = taxon_phenotypes) {
+  susceptibility <- phenotype_susceptibility(
+    lineage = lineage,
+    phenotype = "aerobic_status",
+    susceptibility = c(
+      "aerobe" = "susceptible",
+      "facultative anaerobe" = "susceptible",
+      "obligate anaerobe" = "resistant"),
+    db = phenotype_db)
+  antibiotic_index(abundance, susceptibility)
 }
 
 #' Calculate the antibiotic index for aminoglycoside antibiotics

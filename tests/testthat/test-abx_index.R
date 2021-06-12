@@ -125,6 +125,26 @@ test_that("gram_positive_index and gram_negative_index are inverses", {
     -gram_negative_index(weiss_healthy$proportion, weiss_healthy$lineage))
 })
 
+test_that("anaerobes_index works on Weiss examples", {
+  expect_equal(
+    anaerobes_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    1.788434, tolerance = 1e-5)
+
+  expect_equal(
+    anaerobes_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    -2.21396, tolerance = 1e-5)
+})
+
+test_that("anaerobes_index and aerobes_index are inverses", {
+  expect_equal(
+    anaerobes_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    -aerobes_index(weiss_sepsis$proportion, weiss_sepsis$lineage))
+
+  expect_equal(
+    anaerobes_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    -aerobes_index(weiss_healthy$proportion, weiss_healthy$lineage))
+})
+
 test_that("is_susceptible returns correct values for taxa", {
   expect_equal(
     is_susceptible(
