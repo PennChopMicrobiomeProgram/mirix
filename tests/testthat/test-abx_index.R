@@ -186,12 +186,3 @@ testthat::test_that("Testing abxidx on abx_test_df", {
   testthat::expect_equal(length(aero_idx_outcome), 4)
 
 })
-
-testthat::test_that("Testing abx_idx_df contains the required columns", {
-
-  testthat::expect_equal(paste0(colnames(abx_idx_df), collapse = ", "), "attribute, boo, name, rank, doi")
-  testthat::expect_equal(ncol(abx_idx_df), 5)
-  testthat::expect_equal(class(abx_idx_df), "data.frame")
-
-})
-
