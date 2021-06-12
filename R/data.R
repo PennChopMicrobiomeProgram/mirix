@@ -1,9 +1,3 @@
-#' A test dataframe
-#'
-#' @description A dataframe with samples as columns and relative abundances of bacteria as rows
-#'
-"abx_test_df"
-
 #' Gram stain and aerobic status of bacterial taxa
 #' @format A data frame with the following columns:
 #' \describe{
