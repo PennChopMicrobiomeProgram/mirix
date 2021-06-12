@@ -105,6 +105,26 @@ test_that("aminoglycoside_index works on Weiss examples", {
     2.21396, tolerance = 1e-5)
 })
 
+test_that("gram_pos_index works on Weiss examples", {
+  expect_equal(
+    gram_pos_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    0.5644559, tolerance = 1e-5)
+
+  expect_equal(
+    gram_pos_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    0.9650513, tolerance = 1e-5)
+})
+
+test_that("gram_pos_index and gram_neg_index are inverses", {
+  expect_equal(
+    gram_pos_index(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    -gram_neg_index(weiss_sepsis$proportion, weiss_sepsis$lineage))
+
+  expect_equal(
+    gram_pos_index(weiss_healthy$proportion, weiss_healthy$lineage),
+    -gram_neg_index(weiss_healthy$proportion, weiss_healthy$lineage))
+})
+
 test_that("is_susceptible returns correct values for taxa", {
   expect_equal(
     is_susceptible(
