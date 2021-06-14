@@ -12,7 +12,7 @@ A data frame with the following columns:
 \item{antibiotic}{The antibiotic or antibiotic class}
 \item{value}{
 The susceptibility of the taxon to the antibiotic, one of "susceptible"
-or "resistant".
+or "resistant".}
 \item{doi}{DOI of the publication from which the information was obtained.}
 }
 }
