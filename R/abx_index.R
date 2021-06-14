@@ -203,6 +203,20 @@ aminoglycoside_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
+#' Calculate the antibiotic index
+#'
+#' @param abundance A vector of taxon abundances in a sample
+#' @param susceptibility A character vector of antibiotic susceptibility, with
+#'   values that are "susceptible", "resistant", or \code{NA}
+#' @param replace_zero Zero-replacement value. If the numerator or denominator
+#'   is smaller than this value, they will be replaced with the number here.
+#'   This number should generally be slightly less than the minimum measurement
+#'   that could be acquired with the method used. For count data, a value of
+#'   0.5 is typical. For relative abundances, a number that is slightly lower
+#'   than the lowest relative abundance will work.
+#'
+#' @return The antibiotic index value
+#' @export
 antibiotic_index <- function (abundance, susceptibility, replace_zero = 1e-4) {
   x_resistant <- sum(abundance[susceptibility %in% "resistant"])
   x_susceptible <- sum(abundance[susceptibility %in% "susceptible"])
