@@ -201,6 +201,6 @@ taxon_susceptibility %>%
 ```
 
 If you need to add or modify information in these databases, you can
-copy the data frames to new variables, make the necessary changes, and
-pass the new database directly to the `vancomycin_index` or
-`vancomycin_susceptibility`.
+copy the data frames to new variables, make the changes you’d like, and
+pass the new databases directly to the `vancomycin_index` or
+`vancomycin_susceptibility` functions.
