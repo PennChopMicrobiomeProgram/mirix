@@ -203,8 +203,14 @@ aminoglycoside_index <- function(abundance,
   antibiotic_index(abundance, susceptibility)
 }
 
-antibiotic_index <- function (abundance, susceptibility) {
+antibiotic_index <- function (abundance, susceptibility, replace_zero = 1e-4) {
   x_resistant <- sum(abundance[susceptibility %in% "resistant"])
   x_susceptible <- sum(abundance[susceptibility %in% "susceptible"])
+  if ((x_resistant < replace_zero) && (x_susceptible < replace_zero)) {
+    warning(
+      "Numerator and denominator both less than the zero-replacement value.")
+  }
+  x_resistant <- max(x_resistant, replace_zero)
+  x_susceptible <- max(x_susceptible, replace_zero)
   log10(x_resistant / x_susceptible)
 }

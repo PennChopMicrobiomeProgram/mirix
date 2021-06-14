@@ -4,6 +4,9 @@ weiss_sepsis$proportion <- round(weiss_sepsis$proportion, 3)
 weiss_healthy <- subset(weiss2021_data, sample_id %in% "Healthy.148")
 weiss_healthy$proportion <- round(weiss_healthy$proportion, 3)
 
+weiss_no_gram_pos <- subset(weiss2021_data, sample_id %in% "Sepsis.16001.C")
+weiss_no_gram_pos$proportion <- round(weiss_no_gram_pos$proportion, 3)
+
 test_that("vancomycin_susceptibility works on Weiss examples", {
   expect_equal(
     vancomycin_susceptibility(weiss_sepsis$lineage),
@@ -143,4 +146,10 @@ test_that("anaerobes_index and aerobes_index are inverses", {
   expect_equal(
     anaerobes_index(weiss_healthy$proportion, weiss_healthy$lineage),
     -aerobes_index(weiss_healthy$proportion, weiss_healthy$lineage))
+})
+
+test_that("antibioitc_index does not produce infinite values", {
+  expect_equal(
+    gram_positive_index(weiss_no_gram_pos$proportion, weiss_no_gram_pos$lineage),
+    3.999565, tolerance = 1e-5)
 })
