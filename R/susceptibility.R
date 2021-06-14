@@ -7,6 +7,10 @@
 #'   "gram_stain"
 #' @return A vector of assigned susceptibility values, which should be either
 #'   "susceptible", "resistant", or \code{NA}
+#' @name antibiotic_sepecific_susceptibility
+NULL
+
+#' @rdname antibiotic_sepecific_susceptibility
 #' @export
 vancomycin_susceptibility <- function (lineage,
                                        antibiotic_db = taxon_susceptibility,
@@ -26,13 +30,7 @@ vancomycin_susceptibility <- function (lineage,
   ifelse(is.na(abx_sus), ph_sus, abx_sus)
 }
 
-#' Determine susceptibility to tetracycline
-#'
-#' @param lineage A character vector of taxonomic assignments or lineages
-#' @param antibiotic_db A data frame with columns named "taxon", "rank",
-#'   "antibiotic", and "value"
-#' @return A vector of assigned susceptibility values, which should be either
-#'   "susceptible", "resistant", or \code{NA}
+#' @rdname antibiotic_sepecific_susceptibility
 #' @export
 tetracycline_susceptibility <- function (lineage,
                                          antibiotic_db = taxon_susceptibility) {
@@ -44,13 +42,7 @@ tetracycline_susceptibility <- function (lineage,
   ifelse(is.na(abx_sus), intrinsic_sus, abx_sus)
 }
 
-#' Determine susceptibility to penicillin-like antibiotics
-#'
-#' @param lineage A character vector of taxonomic assignments or lineages
-#' @param antibiotic_db A data frame with columns named "taxon", "rank",
-#'   "antibiotic", and "value"
-#' @return A vector of assigned susceptibility values, which should be either
-#'   "susceptible", "resistant", or \code{NA}
+#' @rdname antibiotic_sepecific_susceptibility
 #' @export
 penicillin_susceptibility <- function(lineage,
                                       antibiotic_db = taxon_susceptibility) {
@@ -62,16 +54,7 @@ penicillin_susceptibility <- function(lineage,
   ifelse(is.na(abx_sus), intrinsic_sus, abx_sus)
 }
 
-
-#' Determine susceptibility to aminoglycoside antibiotics
-#'
-#' @param lineage A character vector of taxonomic assignments or lineages
-#' @param antibiotic_db A data frame with columns named "taxon", "rank",
-#'   "antibiotic", and "value"
-#' @param phenotype_db A data frame with columns named "taxon", "rank",
-#'   "gram_stain", and "aerobic_status"
-#' @return A vector of assigned susceptibility values, which should be either
-#'   "susceptible", "resistant", or \code{NA}
+#' @rdname antibiotic_sepecific_susceptibility
 #' @export
 aminoglycoside_susceptibility <- function (lineage,
                                            antibiotic_db = taxon_susceptibility,
