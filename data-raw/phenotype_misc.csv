@@ -1,0 +1,10 @@
+taxon,rank,aerobic_status,gram_stain,doi
+Actinobacteria,Phylum,NA,Gram-positive,10.1128/MMBR.00019-15
+Bacteroidetes,Phylum,NA,Gram-negative,NA
+Firmicutes,Phylum,NA,Gram-positive,10.1099/00207713-28-1-1
+Negativicutes,Class,NA,Gram-negative,10.4056/sigs.2981345
+Proteobacteria,Phylum,NA,Gram-negative,NA
+Clostridia,Class,obligate anaerobe,Gram-positive,NA
+Bacilli,Class,facultative anaerobe,Gram-positive,NA
+Rikenellaceae,Family,obligate anaerobe,Gram-negative,NA
+Enterobacteriaceae,Family,facultative anaerobe,Gram-negative,NA

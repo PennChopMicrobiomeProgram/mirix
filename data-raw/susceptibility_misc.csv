@@ -1,0 +1,51 @@
+taxon,rank,antibiotic,value,doi
+Lactobacillus,Genus,vancomycin,resistant,10.1128/AEM.01738-18
+Leuconostoc,Genus,vancomycin,resistant,10.1053/jhin.1998.0605
+Pediococcus,Genus,vancomycin,resistant,10.1053/jhin.1998.0605
+Erysipelothrix,Genus,vancomycin,resistant,10.1053/jhin.1998.0605
+Mycoplasma,Genus,vancomycin,resistant,10.1038/nrmicro1464
+Faecalibacterium,Genus,vancomycin,susceptible,10.3389/fmicb.2017.01226
+Roseburia,Genus,vancomycin,susceptible,10.1099/00207713-33-3-618
+Enterococcus gallinarum,Species,vancomycin,resistant,10.1016/j.jiac.2018.01.001
+Enterococcus casseliflavus,Species,vancomycin,resistant,10.1016/j.jiac.2018.01.001
+Enterococcus flavescens,Species,vancomycin,resistant,10.1016/j.jiac.2018.01.001
+Escherichia coli,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Enterococcus faecalis,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Pseudomonas aeruginosa,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Staphylococcus aureus,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Stenotrophomonas maltophilia,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Pseudomonas,Genus,tetracycline,resistant,10.1101/cshperspect.a025387
+Bacteroides fragilis,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Enterobacter cloacae,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Acinetobacter baumannii,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Klebsiella pneumoniae,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Proteus mirabilis,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Serratia marcescens,Species,tetracycline,resistant,10.1101/cshperspect.a025387
+Enterobacter asburiae,Species,tetracycline,resistant,10.1128/CMR.00002-19
+Enterobacter bugandensis,Species,tetracycline,resistant,10.1128/CMR.00002-19
+Enterobacter aerogenes,Species,tetracycline,resistant,10.1128/CMR.00002-19
+Agrobacterium tumefaciens,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Bacillus anthracis,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Bacillus cereus,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Bacillus thuringiensis,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Bacteroides fragilis,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Bifidobacterium longum,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Clostridium acetobutylicum,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Clostridium perfringens,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Lactobacillus johnsonii,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Lactobacillus plantarum,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Streptococcus agalactiae,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Streptomyces avermitilis,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Streptomyces coelicolor,Species,tetracycline,resistant,10.1186/1471-2164-8-15
+Salmonella typhimurium,Species,tetracycline,resistant,10.1038/nrmicro1464
+Campylobacter jejuni,Species,tetracycline,resistant,10.1038/nrmicro1464
+Bacteroides,Genus,tetracycline,resistant,10.1128/mBio.00569-13
+Klebsiella,Genus,tetracycline,susceptible,10.1101/cshperspect.a025387
+Mycobacterium abscessus,Species,tetracycline,resistant,10.1128/AAC.00119-18
+Bacteroides,Genus,penicillin,resistant,10.3934/microbiol.2018.3.482
+Stenotrophomonas maltophilia,Species,penicillin,resistant,10.1186/s13054-019-2371-3
+Enterococcus faecalis,Species,penicillin,resistant,10.4161/viru.21282
+Enterococcus faecium,Species,penicillin,resistant,10.4161/viru.21282
+Escherichia coli,Species,penicillin,resistant,0.1016/j.ijmm.2013.02.009
+Mycoplasma,Genus,penicillin,resistant,10.1038/nrmicro1464
+Staphylococcus,Genus,aminoglycoside,susceptible,10.1136/archdischild-2015-309069

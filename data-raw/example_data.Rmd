@@ -1,0 +1,15 @@
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(usethis)
+```
+
+```{r}
+weiss2021_data <- read_csv(
+  "weiss2021_data.csv",
+  col_types = cols(study_window = col_character()))
+```
+
+```{r}
+usethis::use_data(weiss2021_data, overwrite = TRUE)
+```

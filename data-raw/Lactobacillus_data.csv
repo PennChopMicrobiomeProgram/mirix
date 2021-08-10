@@ -2,11 +2,11 @@
 Lactobacillus algidus,Anaerobic,Species,10.1128/AEM.01738-18,TRUE
 Lactobacillus ceti,Strictly anaerobic,Species,10.1128/AEM.01738-18,TRUE
 Lactobacillus composti,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
-Lactobacillus delbrueckii subsp. bulgaricus,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
-Lactobacillus delbrueckii subsp. delbrueckii,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
-Lactobacillus delbrueckii subsp. indicus,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
-Lactobacillus delbrueckii subsp. jakobsenii,Anaerobic,Species,10.1128/AEM.01738-18,TRUE
-Lactobacillus delbrueckii subsp. lactis,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
+Lactobacillus delbrueckii subsp. bulgaricus,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
+Lactobacillus delbrueckii subsp. delbrueckii,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
+Lactobacillus delbrueckii subsp. indicus,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
+Lactobacillus delbrueckii subsp. jakobsenii,Anaerobic,Species,10.1128/AEM.01738-18,TRUE
+Lactobacillus delbrueckii subsp. lactis,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
 Lactobacillus farciminis,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
 Lactobacillus hilgardii,Preferably anaerobic,Species,10.1128/AEM.01738-18,TRUE
 Lactobacillus pobuzihii,Microaerophilic,Species,10.1128/AEM.01738-18,TRUE
@@ -27,8 +27,8 @@ Lactobacillus apinorum,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus apis,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus apodemi,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus aquaticus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus aviarius subsp. araffinosus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus aviarius subsp. aviarius,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus aviarius subsp. araffinosus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus aviarius subsp. aviarius,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus backii,Preferably anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus bifermentans,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus bombi,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
@@ -43,8 +43,8 @@ Lactobacillus casei,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus colehominis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus collinoides,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus concavus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus coryniformissubsp. coryniformis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus coryniformissubsp. torquens,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus coryniformis subsp. coryniformis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus coryniformis subsp. torquens,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus crispatus,Preferably anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus crustorum,Aerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus curieae,Facultatively anaerobic,Species,10.1128/AEM.01738-18,FALSE
@@ -95,8 +95,8 @@ Lactobacillus iwatensis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus jensenii,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus johnsonii,Preferably anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus kalixensis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus kefiranofacienssubsp. kefiranofaciens,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus kefiranofacienssubsp. kefirgranum,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus kefiranofaciens subsp. kefiranofaciens,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus kefiranofaciens subsp. kefirgranum,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus kefiri,Aerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus kimbladii,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus kimchicus,Aerobic,Species,10.1128/AEM.01738-18,FALSE
@@ -136,8 +136,8 @@ Lactobacillus panis,Aerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus pantheris,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus parabrevis,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus parabuchneri,Aerobic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus paracasei subsp. paracasei,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus paracasei subsp. tolerans,Aerobic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus paracasei subsp. paracasei,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus paracasei subsp. tolerans,Aerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus paracollinoides,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus parafarraginis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus parakefiri,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
@@ -149,7 +149,7 @@ Lactobacillus pentosus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus perolens,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus plajomi,Facultatively anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus plantarum,Aerobic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus plantarum subsp. argentoratensis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus plantarum subsp. argentoratensis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus pontis,Aerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus porcinae,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus psittaci,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
@@ -161,8 +161,8 @@ Lactobacillus rodentium,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus rossiae,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus ruminis,Anaerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus saerimneri,Aerobic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus sakei subsp. carnosus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
-Lactobacillus sakei subsp. sakei,Aerobic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus sakei subsp. carnosus,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
+Lactobacillus sakei subsp. sakei,Aerobic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus salivarius,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus saniviri,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
 Lactobacillus satsumensis,Microaerophilic,Species,10.1128/AEM.01738-18,FALSE
