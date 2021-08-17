@@ -24,6 +24,8 @@
 #' antibiotic_susceptibility(
 #'   c("Enterococcus faecalis", "Lactobacillus", "Lactobacillus delbrueckii"),
 #'   "vancomycin")
+#' @name antibiotic_susceptibility
+#' @export
 antibiotic_susceptibility <- function (lineage,
                                        antibiotic,
                                        db = taxon_susceptibility) {
@@ -67,6 +69,8 @@ antibiotic_susceptibility <- function (lineage,
 #'   c("Bacteroidetes", "Firmicutes", "Firmicutes; Negativicutes"),
 #'   "gram_stain",
 #'   c("Gram-positive" = "susceptible", "Gram-negative" = "resistant"))
+#' @name phenotype_susceptibility
+#' @export
 phenotype_susceptibility <- function (lineage,
                                       phenotype,
                                       susceptibility,

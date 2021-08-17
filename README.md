@@ -2,12 +2,11 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/tuv292/abxidx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abxidx)
-[![Travis build
-status](https://travis-ci.com/tuv292/abxidx.svg?branch=master)](https://travis-ci.com/tuv292/abxidx)
-[![Codecov test
-coverage](https://codecov.io/gh/tuv292/abxidx/branch/master/graph/badge.svg)](https://codecov.io/gh/tuv292/abxidx?branch=master)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/abxidx/workflows/R-CMD-check/badge.svg)](https://github.com/PennChopMicrobiomeProgram/abxidx/actions)
+[![Travis build status](https://travis-ci.com/PennChopMicrobiomeProgram/abxidx.svg?branch=V2_edits)](https://travis-ci.com/PennChopMicrobiomeProgram/abxidx)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/PennChopMicrobiomeProgram/abxidx?branch=V2_edits&svg=true)](https://ci.appveyor.com/project/PennChopMicrobiomeProgram/abxidx)
+[![Codecov test coverage](https://codecov.io/gh/PennChopMicrobiomeProgram/abxidx/branch/V2_edits/graph/badge.svg)](https://codecov.io/gh/PennChopMicrobiomeProgram/abxidx?branch=V2_edits)
 <!-- badges: end -->
 
 # abxidx
@@ -21,7 +20,7 @@ You can install the development version of abxidx with `devtools`:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("tuv292/abxidx")
+devtools::install_github("PennChopMicrobiomeProgram/abxidx")
 ```
 
 ## Calculating antibiotic index values
