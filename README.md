@@ -20,7 +20,7 @@ You can install the development version of abxidx with `devtools`:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("tuv292/abxidx")
+devtools::install_github("PennChopMicrobiomeProgram/abxidx")
 ```
 
 ## Calculating antibiotic index values

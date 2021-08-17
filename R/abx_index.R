@@ -12,14 +12,14 @@
 #'   "antibiotic", and "value"
 #' @param phenotype_db A data frame with columns named "taxon", "rank",
 #'   "gram_stain", and "aerobic_status"
-#' @name antibiotic_sepecific_index
+#' @name antibiotic_specific_index
 #' @examples
 #' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
 #' vancomycin_index(h22$proportion, h22$lineage)
 NULL
 
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 vancomycin_index <- function(abundance,
                              lineage,
@@ -28,10 +28,10 @@ vancomycin_index <- function(abundance,
                              phenotype_db = taxon_phenotypes) {
   susceptibility <- vancomycin_susceptibility(
     lineage, antibiotic_db, phenotype_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 tetracycline_index <- function(abundance,
                                lineage,
@@ -39,10 +39,10 @@ tetracycline_index <- function(abundance,
                                antibiotic_db = taxon_susceptibility) {
   susceptibility <- tetracycline_susceptibility(
     lineage, antibiotic_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 penicillin_index <- function(abundance,
                              lineage,
@@ -50,10 +50,10 @@ penicillin_index <- function(abundance,
                              antibiotic_db = taxon_susceptibility) {
   susceptibility <- penicillin_susceptibility(
     lineage, antibiotic_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 gram_positive_index <- function(abundance,
                            lineage,
@@ -66,10 +66,10 @@ gram_positive_index <- function(abundance,
       "Gram-positive" = "susceptible",
       "Gram-negative" = "resistant"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 gram_negative_index <- function(abundance,
                            lineage,
@@ -82,10 +82,10 @@ gram_negative_index <- function(abundance,
       "Gram-positive" = "resistant",
       "Gram-negative" = "susceptible"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 anaerobes_index <- function(abundance,
                             lineage,
@@ -99,10 +99,10 @@ anaerobes_index <- function(abundance,
       "facultative anaerobe" = "resistant",
       "obligate anaerobe" = "susceptible"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 aerobes_index <- function(abundance,
                           lineage,
@@ -116,10 +116,10 @@ aerobes_index <- function(abundance,
       "facultative anaerobe" = "susceptible",
       "obligate anaerobe" = "resistant"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_sepecific_index
+#' @rdname antibiotic_specific_index
 #' @export
 aminoglycoside_index <- function(abundance,
                                  lineage,
@@ -128,7 +128,7 @@ aminoglycoside_index <- function(abundance,
                                  phenotype_db = taxon_phenotypes) {
   susceptibility <- aminoglycoside_susceptibility(
     lineage, antibiotic_db, phenotype_db)
-  antibiotic_index(abundance, susceptibility)
+  antibiotic_index(abundance, susceptibility, replace_zero)
 }
 
 #' Calculate the antibiotic index
