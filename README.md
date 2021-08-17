@@ -1,12 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- badges: start -->
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/abxidx/workflows/R-CMD-check/badge.svg)](https://github.com/PennChopMicrobiomeProgram/abxidx/actions)
-[![Travis build status](https://travis-ci.com/PennChopMicrobiomeProgram/abxidx.svg?branch=V2_edits)](https://travis-ci.com/PennChopMicrobiomeProgram/abxidx)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/PennChopMicrobiomeProgram/abxidx?branch=V2_edits&svg=true)](https://ci.appveyor.com/project/PennChopMicrobiomeProgram/abxidx)
-[![Codecov test coverage](https://codecov.io/gh/PennChopMicrobiomeProgram/abxidx/branch/V2_edits/graph/badge.svg)](https://codecov.io/gh/PennChopMicrobiomeProgram/abxidx?branch=V2_edits)
+
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/tuv292/abxidx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abxidx)
+[![Travis build
+status](https://travis-ci.com/tuv292/abxidx.svg?branch=master)](https://travis-ci.com/tuv292/abxidx)
+[![Codecov test
+coverage](https://codecov.io/gh/tuv292/abxidx/branch/master/graph/badge.svg)](https://codecov.io/gh/tuv292/abxidx?branch=master)
 <!-- badges: end -->
 
 # abxidx
@@ -20,7 +22,7 @@ You can install the development version of abxidx with `devtools`:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("PennChopMicrobiomeProgram/abxidx")
+devtools::install_github("tuv292/abxidx")
 ```
 
 ## Calculating antibiotic index values
@@ -57,14 +59,14 @@ weiss2021_data %>%
   knitr::kable()
 ```
 
-| study\_group | study\_window |   n |
-|:-------------|:--------------|----:|
-| Healthy      | NA            |  44 |
-| Sepsis       | A             |  17 |
-| Sepsis       | B             |   9 |
-| Sepsis       | C             |   7 |
-| Sepsis       | D             |   2 |
-| Sepsis       | E             |   8 |
+| study\_group | study\_window |  n |
+| :----------- | :------------ | -: |
+| Healthy      | NA            | 44 |
+| Sepsis       | A             | 17 |
+| Sepsis       | B             |  9 |
+| Sepsis       | C             |  7 |
+| Sepsis       | D             |  2 |
+| Sepsis       | E             |  8 |
 
 for each sample collected, the data frame contains the relative
 abundance of all bacteria with a proportion of more than 0.001. Here is
@@ -80,7 +82,7 @@ weiss2021_data %>%
 ```
 
 | lineage                                                                                                                          | proportion |
-|:---------------------------------------------------------------------------------------------------------------------------------|-----------:|
+| :------------------------------------------------------------------------------------------------------------------------------- | ---------: |
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Enterococcaceae; g\_\_Enterococcus                      |  0.5491550 |
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Lactobacillaceae                                        |  0.3418542 |
 | k\_\_Bacteria; p\_\_Proteobacteria; c\_\_Gammaproteobacteria; o\_\_Pseudomonadales; f\_\_Pseudomonadaceae; g\_\_Pseudomonas      |  0.0825587 |
@@ -146,7 +148,7 @@ weiss2021_data %>%
 ```
 
 | lineage                                                                                                                          | susceptibility |
-|:---------------------------------------------------------------------------------------------------------------------------------|:---------------|
+| :------------------------------------------------------------------------------------------------------------------------------- | :------------- |
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Enterococcaceae; g\_\_Enterococcus                      | susceptible    |
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Lactobacillaceae                                        | susceptible    |
 | k\_\_Bacteria; p\_\_Proteobacteria; c\_\_Gammaproteobacteria; o\_\_Pseudomonadales; f\_\_Pseudomonadaceae; g\_\_Pseudomonas      | resistant      |
