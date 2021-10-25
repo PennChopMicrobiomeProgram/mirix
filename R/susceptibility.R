@@ -72,12 +72,12 @@ aminoglycoside_susceptibility <- function (lineage,
     NA_character_,
     paste(gram_stain_phenotype, aerobic_status_phenotype))
   susceptibility <- c(
-    "Gram-positive aerobe" = "susceptible",
-    "Gram-positive facultative anaerobe" = "susceptible",
-    "Gram-positive obligate anaerobe" = "resistant",
-    "Gram-negative aerobe" = "resistant",
-    "Gram-negative facultative anaerobe" = "resistant",
-    "Gram-negative obligate anaerobe" = "resistant")
+    "Gram-negative aerobe" = "susceptible",
+    "Gram-negative facultative anaerobe" = "susceptible",
+    "Gram-negative obligate anaerobe" = "resistant",
+    "Gram-positive aerobe" = "resistant",
+    "Gram-positive facultative anaerobe" = "resistant",
+    "Gram-positive obligate anaerobe" = "resistant")
   ph_sus <- susceptibility[combined_phenotype]
 
   abx_sus <- antibiotic_susceptibility(
