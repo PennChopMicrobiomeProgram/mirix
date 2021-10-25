@@ -158,7 +158,7 @@ match_taxa <- function (lineages, taxa) {
   if (any(multi_matches)) {
     warning(
       "The following lineages match more than one taxon:\n",
-      paste(lineages[multi_matches], collapse = "\n"))
+      paste(lineages[multi_matches], collapse = "\n"), "\n")
   }
 
   if (n_lineages == 1) {
