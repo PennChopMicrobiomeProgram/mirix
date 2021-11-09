@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
 [![AppVeyor build
@@ -22,7 +21,7 @@ You can install the development version of abxidx with `devtools`:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("tuv292/abxidx")
+devtools::install_github("PennChopMicrobiomeProgram/abxidx")
 ```
 
 ## Calculating antibiotic index values
@@ -59,14 +58,14 @@ weiss2021_data %>%
   knitr::kable()
 ```
 
-| study\_group | study\_window |  n |
-| :----------- | :------------ | -: |
-| Healthy      | NA            | 44 |
-| Sepsis       | A             | 17 |
-| Sepsis       | B             |  9 |
-| Sepsis       | C             |  7 |
-| Sepsis       | D             |  2 |
-| Sepsis       | E             |  8 |
+| study\_group | study\_window |   n |
+|:-------------|:--------------|----:|
+| Healthy      | NA            |  44 |
+| Sepsis       | A             |  17 |
+| Sepsis       | B             |   9 |
+| Sepsis       | C             |   7 |
+| Sepsis       | D             |   2 |
+| Sepsis       | E             |   8 |
 
 for each sample collected, the data frame contains the relative
 abundance of all bacteria with a proportion of more than 0.001. Here is
@@ -82,7 +81,7 @@ weiss2021_data %>%
 ```
 
 | lineage                                                                                                                          | proportion |
-| :------------------------------------------------------------------------------------------------------------------------------- | ---------: |
+|:---------------------------------------------------------------------------------------------------------------------------------|-----------:|
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Enterococcaceae; g\_\_Enterococcus                      |  0.5491550 |
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Lactobacillaceae                                        |  0.3418542 |
 | k\_\_Bacteria; p\_\_Proteobacteria; c\_\_Gammaproteobacteria; o\_\_Pseudomonadales; f\_\_Pseudomonadaceae; g\_\_Pseudomonas      |  0.0825587 |
@@ -94,9 +93,9 @@ weiss2021_data %>%
 For each type of bacteria, the taxonomic assignment includes all the
 taxon names from the kingdom on down to the most specific taxon that
 could be determined from the sequence, in most cases the genus.
-Following the (NCBI taxonomy
-browser)\[<https://www.ncbi.nlm.nih.gov/taxonomy>\], we call this result
-the lineage.
+Following the [NCBI taxonomy
+browser](https://www.ncbi.nlm.nih.gov/taxonomy), we call this result the
+lineage.
 
 Our goal will be to use the lineage information to predict which
 bacteria in each sample would be susceptible or resistant to various
@@ -148,7 +147,7 @@ weiss2021_data %>%
 ```
 
 | lineage                                                                                                                          | susceptibility |
-| :------------------------------------------------------------------------------------------------------------------------------- | :------------- |
+|:---------------------------------------------------------------------------------------------------------------------------------|:---------------|
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Enterococcaceae; g\_\_Enterococcus                      | susceptible    |
 | k\_\_Bacteria; p\_\_Firmicutes; c\_\_Bacilli; o\_\_Lactobacillales; f\_\_Lactobacillaceae                                        | susceptible    |
 | k\_\_Bacteria; p\_\_Proteobacteria; c\_\_Gammaproteobacteria; o\_\_Pseudomonadales; f\_\_Pseudomonadaceae; g\_\_Pseudomonas      | resistant      |
@@ -205,3 +204,93 @@ If you need to add or modify information in these databases, you can
 copy the data frames to new variables, make the changes you’d like, and
 pass the new databases directly to the `vancomycin_index` or
 `vancomycin_susceptibility` functions.
+
+## Predicting taxon abundances for a given value of the index
+
+In addition to calculating the antibiotics index for a given sample, we
+can predict what the abundances in a sample might look like at a given
+value of the index. Our approach is to re-balance the total abundances
+of resistant and susceptible bacteria in the sample, while preserving
+the relative abundances within the resistant taxa and within the
+susceptible taxa. Our method will also preserve the total abundance of
+each sample, in case the total abundance is not equal to 1. For taxa
+that are not annotated as either resistant or susceptible, we don’t
+change the abundance at all.
+
+We’ll use a healthy control sample, `Healthy.6`, to demonstrate. First,
+we’ll calculate the susceptibility to vancomycin for each lineage.
+
+``` r
+healthy6_data <- weiss2021_data %>%
+  filter(sample_id %in% "Healthy.6") %>%
+  mutate(taxon = word(lineage, -1)) %>%
+  mutate(taxon = fct_reorder(taxon, proportion)) %>%
+  mutate(susceptibility = vancomycin_susceptibility(lineage))
+```
+
+Above, we also made a shorter label for the taxa and sorted the values
+based on proportion in the sample, to aid in plotting. Here is a chart
+of the taxon abundances and their susceptibility.
+
+``` r
+healthy6_data %>%
+  ggplot(aes(x = proportion, y = taxon, shape = susceptibility)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_shape_manual(values = c(1, 19), na.value = 3)
+```
+
+![](tools/readme/weiss_healthy6-1.png)<!-- -->
+
+Most taxa in the sample are annotated as susceptible to vancomycin,
+including the most abundant taxon, *Ruminococcaceae*. One taxon, RF39,
+is not annotated. Only a few taxa are annotated as resistant to
+vancomycin, thus it’s not surprising that the vancomycin index for the
+sample is negative.
+
+``` r
+healthy6_data %>%
+  summarise(vanc = vancomycin_index(proportion, lineage))
+#> # A tibble: 1 × 1
+#>     vanc
+#>    <dbl>
+#> 1 -0.207
+```
+
+How would we expect the proportions to change if the index increased to
+a positive value, say 0.5? We can use `predict_abundance()` to run the
+calculation.
+
+``` r
+healthy6_data %>%
+  mutate(predicted = predict_abundance(0.5, proportion, susceptibility)) %>%
+  rename(observed = proportion) %>%
+  pivot_longer(
+    c(observed, predicted), names_to = "method", values_to = "abundance") %>%
+  ggplot(aes(x = abundance, y = taxon, color = method, shape = susceptibility)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_shape_manual(values = c(1, 19), na.value = 3) +
+  scale_color_brewer(palette = "Paired")
+```
+
+![](tools/readme/weiss_healthy6_prediction-1.png)<!-- -->
+
+Here, we can see that the abundances have increased for the resistant
+taxa, such as *Bacteroides* (near the top) and *Enterobacteriaceae* (at
+the bottom). For susceptible taxa, the abundances have decreased. For
+the taxon that’s not annotated, RF39 (near the middle), the abundance
+has not changed at all.
+
+To finish, let’s re-calculate the vancomycin index for our predicted
+abundances, so we can verify that it has the expected value of 0.5.
+
+``` r
+healthy6_data %>%
+  mutate(predicted = predict_abundance(0.5, proportion, susceptibility)) %>%
+  summarise(vanc = vancomycin_index(predicted, lineage))
+#> # A tibble: 1 × 1
+#>    vanc
+#>   <dbl>
+#> 1 0.500
+```

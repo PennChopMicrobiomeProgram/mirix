@@ -109,5 +109,5 @@ test_that("aminoglycoside_susceptibility works for selected taxa", {
       lineage = lineage,
       antibiotic_db = test_antibiotic_db,
       phenotype_db = gram_stain_aerobic_status_db),
-    c("susceptible", NA, "susceptible", "resistant"))
+    c("susceptible", NA, "resistant", "resistant"))
 })
