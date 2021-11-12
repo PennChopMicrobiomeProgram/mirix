@@ -90,7 +90,7 @@ phenotype_species %>%
 ## Misc database
 
 ```{r}
-phenotype_misc <- read_csv("phenotype_misc.csv")
+phenotype_misc <- read_csv("phenotype_misc.csv", show_col_types = FALSE)
 ```
 
 ## Final check
@@ -134,6 +134,52 @@ Check for unexpected Gram stain values
 taxon_phenotypes %>%
   filter(!(gram_stain %in% allowed_gram_stain_values))
 ```
+
+```{r eval=FALSE}
+rank_colors <- structure(
+  RColorBrewer::brewer.pal(9, "GnBu")[4:9],
+  names = allowed_taxonomic_rank_values[2:7])
+
+n_aerobic <- taxon_phenotypes %>%
+  filter(!is.na(aerobic_status)) %>%
+  count(rank, aerobic_status) %>%
+  mutate(aerobic_status = fct_reorder(aerobic_status, n)) %>%
+  rename(value = aerobic_status) %>%
+  mutate(count_by = "Aerobic status")
+
+n_gram <- taxon_phenotypes %>%
+  filter(!is.na(gram_stain)) %>%
+  count(rank, gram_stain) %>%
+  mutate(gram_stain = fct_reorder(gram_stain, n)) %>%
+  rename(value = gram_stain) %>%
+  mutate(count_by = "Gram stain")
+
+bind_rows(n_aerobic, n_gram) %>%
+  mutate(value = fct_reorder(value, n, .fun = sum)) %>%
+  mutate(rank = fct_relevel(rank,  allowed_taxonomic_rank_values[2:7])) %>%
+  ggplot(aes(y = value, x = n, fill = rank)) +
+  geom_col() +
+  facet_grid(count_by ~ ., scales = "free_y", space = "free_y") +
+  scale_fill_manual(values = rank_colors) +
+  labs(x = "Number of taxa", y = "", fill = "") +
+  theme_bw() +
+  theme(strip.background = element_blank())
+ggsave("phenotype_counts.png", width = 8, height = 4, dpi = 300)
+```
+
+```{r eval=FALSE}
+taxon_phenotypes %>%
+  count(rank) %>%
+  mutate(rank = fct_relevel(rank, allowed_taxonomic_rank_values[2:7])) %>%
+  ggplot() +
+  geom_col(aes(x = n, y = rank, fill = rank)) +
+  scale_fill_manual(values = rank_colors) +
+  labs(x = "Number of taxa annotated", y = "") +
+  theme_bw() +
+  theme(legend.position = "none")
+ggsave("taxon_counts.png", width = 4, height = 2, dpi = 300)
+```
+
 
 ## Export
 
