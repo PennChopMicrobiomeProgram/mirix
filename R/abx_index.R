@@ -1,4 +1,4 @@
-#' Calculate antibiotic-specific index values
+#' Calculate antibiotic-specific MiRIx values
 #'
 #' @param abundance A vector of taxon abundances in a sample
 #' @param lineage A character vector of taxonomic assignments or lineages
@@ -12,14 +12,14 @@
 #'   "antibiotic", and "value"
 #' @param phenotype_db A data frame with columns named "taxon", "rank",
 #'   "gram_stain", and "aerobic_status"
-#' @name antibiotic_specific_index
+#' @name mirix_antibiotic
 #' @examples
 #' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
 #' vancomycin_index(h22$proportion, h22$lineage)
 NULL
 
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 vancomycin_index <- function(abundance,
                              lineage,
@@ -28,10 +28,10 @@ vancomycin_index <- function(abundance,
                              phenotype_db = taxon_phenotypes) {
   susceptibility <- vancomycin_susceptibility(
     lineage, antibiotic_db, phenotype_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 tetracycline_index <- function(abundance,
                                lineage,
@@ -39,10 +39,10 @@ tetracycline_index <- function(abundance,
                                antibiotic_db = taxon_susceptibility) {
   susceptibility <- tetracycline_susceptibility(
     lineage, antibiotic_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 penicillin_index <- function(abundance,
                              lineage,
@@ -50,10 +50,10 @@ penicillin_index <- function(abundance,
                              antibiotic_db = taxon_susceptibility) {
   susceptibility <- penicillin_susceptibility(
     lineage, antibiotic_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 gram_positive_index <- function(abundance,
                            lineage,
@@ -66,10 +66,10 @@ gram_positive_index <- function(abundance,
       "Gram-positive" = "susceptible",
       "Gram-negative" = "resistant"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 gram_negative_index <- function(abundance,
                            lineage,
@@ -82,10 +82,10 @@ gram_negative_index <- function(abundance,
       "Gram-positive" = "resistant",
       "Gram-negative" = "susceptible"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 anaerobes_index <- function(abundance,
                             lineage,
@@ -99,10 +99,10 @@ anaerobes_index <- function(abundance,
       "facultative anaerobe" = "resistant",
       "obligate anaerobe" = "susceptible"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 aerobes_index <- function(abundance,
                           lineage,
@@ -116,10 +116,10 @@ aerobes_index <- function(abundance,
       "facultative anaerobe" = "susceptible",
       "obligate anaerobe" = "resistant"),
     db = phenotype_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' @rdname antibiotic_specific_index
+#' @rdname mirix_antibiotic
 #' @export
 aminoglycoside_index <- function(abundance,
                                  lineage,
@@ -128,13 +128,13 @@ aminoglycoside_index <- function(abundance,
                                  phenotype_db = taxon_phenotypes) {
   susceptibility <- aminoglycoside_susceptibility(
     lineage, antibiotic_db, phenotype_db)
-  antibiotic_index(abundance, susceptibility, replace_zero)
+  mirix(abundance, susceptibility, replace_zero)
 }
 
-#' Calculate the antibiotic index
+#' Calculate Microbiome Response Index (MiRIx) values
 #'
 #' @param abundance A vector of taxon abundances in a sample
-#' @param susceptibility A character vector of antibiotic susceptibility, with
+#' @param susceptibility A character vector of taxon susceptibility, with
 #'   values that are "susceptible", "resistant", or \code{NA}
 #' @param replace_zero Zero-replacement value. If the numerator or denominator
 #'   is smaller than this value, they will be replaced with the number here.
@@ -143,9 +143,9 @@ aminoglycoside_index <- function(abundance,
 #'   0.5 is typical. For relative abundances, a number that is slightly lower
 #'   than the lowest relative abundance will work.
 #'
-#' @return The antibiotic index value
+#' @return The MiRIx value
 #' @export
-antibiotic_index <- function (abundance, susceptibility, replace_zero = 1e-4) {
+mirix <- function (abundance, susceptibility, replace_zero = 1e-4) {
   x_resistant <- sum(abundance[susceptibility %in% "resistant"])
   x_susceptible <- sum(abundance[susceptibility %in% "susceptible"])
   if ((x_resistant < replace_zero) && (x_susceptible < replace_zero)) {
