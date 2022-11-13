@@ -12,7 +12,7 @@ NULL
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-vancomycin_susceptibility <- function (lineage,
+antibiotic_susceptibility_vancomycin <- function (lineage,
                                        antibiotic_db = taxon_susceptibility,
                                        phenotype_db = taxon_phenotypes) {
   # Gram-positive organisms are susceptible to vancomycin
@@ -32,7 +32,7 @@ vancomycin_susceptibility <- function (lineage,
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-tetracycline_susceptibility <- function (lineage,
+antibiotic_susceptibility_tetracycline <- function (lineage,
                                          antibiotic_db = taxon_susceptibility) {
   intrinsic_sus <- rep("susceptible", length(lineage))
   abx_sus <- antibiotic_susceptibility(
@@ -44,7 +44,7 @@ tetracycline_susceptibility <- function (lineage,
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-penicillin_susceptibility <- function(lineage,
+antibiotic_susceptibility_penicillin <- function(lineage,
                                       antibiotic_db = taxon_susceptibility) {
   intrinsic_sus <- rep("susceptible", length(lineage))
   abx_sus <- antibiotic_susceptibility(
@@ -56,7 +56,7 @@ penicillin_susceptibility <- function(lineage,
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-aminoglycoside_susceptibility <- function (lineage,
+antibiotic_susceptibility_aminoglycoside <- function (lineage,
                                            antibiotic_db = taxon_susceptibility,
                                            phenotype_db = taxon_phenotypes) {
   gram_stain_db <- taxon_phenotypes[,c("taxon", "rank", "gram_stain")]

@@ -2,23 +2,29 @@
 % Please edit documentation in R/susceptibility.R
 \name{antibiotic_specific_susceptibility}
 \alias{antibiotic_specific_susceptibility}
-\alias{vancomycin_susceptibility}
-\alias{tetracycline_susceptibility}
-\alias{penicillin_susceptibility}
-\alias{aminoglycoside_susceptibility}
+\alias{antibiotic_susceptibility_vancomycin}
+\alias{antibiotic_susceptibility_tetracycline}
+\alias{antibiotic_susceptibility_penicillin}
+\alias{antibiotic_susceptibility_aminoglycoside}
 \title{Determine susceptibility to vancomycin}
 \usage{
-vancomycin_susceptibility(
+antibiotic_susceptibility_vancomycin(
   lineage,
   antibiotic_db = taxon_susceptibility,
   phenotype_db = taxon_phenotypes
 )
 
-tetracycline_susceptibility(lineage, antibiotic_db = taxon_susceptibility)
+antibiotic_susceptibility_tetracycline(
+  lineage,
+  antibiotic_db = taxon_susceptibility
+)
 
-penicillin_susceptibility(lineage, antibiotic_db = taxon_susceptibility)
+antibiotic_susceptibility_penicillin(
+  lineage,
+  antibiotic_db = taxon_susceptibility
+)
 
-aminoglycoside_susceptibility(
+antibiotic_susceptibility_aminoglycoside(
   lineage,
   antibiotic_db = taxon_susceptibility,
   phenotype_db = taxon_phenotypes

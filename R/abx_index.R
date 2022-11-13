@@ -26,7 +26,7 @@ mirix_vancomycin <- function(abundance,
                              replace_zero = 1e-4,
                              antibiotic_db = taxon_susceptibility,
                              phenotype_db = taxon_phenotypes) {
-  susceptibility <- vancomycin_susceptibility(
+  susceptibility <- antibiotic_susceptibility_vancomycin(
     lineage, antibiotic_db, phenotype_db)
   mirix(abundance, susceptibility, replace_zero)
 }
@@ -37,7 +37,7 @@ mirix_doxycycline <- function(abundance,
                                lineage,
                                replace_zero = 1e-4,
                                antibiotic_db = taxon_susceptibility) {
-  susceptibility <- tetracycline_susceptibility(
+  susceptibility <- antibiotic_susceptibility_tetracycline(
     lineage, antibiotic_db)
   mirix(abundance, susceptibility, replace_zero)
 }
@@ -48,7 +48,7 @@ mirix_amoxicillin <- function(abundance,
                              lineage,
                              replace_zero = 1e-4,
                              antibiotic_db = taxon_susceptibility) {
-  susceptibility <- penicillin_susceptibility(
+  susceptibility <- antibiotic_susceptibility_penicillin(
     lineage, antibiotic_db)
   mirix(abundance, susceptibility, replace_zero)
 }
@@ -126,7 +126,7 @@ mirix_gentamicin <- function(abundance,
                                  replace_zero = 1e-4,
                                  antibiotic_db = taxon_susceptibility,
                                  phenotype_db = taxon_phenotypes) {
-  susceptibility <- aminoglycoside_susceptibility(
+  susceptibility <- antibiotic_susceptibility_aminoglycoside(
     lineage, antibiotic_db, phenotype_db)
   mirix(abundance, susceptibility, replace_zero)
 }

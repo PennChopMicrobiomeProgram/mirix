@@ -7,13 +7,13 @@ weiss_healthy$proportion <- round(weiss_healthy$proportion, 3)
 weiss_no_gram_pos <- subset(weiss2021_data, sample_id %in% "Sepsis.16001.C")
 weiss_no_gram_pos$proportion <- round(weiss_no_gram_pos$proportion, 3)
 
-test_that("vancomycin_susceptibility works on Weiss examples", {
+test_that("antibiotic_susceptibility_vancomycin works on Weiss examples", {
   expect_equal(
-    vancomycin_susceptibility(weiss_sepsis$lineage),
+    antibiotic_susceptibility_vancomycin(weiss_sepsis$lineage),
     c("resistant", "susceptible", "resistant", "resistant", "resistant"))
 
   expect_equal(
-    vancomycin_susceptibility(weiss_healthy$lineage),
+    antibiotic_susceptibility_vancomycin(weiss_healthy$lineage),
     c("resistant", "susceptible", "resistant", "resistant", "susceptible",
       "susceptible", "resistant", "susceptible", "susceptible", "susceptible",
       "susceptible", "susceptible", "susceptible", "resistant", "susceptible",
@@ -33,13 +33,13 @@ test_that("mirix_vancomycin works on Weiss examples", {
     0.3609116, tolerance = 1e-5)
 })
 
-test_that("tetracycline_susceptibility works on Weiss examples", {
+test_that("antibiotic_susceptibility_tetracycline works on Weiss examples", {
   expect_equal(
-    tetracycline_susceptibility(weiss_sepsis$lineage),
+    antibiotic_susceptibility_tetracycline(weiss_sepsis$lineage),
     c("susceptible", "susceptible", "resistant", "susceptible", "susceptible"))
 
   expect_equal(
-    tetracycline_susceptibility(weiss_healthy$lineage),
+    antibiotic_susceptibility_tetracycline(weiss_healthy$lineage),
     c("susceptible", "susceptible", "resistant", "susceptible", "susceptible",
       "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
       "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
@@ -59,13 +59,13 @@ test_that("mirix_doxycycline works on Weiss examples", {
     -1.045228, tolerance = 1e-5)
 })
 
-test_that("penicillin_susceptibility works on Weiss examples", {
+test_that("antibiotic_susceptibility_penicillin works on Weiss examples", {
   expect_equal(
-    penicillin_susceptibility(weiss_sepsis$lineage),
+    antibiotic_susceptibility_penicillin(weiss_sepsis$lineage),
     c("susceptible", "susceptible", "resistant", "susceptible", "susceptible"))
 
   expect_equal(
-    penicillin_susceptibility(weiss_healthy$lineage),
+    antibiotic_susceptibility_penicillin(weiss_healthy$lineage),
     c("susceptible", "susceptible", "resistant", "susceptible", "susceptible",
       "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
       "susceptible", "susceptible", "susceptible", "susceptible", "susceptible",
@@ -84,13 +84,13 @@ test_that("mirix_amoxicillin works on Weiss examples", {
     -1.045228, tolerance = 1e-5)
 })
 
-test_that("aminoglycoside_susceptibility works on Weiss examples", {
+test_that("antibiotic_susceptibility_aminoglycoside works on Weiss examples", {
   expect_equal(
-    aminoglycoside_susceptibility(weiss_sepsis$lineage),
+    antibiotic_susceptibility_aminoglycoside(weiss_sepsis$lineage),
     c("susceptible", "resistant", "resistant", "resistant", "resistant"))
 
   expect_equal(
-    aminoglycoside_susceptibility(weiss_healthy$lineage),
+    antibiotic_susceptibility_aminoglycoside(weiss_healthy$lineage),
     c("resistant", "resistant", "resistant", "resistant", "resistant",
       "resistant", "resistant", "resistant", "resistant", "resistant",
       "resistant", "resistant", "resistant", "resistant", "resistant",
