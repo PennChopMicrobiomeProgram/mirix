@@ -15,13 +15,13 @@
 #' @name mirix_antibiotic
 #' @examples
 #' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
-#' vancomycin_index(h22$proportion, h22$lineage)
+#' mirix_vancomycin(h22$proportion, h22$lineage)
 NULL
 
 
 #' @rdname mirix_antibiotic
 #' @export
-vancomycin_index <- function(abundance,
+mirix_vancomycin <- function(abundance,
                              lineage,
                              replace_zero = 1e-4,
                              antibiotic_db = taxon_susceptibility,
@@ -33,7 +33,7 @@ vancomycin_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-tetracycline_index <- function(abundance,
+mirix_doxycycline <- function(abundance,
                                lineage,
                                replace_zero = 1e-4,
                                antibiotic_db = taxon_susceptibility) {
@@ -44,7 +44,7 @@ tetracycline_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-penicillin_index <- function(abundance,
+mirix_amoxicillin <- function(abundance,
                              lineage,
                              replace_zero = 1e-4,
                              antibiotic_db = taxon_susceptibility) {
@@ -55,7 +55,7 @@ penicillin_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-gram_positive_index <- function(abundance,
+mirix_gram_positive <- function(abundance,
                            lineage,
                            replace_zero = 1e-4,
                            phenotype_db = taxon_phenotypes) {
@@ -71,7 +71,7 @@ gram_positive_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-gram_negative_index <- function(abundance,
+mirix_gram_negative <- function(abundance,
                            lineage,
                            replace_zero = 1e-4,
                            phenotype_db = taxon_phenotypes) {
@@ -87,7 +87,7 @@ gram_negative_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-anaerobes_index <- function(abundance,
+mirix_metronidazole <- function(abundance,
                             lineage,
                             replace_zero = 1e-4,
                             phenotype_db = taxon_phenotypes) {
@@ -104,7 +104,7 @@ anaerobes_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-aerobes_index <- function(abundance,
+mirix_ciprofloxacin <- function(abundance,
                           lineage,
                           replace_zero = 1e-4,
                           phenotype_db = taxon_phenotypes) {
@@ -121,7 +121,7 @@ aerobes_index <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-aminoglycoside_index <- function(abundance,
+mirix_gentamicin <- function(abundance,
                                  lineage,
                                  replace_zero = 1e-4,
                                  antibiotic_db = taxon_susceptibility,

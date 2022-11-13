@@ -2,17 +2,17 @@
 % Please edit documentation in R/abx_index.R
 \name{mirix_antibiotic}
 \alias{mirix_antibiotic}
-\alias{vancomycin_index}
-\alias{tetracycline_index}
-\alias{penicillin_index}
-\alias{gram_positive_index}
-\alias{gram_negative_index}
-\alias{anaerobes_index}
-\alias{aerobes_index}
-\alias{aminoglycoside_index}
+\alias{mirix_vancomycin}
+\alias{mirix_doxycycline}
+\alias{mirix_amoxicillin}
+\alias{mirix_gram_positive}
+\alias{mirix_gram_negative}
+\alias{mirix_metronidazole}
+\alias{mirix_ciprofloxacin}
+\alias{mirix_gentamicin}
 \title{Calculate antibiotic-specific MiRIx values}
 \usage{
-vancomycin_index(
+mirix_vancomycin(
   abundance,
   lineage,
   replace_zero = 1e-04,
@@ -20,49 +20,49 @@ vancomycin_index(
   phenotype_db = taxon_phenotypes
 )
 
-tetracycline_index(
+mirix_doxycycline(
   abundance,
   lineage,
   replace_zero = 1e-04,
   antibiotic_db = taxon_susceptibility
 )
 
-penicillin_index(
+mirix_amoxicillin(
   abundance,
   lineage,
   replace_zero = 1e-04,
   antibiotic_db = taxon_susceptibility
 )
 
-gram_positive_index(
+mirix_gram_positive(
   abundance,
   lineage,
   replace_zero = 1e-04,
   phenotype_db = taxon_phenotypes
 )
 
-gram_negative_index(
+mirix_gram_negative(
   abundance,
   lineage,
   replace_zero = 1e-04,
   phenotype_db = taxon_phenotypes
 )
 
-anaerobes_index(
+mirix_metronidazole(
   abundance,
   lineage,
   replace_zero = 1e-04,
   phenotype_db = taxon_phenotypes
 )
 
-aerobes_index(
+mirix_ciprofloxacin(
   abundance,
   lineage,
   replace_zero = 1e-04,
   phenotype_db = taxon_phenotypes
 )
 
-aminoglycoside_index(
+mirix_gentamicin(
   abundance,
   lineage,
   replace_zero = 1e-04,
@@ -93,5 +93,5 @@ Calculate antibiotic-specific MiRIx values
 }
 \examples{
 h22 <- weiss2021_data[weiss2021_data$sample_id \%in\% "Healthy.22",]
-vancomycin_index(h22$proportion, h22$lineage)
+mirix_vancomycin(h22$proportion, h22$lineage)
 }
