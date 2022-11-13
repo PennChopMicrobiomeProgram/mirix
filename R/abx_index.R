@@ -55,38 +55,6 @@ mirix_amoxicillin <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_gram_positive <- function(abundance,
-                           lineage,
-                           replace_zero = 1e-4,
-                           phenotype_db = taxon_phenotypes) {
-  susceptibility <- phenotype_susceptibility(
-    lineage = lineage,
-    phenotype = "gram_stain",
-    susceptibility = c(
-      "Gram-positive" = "susceptible",
-      "Gram-negative" = "resistant"),
-    db = phenotype_db)
-  mirix(abundance, susceptibility, replace_zero)
-}
-
-#' @rdname mirix_antibiotic
-#' @export
-mirix_gram_negative <- function(abundance,
-                           lineage,
-                           replace_zero = 1e-4,
-                           phenotype_db = taxon_phenotypes) {
-  susceptibility <- phenotype_susceptibility(
-    lineage = lineage,
-    phenotype = "gram_stain",
-    susceptibility = c(
-      "Gram-positive" = "resistant",
-      "Gram-negative" = "susceptible"),
-    db = phenotype_db)
-  mirix(abundance, susceptibility, replace_zero)
-}
-
-#' @rdname mirix_antibiotic
-#' @export
 mirix_metronidazole <- function(abundance,
                             lineage,
                             replace_zero = 1e-4,

@@ -5,8 +5,6 @@
 \alias{mirix_vancomycin}
 \alias{mirix_doxycycline}
 \alias{mirix_amoxicillin}
-\alias{mirix_gram_positive}
-\alias{mirix_gram_negative}
 \alias{mirix_metronidazole}
 \alias{mirix_ciprofloxacin}
 \alias{mirix_gentamicin}
@@ -32,20 +30,6 @@ mirix_amoxicillin(
   lineage,
   replace_zero = 1e-04,
   antibiotic_db = taxon_susceptibility
-)
-
-mirix_gram_positive(
-  abundance,
-  lineage,
-  replace_zero = 1e-04,
-  phenotype_db = taxon_phenotypes
-)
-
-mirix_gram_negative(
-  abundance,
-  lineage,
-  replace_zero = 1e-04,
-  phenotype_db = taxon_phenotypes
 )
 
 mirix_metronidazole(
