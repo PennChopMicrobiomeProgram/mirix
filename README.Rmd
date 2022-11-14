@@ -21,35 +21,36 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-# abxidx
+# mirix
 
-The goal of abxidx is to calculate an index for a given bacterial community's
-susceptibility to a given antibiotic.
+The goal of mirix is to calculate the Microbiome Response Index (MiRIx) for a
+given bacterial community. Often this will be used to predict the community's
+susceptibility to an antibiotic.
 
 ## Installation
 
-You can install the development version of abxidx with `devtools`:
+You can install the development version of mirix with `devtools`:
 
 ```{r eval=FALSE}
 #install.packages("devtools")
-devtools::install_github("PennChopMicrobiomeProgram/abxidx")
+devtools::install_github("PennChopMicrobiomeProgram/mirix")
 ```
 
 ## Calculating antibiotic index values
 
-Here, we'll load the `abxidx` package, demonstrate some basic tasks, and give
+Here, we'll load the `mirix` package, demonstrate some basic tasks, and give
 some pointers for its use. Although we could accomplish all our tasks in base
-R, the `abxidx` package works very nicely with functions from the tidyverse.
+R, the `mirix` package works very nicely with functions from the tidyverse.
 We'll import those functions now.
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
 
-Next, we'll load the `abxidx` library.
+Next, we'll load the `mirix` library.
 
 ```{r eval=FALSE}
-library(abxidx)
+library(mirix)
 ```
 
 This package comes with a built-in data set, `weiss2021_data`, from a study of
@@ -68,6 +69,7 @@ weiss2021_data %>%
   count(study_group, study_window) %>%
   knitr::kable()
 ```
+
 for each sample collected, the data frame contains the relative abundance of
 all bacteria with a proportion of more than 0.001. Here is one of the sepsis
 samples, from subject 19019 in time window A. In this sample, the sequencing
@@ -88,9 +90,9 @@ result the lineage.
 
 Our goal will be to use the lineage information to predict which bacteria
 in each sample would be susceptible or resistant to various antibiotics. For a
-given antibiotic, we construct an *antibiotic-specific index* by taking the
-log-ratio of the abundance for resistant organisms over that of susceptible
-organisms.
+given antibiotic, we construct an *antibiotic-specific* Mircrobiome Response
+Index by taking the log-ratio of the abundance for resistant organisms over
+that of susceptible organisms.
 
 If the bacterial community is dominated by susceptible organisms, the index
 will be negative. Conversely, the index is positive if susceptible organisms
@@ -98,12 +100,12 @@ constitute a minority. If an antibiotic has the predicted effect on a
 bacterial community, the index should increase after the antibiotic is
 introduced.
 
-Let's compute the vancomycin index for each sample in the study.
+Let's compute the vancomycin response index for each sample in the study.
 
 ```{r weiss_vancomycin_index}
 weiss2021_vanc <- weiss2021_data %>%
   group_by(sample_id, study_group, study_window) %>%
-  summarise(vanc = vancomycin_index(proportion, lineage), .groups = "drop")
+  summarise(vanc = mirix_vancomycin(proportion, lineage), .groups = "drop")
 
 weiss2021_vanc %>%
   ggplot(aes(x=study_window, y = vanc)) +
@@ -119,7 +121,7 @@ as susceptible or resistant to vancomycin.
 
 ## Susceptible and resistant bacteria
 
-The `abxidx` library offers some lower-level functions that show more details
+The `mirix` library offers some lower-level functions that show more details
 about how the index was calculated. For each antibiotic with an index function,
 there is an accompanying function to determine the susceptibility for each
 lineage. Let's list out the susceptibility for the lineages in the sample from
@@ -128,7 +130,7 @@ subject 19019:
 ```{r results='asis'}
 weiss2021_data %>%
   filter(sample_id %in% "Sepsis.19019.A") %>%
-  mutate(susceptibility = vancomycin_susceptibility(lineage)) %>%
+  mutate(susceptibility = antibiotic_susceptibility_vancomycin(lineage)) %>%
   select(lineage, susceptibility) %>%
   knitr::kable()
 ```
@@ -151,10 +153,10 @@ an assignment to the *Lactobacillus* genus, but instead to the
 
 ## Databases for bacterial phenotypes and antibiotic susceptibility
 
-The `abxidx` package comes with two built-in databases. The `taxon_phenotypes`
+The `mirix` package comes with two built-in databases. The `taxon_phenotypes`
 database contains information on Gram-stain and aerobic status for over 900
 bacterial taxa. The taxa were selected to cover many taxa encountered in the
-human microbiom. It is here where we note that the *Firmicutes* are generally
+human microbiome. It is here where we note that the *Firmicutes* are generally
 Gram-positive.
 
 ```{r}
@@ -174,8 +176,8 @@ taxon_susceptibility %>%
 
 If you need to add or modify information in these databases, you can copy the
 data frames to new variables, make the changes you'd like, and pass the new
-databases directly to the `vancomycin_index` or `vancomycin_susceptibility`
-functions.
+databases directly to the `mirix_vancomycin()` or
+`antibiotic_susceptibility_vancomycin()` functions.
 
 ## Predicting taxon abundances for a given value of the index
 
@@ -196,7 +198,7 @@ healthy6_data <- weiss2021_data %>%
   filter(sample_id %in% "Healthy.6") %>%
   mutate(taxon = word(lineage, -1)) %>%
   mutate(taxon = fct_reorder(taxon, proportion)) %>%
-  mutate(susceptibility = vancomycin_susceptibility(lineage))
+  mutate(susceptibility = antibiotic_susceptibility_vancomycin(lineage))
 ```
 
 Above, we also made a shorter label for the taxa and sorted the values based on
@@ -218,7 +220,7 @@ surprising that the vancomycin index for the sample is negative.
 
 ```{r}
 healthy6_data %>%
-  summarise(vanc = vancomycin_index(proportion, lineage))
+  summarise(vanc = mirix_vancomycin(proportion, lineage))
 ```
 How would we expect the proportions to change if the index increased to a
 positive value, say 0.5? We can use `predict_abundance()` to run the
@@ -242,11 +244,12 @@ such as *Bacteroides* (near the top) and *Enterobacteriaceae* (at the bottom).
 For susceptible taxa, the abundances have decreased. For the taxon that's not
 annotated, RF39 (near the middle), the abundance has not changed at all.
 
-To finish, let's re-calculate the vancomycin index for our predicted abundances, so we can verify that it has the expected value of 0.5.
+To finish, let's re-calculate the vancomycin index for our predicted abundances,
+so we can verify that it has the expected value of 0.5.
 
 ```{r}
 healthy6_data %>%
   mutate(predicted = predict_abundance(0.5, proportion, susceptibility)) %>%
-  summarise(vanc = vancomycin_index(predicted, lineage))
+  summarise(vanc = mirix_vancomycin(predicted, lineage))
 ```
 
