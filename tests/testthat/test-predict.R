@@ -10,7 +10,7 @@ abundance <- c(0.1, 0.2, 0.1, 0.2, 0.3, 0.1)
 susceptibility <- c(
   "resistant", "resistant", "resistant",
   "susceptible", "susceptible", "susceptible")
-idx <- antibiotic_index(abundance, susceptibility)
+idx <- mirix(abundance, susceptibility)
 abundance_idx0 <- c(0.125, 0.25, 0.125, 0.1666666667, 0.25, 0.08333333333)
 
 test_that("predict_abundance works for normal case", {

@@ -61,51 +61,51 @@ aminoglycoside_db <- data.frame(
 test_antibiotic_db <- rbind(
   vancomycin_db, tetracycline_db, penicillin_db, aminoglycoside_db)
 
-test_that("vancomycin_susceptibility works for selected taxa", {
+test_that("antibiotic_susceptibility_vancomycin works for selected taxa", {
   lineage <- c(
     "Firmicutes; Enterococcus faecalis",
     "Firmicutes; Lactobacillus",
     "Firmicutes; Lactobacillus; Lactobacillus delbrueckii")
   expect_equal(
-    vancomycin_susceptibility(
+    antibiotic_susceptibility_vancomycin(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db,
       phenotype_db = gram_stain_db),
     c("susceptible", "resistant", "susceptible"))
 })
 
-test_that("tetracycline_susceptibility works for selected taxa", {
+test_that("antibiotic_susceptibility_tetracycline works for selected taxa", {
   lineage <- c(
     "Firmicutes; Enterococcus faecalis",
     "Firmicutes; Lactobacillus",
     "Proteobacteria; Klebsiella; Klebsiella pneumoniae")
   expect_equal(
-    tetracycline_susceptibility(
+    antibiotic_susceptibility_tetracycline(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db),
     c("resistant", "susceptible", "susceptible"))
 })
 
-test_that("penicillin_susceptibility works for selected taxa", {
+test_that("antibiotic_susceptibility_penicillin works for selected taxa", {
   lineage <- c(
     "Firmicutes; Enterococcus faecalis",
     "Firmicutes; Lactobacillus",
     "Proteobacteria; Klebsiella; Klebsiella pneumoniae")
   expect_equal(
-    penicillin_susceptibility(
+    antibiotic_susceptibility_penicillin(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db),
     c("resistant", "susceptible", "susceptible"))
 })
 
-test_that("aminoglycoside_susceptibility works for selected taxa", {
+test_that("antibiotic_susceptibility_aminoglycoside works for selected taxa", {
   lineage <- c(
     "Staphylococcus epidermidis",
     "Rothia", # Not enough info to determine both phenotypes, should be NA
     "Actinobacteria; Rothia",
     "Bacteroides vulgatus")
   expect_equal(
-    aminoglycoside_susceptibility(
+    antibiotic_susceptibility_aminoglycoside(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db,
       phenotype_db = gram_stain_aerobic_status_db),
