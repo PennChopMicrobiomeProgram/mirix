@@ -2,13 +2,14 @@ taxon,rank,aerobic_status,gram_stain,doi
 Actinobacteria,Phylum,NA,Gram-positive,10.1128/MMBR.00019-15
 Bacteroidetes,Phylum,NA,Gram-negative,NA
 Firmicutes,Phylum,NA,Gram-positive,10.1099/00207713-28-1-1
-Negativicutes,Class,NA,Gram-negative,10.4056/sigs.2981345
 Proteobacteria,Phylum,NA,Gram-negative,NA
+Negativicutes,Class,NA,Gram-negative,10.4056/sigs.2981345
 Clostridia,Class,obligate anaerobe,Gram-positive,NA
 Bacilli,Class,facultative anaerobe,Gram-positive,NA
+Bacteroidales,Order,obligate anaerobe,Gram-negative,10.1128/microbiolspec.dmih2-0015-2015
 Rikenellaceae,Family,obligate anaerobe,Gram-negative,NA
 Enterobacteriaceae,Family,facultative anaerobe,Gram-negative,NA
-Bacteroidales,Order,obligate anaerobe,Gram-negative,10.1128/microbiolspec.dmih2-0015-2015
+Haemophilus,Genus,facultative anaerobe,Gram-negative,10.1002/9781118960608.gbm01198
 Peptostreptococcus,Genus,obligate anaerobe,Gram-positive,10.1128/microbiolspec.dmih2-0015-2015
 Finegoldia,Genus,obligate anaerobe,Gram-positive,10.1128/microbiolspec.dmih2-0015-2015
 Parvimonas,Genus,obligate anaerobe,Gram-positive,10.1128/microbiolspec.dmih2-0015-2015
