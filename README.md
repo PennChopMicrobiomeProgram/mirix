@@ -1,20 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- badges: start -->
-
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/tuv292/abxidx?branch=master&svg=true)](https://ci.appveyor.com/project/tuv292/abxidx)
-[![Travis build
-status](https://travis-ci.com/tuv292/abxidx.svg?branch=master)](https://travis-ci.com/tuv292/abxidx)
-[![Codecov test
-coverage](https://codecov.io/gh/tuv292/abxidx/branch/master/graph/badge.svg)](https://codecov.io/gh/tuv292/abxidx?branch=master)
-<!-- badges: end -->
 
 # mirix
 
 The goal of mirix is to calculate the Microbiome Response Index (MiRIx)
 for a given bacterial community. Often this will be used to predict the
-community’s susceptibility to a specific antibiotic.
+community’s susceptibility to an antibiotic.
 
 ## Installation
 
