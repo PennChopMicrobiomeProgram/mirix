@@ -16,8 +16,8 @@ predict_abundance <- function (index_value, abundance, susceptibility) {
   total <- old_total_resistant + old_total_susceptible
 
   adjust_abundance <- function (val) {
-    p_resistant <- logistic(val, base = 10)
-    p_susceptible <- 1 - p_resistant
+    p_susceptible <- logistic(val, base = 10)
+    p_resistant <- 1 - p_susceptible
     new_total_resistant <- total * p_resistant
     new_total_susceptible <- total * p_susceptible
     multiplier_resistant <- new_total_resistant / old_total_resistant

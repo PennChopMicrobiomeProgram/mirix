@@ -2,8 +2,8 @@ test_that("predict_abundance works for simple case", {
   a <- c(0.2, 0.8)
   r <- c("resistant", "susceptible")
   expect_equal(predict_abundance( 0.0, a, r), c( 1 /  2,  1 /  2))
-  expect_equal(predict_abundance( 1.0, a, r), c(10 / 11,  1 / 11))
-  expect_equal(predict_abundance(-1.0, a, r), c( 1 / 11, 10 / 11))
+  expect_equal(predict_abundance( 1.0, a, r), c( 1 / 11, 10 / 11))
+  expect_equal(predict_abundance(-1.0, a, r), c(10 / 11,  1 / 11))
 })
 
 abundance <- c(0.1, 0.2, 0.1, 0.2, 0.3, 0.1)
