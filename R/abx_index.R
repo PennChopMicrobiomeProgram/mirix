@@ -114,13 +114,13 @@ mirix_gentamicin <- function(abundance,
 #' @return The MiRIx value
 #' @export
 mirix <- function (abundance, susceptibility, replace_zero = 1e-4) {
-  x_resistant <- sum(abundance[susceptibility %in% "resistant"])
   x_susceptible <- sum(abundance[susceptibility %in% "susceptible"])
+  x_resistant <- sum(abundance[susceptibility %in% "resistant"])
   if ((x_resistant < replace_zero) && (x_susceptible < replace_zero)) {
     warning(
       "Numerator and denominator both less than the zero-replacement value.")
   }
-  x_resistant <- max(x_resistant, replace_zero)
   x_susceptible <- max(x_susceptible, replace_zero)
-  log10(x_resistant / x_susceptible)
+  x_resistant <- max(x_resistant, replace_zero)
+  log10(x_susceptible / x_resistant)
 }
