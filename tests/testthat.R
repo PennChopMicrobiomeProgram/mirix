@@ -1,4 +1,4 @@
 library(testthat)
-library(abxidx)
+library(mirix)
 
-test_check("abxidx")
+test_check("mirix")
