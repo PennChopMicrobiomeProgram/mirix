@@ -32,6 +32,13 @@ vancomycin_db <- data.frame(
   antibiotic = "vancomycin",
   stringsAsFactors = FALSE)
 
+oxacillin_db <- data.frame(
+  taxon = c("Enterococcus"),
+  rank = c("Genus"),
+  value = c("resistant"),
+  antibiotic = "oxacillin",
+  stringsAsFactors = FALSE)
+
 tetracycline_db <- data.frame(
   taxon = c("Escherichia coli", "Enterococcus faecalis", "Klebsiella"),
   rank = c("Species", "Species", "Genus"),
@@ -59,7 +66,8 @@ aminoglycoside_db <- data.frame(
   stringsAsFactors = FALSE)
 
 test_antibiotic_db <- rbind(
-  vancomycin_db, tetracycline_db, penicillin_db, aminoglycoside_db)
+  vancomycin_db, oxacillin_db, tetracycline_db, penicillin_db,
+  aminoglycoside_db)
 
 test_that("antibiotic_susceptibility_vancomycin works for selected taxa", {
   lineage <- c(
@@ -72,6 +80,19 @@ test_that("antibiotic_susceptibility_vancomycin works for selected taxa", {
       antibiotic_db = test_antibiotic_db,
       phenotype_db = gram_stain_db),
     c("susceptible", "resistant", "susceptible"))
+})
+
+test_that("antibiotic_susceptibility_oxacillin works for selected taxa", {
+  lineage <- c(
+    "Firmicutes; Enterococcus faecalis",
+    "Bacteroidetes; Bacteroides fragilis",
+    "Firmicutes; Staphylococcus aureus")
+  expect_equal(
+    antibiotic_susceptibility_oxacillin(
+      lineage = lineage,
+      antibiotic_db = test_antibiotic_db,
+      phenotype_db = gram_stain_db),
+    c("resistant", "resistant", "susceptible"))
 })
 
 test_that("antibiotic_susceptibility_tetracycline works for selected taxa", {

@@ -3,12 +3,19 @@
 \name{antibiotic_specific_susceptibility}
 \alias{antibiotic_specific_susceptibility}
 \alias{antibiotic_susceptibility_vancomycin}
+\alias{antibiotic_susceptibility_oxacillin}
 \alias{antibiotic_susceptibility_tetracycline}
 \alias{antibiotic_susceptibility_penicillin}
 \alias{antibiotic_susceptibility_aminoglycoside}
 \title{Determine susceptibility to vancomycin}
 \usage{
 antibiotic_susceptibility_vancomycin(
+  lineage,
+  antibiotic_db = taxon_susceptibility,
+  phenotype_db = taxon_phenotypes
+)
+
+antibiotic_susceptibility_oxacillin(
   lineage,
   antibiotic_db = taxon_susceptibility,
   phenotype_db = taxon_phenotypes

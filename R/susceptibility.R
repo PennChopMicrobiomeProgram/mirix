@@ -32,6 +32,25 @@ antibiotic_susceptibility_vancomycin <- function (lineage,
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
+antibiotic_susceptibility_oxacillin <- function (lineage,
+                                                 antibiotic_db = taxon_susceptibility,
+                                                 phenotype_db = taxon_phenotypes) {
+  ph_sus <- phenotype_susceptibility(
+    lineage = lineage,
+    phenotype = "gram_stain",
+    susceptibility = c(
+      "Gram-positive" = "susceptible",
+      "Gram-negative" = "resistant"),
+    db = phenotype_db)
+  abx_sus <- antibiotic_susceptibility(
+    lineage = lineage,
+    antibiotic = "oxacillin",
+    db = antibiotic_db)
+  ifelse(is.na(abx_sus), ph_sus, abx_sus)
+}
+
+#' @rdname antibiotic_specific_susceptibility
+#' @export
 antibiotic_susceptibility_tetracycline <- function (lineage,
                                          antibiotic_db = taxon_susceptibility) {
   intrinsic_sus <- rep("susceptible", length(lineage))

@@ -30,6 +30,15 @@ test_that("mirix_vancomycin works on Weiss examples", {
     -0.3609116, tolerance = 1e-5)
 })
 
+test_that("mirix_oxacillin works on Weiss examples", {
+  expect_equal(
+    mirix_oxacillin(weiss_sepsis$proportion, weiss_sepsis$lineage),
+    -0.5644559, tolerance = 1e-5)
+  expect_equal(
+    mirix_oxacillin(weiss_healthy$proportion, weiss_healthy$lineage),
+    -0.9650513, tolerance = 1e-5)
+})
+
 test_that("antibiotic_susceptibility_tetracycline works on Weiss examples", {
   expect_equal(
     antibiotic_susceptibility_tetracycline(weiss_sepsis$lineage),

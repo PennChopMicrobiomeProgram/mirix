@@ -3,6 +3,7 @@
 \name{mirix_antibiotic}
 \alias{mirix_antibiotic}
 \alias{mirix_vancomycin}
+\alias{mirix_oxacillin}
 \alias{mirix_doxycycline}
 \alias{mirix_amoxicillin}
 \alias{mirix_metronidazole}
@@ -11,6 +12,14 @@
 \title{Calculate antibiotic-specific MiRIx values}
 \usage{
 mirix_vancomycin(
+  abundance,
+  lineage,
+  replace_zero = 1e-04,
+  antibiotic_db = taxon_susceptibility,
+  phenotype_db = taxon_phenotypes
+)
+
+mirix_oxacillin(
   abundance,
   lineage,
   replace_zero = 1e-04,

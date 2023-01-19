@@ -33,6 +33,18 @@ mirix_vancomycin <- function(abundance,
 
 #' @rdname mirix_antibiotic
 #' @export
+mirix_oxacillin <- function(abundance,
+                            lineage,
+                            replace_zero = 1e-4,
+                            antibiotic_db = taxon_susceptibility,
+                            phenotype_db = taxon_phenotypes) {
+  susceptibility <- antibiotic_susceptibility_oxacillin(
+    lineage, antibiotic_db, phenotype_db)
+  mirix(abundance, susceptibility, replace_zero)
+}
+
+#' @rdname mirix_antibiotic
+#' @export
 mirix_doxycycline <- function(abundance,
                                lineage,
                                replace_zero = 1e-4,
