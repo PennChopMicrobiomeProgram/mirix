@@ -1,7 +1,7 @@
 #' Predict taxon abundances at given values of an index
 #'
 #' @param index_value Value or values of the index at which to make predictions.
-#' @param abundances A vector of taxon abundances in a sample.
+#' @param abundance A vector of taxon abundances in a sample.
 #' @param susceptibility A character vector of antibiotic susceptibility, with
 #'   values that are "susceptible", "resistant", or \code{NA}.
 #' @return A new vector of abundances if \code{index_value} has length 1. If

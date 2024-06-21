@@ -28,7 +28,7 @@
 #' @export
 antibiotic_susceptibility <- function (lineage,
                                        antibiotic,
-                                       db = taxon_susceptibility) {
+                                       db = mirixdb::taxon_susceptibility) {
   is_relevant <- db$antibiotic %in% antibiotic
   db <- db[is_relevant, c("taxon", "rank", "value")]
 
@@ -74,7 +74,7 @@ antibiotic_susceptibility <- function (lineage,
 phenotype_susceptibility <- function (lineage,
                                       phenotype,
                                       susceptibility,
-                                      db = taxon_phenotypes) {
+                                      db = mirixdb::taxon_phenotypes) {
   is_relevant <- db[[phenotype]] %in% names(susceptibility)
   db <- db[is_relevant, c("taxon", "rank", phenotype)]
   # match_annotation() requires a column named "value"

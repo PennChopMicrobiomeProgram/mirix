@@ -10,24 +10,24 @@
 \usage{
 antibiotic_susceptibility_vancomycin(
   lineage,
-  antibiotic_db = taxon_susceptibility,
-  phenotype_db = taxon_phenotypes
+  antibiotic_db = mirixdb::taxon_susceptibility,
+  phenotype_db = mirixdb::taxon_phenotypes
 )
 
 antibiotic_susceptibility_tetracycline(
   lineage,
-  antibiotic_db = taxon_susceptibility
+  antibiotic_db = mirixdb::taxon_susceptibility
 )
 
 antibiotic_susceptibility_penicillin(
   lineage,
-  antibiotic_db = taxon_susceptibility
+  antibiotic_db = mirixdb::taxon_susceptibility
 )
 
 antibiotic_susceptibility_aminoglycoside(
   lineage,
-  antibiotic_db = taxon_susceptibility,
-  phenotype_db = taxon_phenotypes
+  antibiotic_db = mirixdb::taxon_susceptibility,
+  phenotype_db = mirixdb::taxon_phenotypes
 )
 }
 \arguments{

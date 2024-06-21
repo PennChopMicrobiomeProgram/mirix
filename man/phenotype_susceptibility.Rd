@@ -8,7 +8,7 @@ phenotype_susceptibility(
   lineage,
   phenotype,
   susceptibility,
-  db = taxon_phenotypes
+  db = mirixdb::taxon_phenotypes
 )
 }
 \arguments{

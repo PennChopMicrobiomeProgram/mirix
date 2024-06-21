@@ -4,7 +4,11 @@
 \alias{antibiotic_susceptibility}
 \title{Evaluate susceptibility based on antibiotic-specific annotations}
 \usage{
-antibiotic_susceptibility(lineage, antibiotic, db = taxon_susceptibility)
+antibiotic_susceptibility(
+  lineage,
+  antibiotic,
+  db = mirixdb::taxon_susceptibility
+)
 }
 \arguments{
 \item{lineage}{A character vector of taxonomic assignments or lineages}
