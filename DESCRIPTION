@@ -8,7 +8,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Suggests:
     knitr,
     rmarkdown,
@@ -16,3 +16,4 @@ Suggests:
     testthat
 Depends: 
     R (>= 2.10)
+Remotes: PennChopMicrobiomeProgram/mirix_db
