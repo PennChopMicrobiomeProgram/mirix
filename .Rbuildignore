@@ -6,3 +6,4 @@
 ^codecov\.yml$
 ^data-raw$
 ^R/abx_index_old\.R$
+^\.github$

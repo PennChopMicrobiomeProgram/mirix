@@ -17,6 +17,10 @@ devtools::load_all()
 
 # mirix
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/mirix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/mirix/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 The goal of mirix is to calculate the Microbiome Response Index (MiRIx) for a
 given bacterial community. Often this will be used to predict the community's
 susceptibility to an antibiotic.
