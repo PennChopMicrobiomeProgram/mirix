@@ -15,5 +15,6 @@ Suggests:
     covr,
     testthat
 Depends: 
-    R (>= 2.10)
-Remotes: PennChopMicrobiomeProgram/mirix_db
+    R (>= 2.10),
+    mirixdb
+Remotes: PennChopMicrobiomeProgram/mirixdb
