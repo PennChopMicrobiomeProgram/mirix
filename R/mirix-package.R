@@ -2,6 +2,6 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom mirixdb taxon_phenotypes taxon_susceptibility
+#' @import mirixdb
 ## usethis namespace: end
 NULL

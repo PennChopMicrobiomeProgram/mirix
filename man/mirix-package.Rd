@@ -6,6 +6,6 @@
 \alias{mirix-package}
 \title{mirix: Modeling the Susceptibility of a Bacterial Community to Antibiotics}
 \description{
-This package calculates an index for a given bacterial community's susceptibility to the specified antibiotics.
+Calculates an index for a given bacterial community's susceptibility to specified antibiotics.
 }
 \keyword{internal}
