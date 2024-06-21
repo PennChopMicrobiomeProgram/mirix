@@ -19,6 +19,7 @@ devtools::load_all()
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/mirix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/mirix/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/mirix/graph/badge.svg?token=7DBBaNoGDc)](https://codecov.io/gh/PennChopMicrobiomeProgram/mirix)
 <!-- badges: end -->
 
 The goal of mirix is to calculate the Microbiome Response Index (MiRIx) for a
@@ -158,7 +159,7 @@ human microbiome. It is here where we note that the *Firmicutes* are generally
 Gram-positive.
 
 ```{r}
-taxon_phenotypes %>%
+mirixdb::taxon_phenotypes %>%
   filter(taxon %in% "Firmicutes")
 ```
 
@@ -168,7 +169,7 @@ where we note that *Lactobacillus* species are typically resistant to
 vancomycin.
 
 ```{r}
-taxon_susceptibility %>%
+mirixdb::taxon_susceptibility %>%
   filter(taxon %in% "Lactobacillus")
 ```
 
