@@ -111,6 +111,7 @@ mirix_gentamicin <- function(abundance,
 #'   0.5 is typical. For relative abundances, a number that is slightly lower
 #'   than the lowest relative abundance will work.
 #'
+#' @import mirixdb
 #' @return The MiRIx value
 #' @export
 mirix <- function (abundance, susceptibility, replace_zero = 1e-4) {
