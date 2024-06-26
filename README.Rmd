@@ -159,7 +159,7 @@ human microbiome. It is here where we note that the *Firmicutes* are generally
 Gram-positive.
 
 ```{r}
-mirixdb::taxon_phenotypes %>%
+whatbacteria::taxon_phenotypes %>%
   filter(taxon %in% "Firmicutes")
 ```
 
@@ -169,7 +169,7 @@ where we note that *Lactobacillus* species are typically resistant to
 vancomycin.
 
 ```{r}
-mirixdb::taxon_susceptibility %>%
+whatbacteria::taxon_susceptibility %>%
   filter(taxon %in% "Lactobacillus")
 ```
 

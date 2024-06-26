@@ -182,7 +182,7 @@ cover many taxa encountered in the human microbiome. It is here where we
 note that the *Firmicutes* are generally Gram-positive.
 
 ``` r
-mirixdb::taxon_phenotypes %>%
+whatbacteria::taxon_phenotypes %>%
   filter(taxon %in% "Firmicutes")
 #>        taxon   rank aerobic_status    gram_stain                     doi
 #> 1 Firmicutes Phylum           <NA> Gram-positive 10.1099/00207713-28-1-1
@@ -194,7 +194,7 @@ example, where we note that *Lactobacillus* species are typically
 resistant to vancomycin.
 
 ``` r
-mirixdb::taxon_susceptibility %>%
+whatbacteria::taxon_susceptibility %>%
   filter(taxon %in% "Lactobacillus")
 #>           taxon  rank antibiotic     value                  doi
 #> 1 Lactobacillus Genus vancomycin resistant 10.1128/AEM.01738-18
