@@ -61,11 +61,11 @@ antibiotic_susceptibility_aminoglycoside <- function (lineage,
                                            phenotype_db = whatbacteria::taxon_phenotypes) {
   gram_stain_db <- whatbacteria::taxon_phenotypes[,c("taxon", "rank", "gram_stain")]
   colnames(gram_stain_db)[3] <- "value"
-  gram_stain_phenotype <- match_annotation(lineage, gram_stain_db)
+  gram_stain_phenotype <- whatbacteria::match_annotation(lineage, gram_stain_db)
 
   aerobic_status_db <- whatbacteria::taxon_phenotypes[,c("taxon", "rank", "aerobic_status")]
   colnames(aerobic_status_db)[3] <- "value"
-  aerobic_status_phenotype <- match_annotation(lineage, aerobic_status_db)
+  aerobic_status_phenotype <- whatbacteria::match_annotation(lineage, aerobic_status_db)
 
   combined_phenotype <- ifelse(
     is.na(gram_stain_phenotype) | is.na(aerobic_status_phenotype),
