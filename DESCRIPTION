@@ -17,5 +17,5 @@ Suggests:
 Depends: 
     R (>= 2.10)
 Imports:
-    mirixdb
-Remotes: PennChopMicrobiomeProgram/mirixdb
+    whatbacteria
+Remotes: PennChopMicrobiomeProgram/whatbacteria

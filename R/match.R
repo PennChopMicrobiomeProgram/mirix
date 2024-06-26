@@ -28,18 +28,8 @@
 #' @export
 antibiotic_susceptibility <- function (lineage,
                                        antibiotic,
-                                       db = mirixdb::taxon_susceptibility) {
-  what_antibiotic(lineage, antibiotic, db)
-}
-
-what_antibiotic <- function (lineage,
-                             antibiotic,
-                             db = mirixdb::taxon_susceptibility) {
-  is_relevant <- db$antibiotic %in% antibiotic
-  db <- db[is_relevant, c("taxon", "rank", "value")]
-
-  susceptibility_values <- match_annotation(lineage, db)
-  susceptibility_values
+                                       db = whatbacteria::taxon_susceptibility) {
+  whatbacteria::what_antibiotic(lineage, antibiotic, db)
 }
 
 #' Evaluate antibiotic susceptibility based on phenotype
@@ -80,50 +70,11 @@ what_antibiotic <- function (lineage,
 phenotype_susceptibility <- function (lineage,
                                       phenotype,
                                       susceptibility,
-                                      db = mirixdb::taxon_phenotypes) {
-  phenotype_values <- what_phenotype(lineage, phenotype, db)
+                                      db = whatbacteria::taxon_phenotypes) {
+  phenotype_values <- whatbacteria::what_phenotype(lineage, phenotype, db)
   susceptibility_values <- susceptibility[phenotype_values]
   susceptibility_values <- unname(susceptibility_values)
   susceptibility_values
-}
-
-what_phenotype <- function (lineage,
-                            phenotype,
-                            db = mirixdb::taxon_phenotypes) {
-  db <- db[, c("taxon", "rank", phenotype)]
-  # match_annotation() requires a column named "value"
-  colnames(db)[3] <- "value"
-  match_annotation(lineage, db)
-}
-
-# Determine the annotation values for each lineage
-#
-# @param lineage A vector of taxonomic assignments or lineages
-# @param db A data frame with columns named "taxon", "rank", and "value"
-# @return A vector of assigned values
-match_annotation <- function (lineage, db) {
-  get_rank_specific_db <- function (r) {
-    rank_is_r <- db[["rank"]] %in% r
-    db[rank_is_r,]
-  }
-  db_ranks <- lapply(rev(taxonomic_ranks), get_rank_specific_db)
-  names(db_ranks) <- rev(taxonomic_ranks)
-
-  get_values_by_rank <- function (rank_specific_db) {
-    taxa_idx <- match_taxa(lineage, rank_specific_db[["taxon"]])
-    rank_specific_db[["value"]][taxa_idx]
-  }
-  values_by_rank <- vapply(
-    db_ranks,
-    get_values_by_rank,
-    rep("a", length(lineage)))
-
-  if (length(lineage) == 1) {
-    assigned_values <- first_non_na_value(values_by_rank)
-  } else {
-    assigned_values <- apply(values_by_rank, 1, first_non_na_value)
-  }
-  assigned_values
 }
 
 # The 'official' taxonomic ranks supported by this package
@@ -133,7 +84,7 @@ taxonomic_ranks <- c(
 # Return the first value that is not NA. If all values are NA, return NA. The
 # resultant vector will not have names.
 first_non_na_value <- function (x) {
-  unname(x[first_true_idx(!is.na(x))])
+  unname(x[whatbacteria::first_true_idx(!is.na(x))])
 }
 
 # For each lineage, return the index of the taxon that is found within the
@@ -171,19 +122,9 @@ match_taxa <- function (lineages, taxa) {
   }
 
   if (n_lineages == 1) {
-    taxon_idx <- first_true_idx(lineage_matches)
+    taxon_idx <- whatbacteria::first_true_idx(lineage_matches)
   } else {
-    taxon_idx <- apply(lineage_matches, 1, first_true_idx)
+    taxon_idx <- apply(lineage_matches, 1, whatbacteria::first_true_idx)
   }
   taxon_idx
-}
-
-# Return the first index of a boolean vector that is TRUE. If all elements of
-# the vector are FALSE, return NA. Tempted to call this function minwhich.
-first_true_idx <- function (x) {
-  if (any(x)) {
-    min(which(x == TRUE))
-  } else {
-    NA_integer_
-  }
 }
