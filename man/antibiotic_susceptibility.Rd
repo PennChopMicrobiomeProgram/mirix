@@ -7,7 +7,7 @@
 antibiotic_susceptibility(
   lineage,
   antibiotic,
-  db = mirixdb::taxon_susceptibility
+  db = whatbacteria::taxon_susceptibility
 )
 }
 \arguments{

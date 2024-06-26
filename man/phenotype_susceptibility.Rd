@@ -8,7 +8,7 @@ phenotype_susceptibility(
   lineage,
   phenotype,
   susceptibility,
-  db = mirixdb::taxon_phenotypes
+  db = whatbacteria::taxon_phenotypes
 )
 }
 \arguments{
