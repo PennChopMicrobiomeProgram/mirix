@@ -29,6 +29,12 @@
 antibiotic_susceptibility <- function (lineage,
                                        antibiotic,
                                        db = mirixdb::taxon_susceptibility) {
+  what_antibiotic(lineage, antibiotic, db)
+}
+
+what_antibiotic <- function (lineage,
+                             antibiotic,
+                             db = mirixdb::taxon_susceptibility) {
   is_relevant <- db$antibiotic %in% antibiotic
   db <- db[is_relevant, c("taxon", "rank", "value")]
 
@@ -75,16 +81,19 @@ phenotype_susceptibility <- function (lineage,
                                       phenotype,
                                       susceptibility,
                                       db = mirixdb::taxon_phenotypes) {
-  is_relevant <- db[[phenotype]] %in% names(susceptibility)
-  db <- db[is_relevant, c("taxon", "rank", phenotype)]
-  # match_annotation() requires a column named "value"
-  colnames(db)[3] <- "value"
-
-  phenotype_values <- match_annotation(lineage, db)
-
+  phenotype_values <- what_phenotype(lineage, phenotype, db)
   susceptibility_values <- susceptibility[phenotype_values]
   susceptibility_values <- unname(susceptibility_values)
   susceptibility_values
+}
+
+what_phenotype <- function (lineage,
+                            phenotype,
+                            db = mirixdb::taxon_phenotypes) {
+  db <- db[, c("taxon", "rank", phenotype)]
+  # match_annotation() requires a column named "value"
+  colnames(db)[3] <- "value"
+  match_annotation(lineage, db)
 }
 
 # Determine the annotation values for each lineage
