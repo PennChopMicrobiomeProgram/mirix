@@ -24,8 +24,8 @@ NULL
 mirix_vancomycin <- function(abundance,
                              lineage,
                              replace_zero = 1e-4,
-                             antibiotic_db = mirixdb::taxon_susceptibility,
-                             phenotype_db = mirixdb::taxon_phenotypes) {
+                             antibiotic_db = whatbacteria::taxon_susceptibility,
+                             phenotype_db = whatbacteria::taxon_phenotypes) {
   susceptibility <- antibiotic_susceptibility_vancomycin(
     lineage, antibiotic_db, phenotype_db)
   mirix(abundance, susceptibility, replace_zero)
@@ -36,7 +36,7 @@ mirix_vancomycin <- function(abundance,
 mirix_doxycycline <- function(abundance,
                                lineage,
                                replace_zero = 1e-4,
-                               antibiotic_db = mirixdb::taxon_susceptibility) {
+                               antibiotic_db = whatbacteria::taxon_susceptibility) {
   susceptibility <- antibiotic_susceptibility_tetracycline(
     lineage, antibiotic_db)
   mirix(abundance, susceptibility, replace_zero)
@@ -47,7 +47,7 @@ mirix_doxycycline <- function(abundance,
 mirix_amoxicillin <- function(abundance,
                              lineage,
                              replace_zero = 1e-4,
-                             antibiotic_db = mirixdb::taxon_susceptibility) {
+                             antibiotic_db = whatbacteria::taxon_susceptibility) {
   susceptibility <- antibiotic_susceptibility_penicillin(
     lineage, antibiotic_db)
   mirix(abundance, susceptibility, replace_zero)
@@ -58,7 +58,7 @@ mirix_amoxicillin <- function(abundance,
 mirix_metronidazole <- function(abundance,
                             lineage,
                             replace_zero = 1e-4,
-                            phenotype_db = mirixdb::taxon_phenotypes) {
+                            phenotype_db = whatbacteria::taxon_phenotypes) {
   susceptibility <- phenotype_susceptibility(
     lineage = lineage,
     phenotype = "aerobic_status",
@@ -75,7 +75,7 @@ mirix_metronidazole <- function(abundance,
 mirix_ciprofloxacin <- function(abundance,
                           lineage,
                           replace_zero = 1e-4,
-                          phenotype_db = mirixdb::taxon_phenotypes) {
+                          phenotype_db = whatbacteria::taxon_phenotypes) {
   susceptibility <- phenotype_susceptibility(
     lineage = lineage,
     phenotype = "aerobic_status",
@@ -92,8 +92,8 @@ mirix_ciprofloxacin <- function(abundance,
 mirix_gentamicin <- function(abundance,
                                  lineage,
                                  replace_zero = 1e-4,
-                                 antibiotic_db = mirixdb::taxon_susceptibility,
-                                 phenotype_db = mirixdb::taxon_phenotypes) {
+                                 antibiotic_db = whatbacteria::taxon_susceptibility,
+                                 phenotype_db = whatbacteria::taxon_phenotypes) {
   susceptibility <- antibiotic_susceptibility_aminoglycoside(
     lineage, antibiotic_db, phenotype_db)
   mirix(abundance, susceptibility, replace_zero)
@@ -111,7 +111,7 @@ mirix_gentamicin <- function(abundance,
 #'   0.5 is typical. For relative abundances, a number that is slightly lower
 #'   than the lowest relative abundance will work.
 #'
-#' @import mirixdb
+#' @import whatbacteria
 #' @return The MiRIx value
 #' @export
 mirix <- function (abundance, susceptibility, replace_zero = 1e-4) {

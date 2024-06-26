@@ -14,44 +14,44 @@ mirix_vancomycin(
   abundance,
   lineage,
   replace_zero = 1e-04,
-  antibiotic_db = mirixdb::taxon_susceptibility,
-  phenotype_db = mirixdb::taxon_phenotypes
+  antibiotic_db = whatbacteria::taxon_susceptibility,
+  phenotype_db = whatbacteria::taxon_phenotypes
 )
 
 mirix_doxycycline(
   abundance,
   lineage,
   replace_zero = 1e-04,
-  antibiotic_db = mirixdb::taxon_susceptibility
+  antibiotic_db = whatbacteria::taxon_susceptibility
 )
 
 mirix_amoxicillin(
   abundance,
   lineage,
   replace_zero = 1e-04,
-  antibiotic_db = mirixdb::taxon_susceptibility
+  antibiotic_db = whatbacteria::taxon_susceptibility
 )
 
 mirix_metronidazole(
   abundance,
   lineage,
   replace_zero = 1e-04,
-  phenotype_db = mirixdb::taxon_phenotypes
+  phenotype_db = whatbacteria::taxon_phenotypes
 )
 
 mirix_ciprofloxacin(
   abundance,
   lineage,
   replace_zero = 1e-04,
-  phenotype_db = mirixdb::taxon_phenotypes
+  phenotype_db = whatbacteria::taxon_phenotypes
 )
 
 mirix_gentamicin(
   abundance,
   lineage,
   replace_zero = 1e-04,
-  antibiotic_db = mirixdb::taxon_susceptibility,
-  phenotype_db = mirixdb::taxon_phenotypes
+  antibiotic_db = whatbacteria::taxon_susceptibility,
+  phenotype_db = whatbacteria::taxon_phenotypes
 )
 }
 \arguments{
