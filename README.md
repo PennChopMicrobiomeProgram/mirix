@@ -3,6 +3,12 @@
 
 # mirix
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/mirix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/mirix/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/mirix/graph/badge.svg?token=7DBBaNoGDc)](https://codecov.io/gh/PennChopMicrobiomeProgram/mirix)
+<!-- badges: end -->
+
 The goal of mirix is to calculate the Microbiome Response Index (MiRIx)
 for a given bacterial community. Often this will be used to predict the
 community’s susceptibility to an antibiotic.
@@ -176,7 +182,7 @@ cover many taxa encountered in the human microbiome. It is here where we
 note that the *Firmicutes* are generally Gram-positive.
 
 ``` r
-taxon_phenotypes %>%
+whatbacteria::taxon_phenotypes %>%
   filter(taxon %in% "Firmicutes")
 #>        taxon   rank aerobic_status    gram_stain                     doi
 #> 1 Firmicutes Phylum           <NA> Gram-positive 10.1099/00207713-28-1-1
@@ -188,7 +194,7 @@ example, where we note that *Lactobacillus* species are typically
 resistant to vancomycin.
 
 ``` r
-taxon_susceptibility %>%
+whatbacteria::taxon_susceptibility %>%
   filter(taxon %in% "Lactobacillus")
 #>           taxon  rank antibiotic     value                  doi
 #> 1 Lactobacillus Genus vancomycin resistant 10.1128/AEM.01738-18
@@ -246,9 +252,9 @@ sample is negative.
 healthy6_data %>%
   summarise(vanc = mirix_vancomycin(proportion, lineage))
 #> # A tibble: 1 × 1
-#>     vanc
-#>    <dbl>
-#> 1 -0.207
+#>    vanc
+#>   <dbl>
+#> 1 0.207
 ```
 
 How would we expect the proportions to change if the index increased to
@@ -286,5 +292,5 @@ healthy6_data %>%
 #> # A tibble: 1 × 1
 #>    vanc
 #>   <dbl>
-#> 1 0.500
+#> 1  0.50
 ```

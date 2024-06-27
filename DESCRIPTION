@@ -3,16 +3,19 @@ Title: Modeling the Susceptibility of a Bacterial Community to Antibiotics
 Version: 0.0.1.0
 Author: Vincent Tu <tuv@email.chop.edu>
 Maintainer: Vincent Tu <tuv@email.chop.edu>
-Description: This package calculates an index for a given bacterial community's susceptibility to the specified antibiotics.
+Description: Calculates an index for a given bacterial community's susceptibility to specified antibiotics.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Suggests:
     knitr,
     rmarkdown,
     covr,
     testthat
-Depends: 
+Depends:
     R (>= 2.10)
+Imports:
+    whatbacteria
+Remotes: PennChopMicrobiomeProgram/whatbacteria

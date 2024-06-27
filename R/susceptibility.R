@@ -13,8 +13,8 @@ NULL
 #' @rdname antibiotic_specific_susceptibility
 #' @export
 antibiotic_susceptibility_vancomycin <- function (lineage,
-                                       antibiotic_db = taxon_susceptibility,
-                                       phenotype_db = taxon_phenotypes) {
+                                       antibiotic_db = whatbacteria::taxon_susceptibility,
+                                       phenotype_db = whatbacteria::taxon_phenotypes) {
   # Gram-positive organisms are susceptible to vancomycin
   ph_sus <- phenotype_susceptibility(
     lineage = lineage,
@@ -33,7 +33,7 @@ antibiotic_susceptibility_vancomycin <- function (lineage,
 #' @rdname antibiotic_specific_susceptibility
 #' @export
 antibiotic_susceptibility_tetracycline <- function (lineage,
-                                         antibiotic_db = taxon_susceptibility) {
+                                         antibiotic_db = whatbacteria::taxon_susceptibility) {
   intrinsic_sus <- rep("susceptible", length(lineage))
   abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
@@ -45,7 +45,7 @@ antibiotic_susceptibility_tetracycline <- function (lineage,
 #' @rdname antibiotic_specific_susceptibility
 #' @export
 antibiotic_susceptibility_penicillin <- function(lineage,
-                                      antibiotic_db = taxon_susceptibility) {
+                                      antibiotic_db = whatbacteria::taxon_susceptibility) {
   intrinsic_sus <- rep("susceptible", length(lineage))
   abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
@@ -57,15 +57,15 @@ antibiotic_susceptibility_penicillin <- function(lineage,
 #' @rdname antibiotic_specific_susceptibility
 #' @export
 antibiotic_susceptibility_aminoglycoside <- function (lineage,
-                                           antibiotic_db = taxon_susceptibility,
-                                           phenotype_db = taxon_phenotypes) {
-  gram_stain_db <- taxon_phenotypes[,c("taxon", "rank", "gram_stain")]
+                                           antibiotic_db = whatbacteria::taxon_susceptibility,
+                                           phenotype_db = whatbacteria::taxon_phenotypes) {
+  gram_stain_db <- whatbacteria::taxon_phenotypes[,c("taxon", "rank", "gram_stain")]
   colnames(gram_stain_db)[3] <- "value"
-  gram_stain_phenotype <- match_annotation(lineage, gram_stain_db)
+  gram_stain_phenotype <- whatbacteria::match_annotation(lineage, gram_stain_db)
 
-  aerobic_status_db <- taxon_phenotypes[,c("taxon", "rank", "aerobic_status")]
+  aerobic_status_db <- whatbacteria::taxon_phenotypes[,c("taxon", "rank", "aerobic_status")]
   colnames(aerobic_status_db)[3] <- "value"
-  aerobic_status_phenotype <- match_annotation(lineage, aerobic_status_db)
+  aerobic_status_phenotype <- whatbacteria::match_annotation(lineage, aerobic_status_db)
 
   combined_phenotype <- ifelse(
     is.na(gram_stain_phenotype) | is.na(aerobic_status_phenotype),

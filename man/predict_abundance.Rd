@@ -9,10 +9,10 @@ predict_abundance(index_value, abundance, susceptibility)
 \arguments{
 \item{index_value}{Value or values of the index at which to make predictions.}
 
+\item{abundance}{A vector of taxon abundances in a sample.}
+
 \item{susceptibility}{A character vector of antibiotic susceptibility, with
 values that are "susceptible", "resistant", or \code{NA}.}
-
-\item{abundances}{A vector of taxon abundances in a sample.}
 }
 \value{
 A new vector of abundances if \code{index_value} has length 1. If
