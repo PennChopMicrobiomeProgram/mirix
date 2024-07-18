@@ -125,7 +125,7 @@ weiss2021_vanc %>%
 
 ![](tools/readme/weiss_vancomycin_index-1.png)<!-- -->
 
-For healthy children, the medain value of the index is about -0.2,
+For healthy children, the median value of the index is about -0.2,
 whereas it is roughly -0.85 across the samples from children with
 sepsis. Let’s look further into how the index was calculated, and check
 out which bacteria were labeled as susceptible or resistant to
