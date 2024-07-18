@@ -90,13 +90,13 @@ result the lineage.
 Our goal will be to use the lineage information to predict which bacteria
 in each sample would be susceptible or resistant to various antibiotics. For a
 given antibiotic, we construct an *antibiotic-specific* Mircrobiome Response
-Index by taking the log-ratio of the abundance for resistant organisms over
-that of susceptible organisms.
+Index by taking the log-ratio of the abundance for susceptible organisms over
+that of resistant organisms.
 
 If the bacterial community is dominated by susceptible organisms, the index
-will be negative. Conversely, the index is positive if susceptible organisms
+will be positive Conversely, the index is negative if susceptible organisms
 constitute a minority. If an antibiotic has the predicted effect on a
-bacterial community, the index should increase after the antibiotic is
+bacterial community, the index should decrease after the antibiotic is
 introduced.
 
 Let's compute the vancomycin response index for each sample in the study.
@@ -113,8 +113,8 @@ weiss2021_vanc %>%
   labs(x = "Study window", y = "Vancomycin-specific index")
 ```
 
-For healthy children, the medain value of the index is about 0.2, whereas it is
-roughly 0.85 across the samples from children with sepsis. Let's look further
+For healthy children, the medain value of the index is about -0.2, whereas it is
+roughly -0.85 across the samples from children with sepsis. Let's look further
 into how the index was calculated, and check out which bacteria were labeled
 as susceptible or resistant to vancomycin.
 
@@ -215,19 +215,19 @@ healthy6_data %>%
 Most taxa in the sample are annotated as susceptible to vancomycin, including
 the most abundant taxon, *Ruminococcaceae*. One taxon, RF39, is not annotated.
 Only a few taxa are annotated as resistant to vancomycin, thus it's not
-surprising that the vancomycin index for the sample is negative.
+surprising that the vancomycin index for the sample is posgative.
 
 ```{r}
 healthy6_data %>%
   summarise(vanc = mirix_vancomycin(proportion, lineage))
 ```
 How would we expect the proportions to change if the index increased to a
-positive value, say 0.5? We can use `predict_abundance()` to run the
+negative value, say -0.5? We can use `predict_abundance()` to run the
 calculation.
 
 ```{r weiss_healthy6_prediction}
 healthy6_data %>%
-  mutate(predicted = predict_abundance(0.5, proportion, susceptibility)) %>%
+  mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) %>%
   rename(observed = proportion) %>%
   pivot_longer(
     c(observed, predicted), names_to = "method", values_to = "abundance") %>%
@@ -244,11 +244,11 @@ For susceptible taxa, the abundances have decreased. For the taxon that's not
 annotated, RF39 (near the middle), the abundance has not changed at all.
 
 To finish, let's re-calculate the vancomycin index for our predicted abundances,
-so we can verify that it has the expected value of 0.5.
+so we can verify that it has the expected value of -0.5.
 
 ```{r}
 healthy6_data %>%
-  mutate(predicted = predict_abundance(0.5, proportion, susceptibility)) %>%
+  mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) %>%
   summarise(vanc = mirix_vancomycin(predicted, lineage))
 ```
 
