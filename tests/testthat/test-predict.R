@@ -38,3 +38,8 @@ test_that("predict_abundance preserves total abundance", {
   expected <- abundance_idx0 * 5
   expect_equal(observed, expected, tolerance = 1e-5)
 })
+
+test_that("logistic uses the correct base", {
+  expect_equal(logistic(1, base = 2), 2 / 3)
+  expect_equal(logistic(1, base = 10), 10 / 11)
+})

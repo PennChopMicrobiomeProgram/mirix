@@ -36,6 +36,6 @@ predict_abundance <- function(index_value, abundance, susceptibility) {
 }
 
 logistic <- function(x, base = exp(1)) {
-  ex <- 10^x
+  ex <- base^x
   ex / (ex + 1)
 }
