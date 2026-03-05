@@ -12,78 +12,94 @@ NULL
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-antibiotic_susceptibility_vancomycin <- function (lineage,
-                                       antibiotic_db = whatbacteria::taxon_susceptibility,
-                                       phenotype_db = whatbacteria::taxon_phenotypes) {
+antibiotic_susceptibility_vancomycin <- function(
+  lineage,
+  antibiotic_db = whatbacteria::taxon_susceptibility,
+  phenotype_db = whatbacteria::taxon_phenotypes
+) {
   # Gram-positive organisms are susceptible to vancomycin
   ph_sus <- phenotype_susceptibility(
     lineage = lineage,
     phenotype = "gram_stain",
     susceptibility = c(
       "Gram-positive" = "susceptible",
-      "Gram-negative" = "resistant"),
-    db = phenotype_db)
+      "Gram-negative" = "resistant"
+    ),
+    db = phenotype_db
+  )
   abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
     antibiotic = "vancomycin",
-    db = antibiotic_db)
+    db = antibiotic_db
+  )
   ifelse(is.na(abx_sus), ph_sus, abx_sus)
 }
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-antibiotic_susceptibility_tetracycline <- function (lineage,
-                                         antibiotic_db = whatbacteria::taxon_susceptibility) {
+antibiotic_susceptibility_tetracycline <- function(
+  lineage,
+  antibiotic_db = whatbacteria::taxon_susceptibility
+) {
   intrinsic_sus <- rep("susceptible", length(lineage))
   abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
     antibiotic = "tetracycline",
-    db = antibiotic_db)
+    db = antibiotic_db
+  )
   ifelse(is.na(abx_sus), intrinsic_sus, abx_sus)
 }
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-antibiotic_susceptibility_penicillin <- function(lineage,
-                                      antibiotic_db = whatbacteria::taxon_susceptibility) {
+antibiotic_susceptibility_penicillin <- function(
+  lineage,
+  antibiotic_db = whatbacteria::taxon_susceptibility
+) {
   intrinsic_sus <- rep("susceptible", length(lineage))
   abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
     antibiotic = "penicillin",
-    db = antibiotic_db)
+    db = antibiotic_db
+  )
   ifelse(is.na(abx_sus), intrinsic_sus, abx_sus)
 }
 
 #' @rdname antibiotic_specific_susceptibility
 #' @export
-antibiotic_susceptibility_aminoglycoside <- function (lineage,
-                                           antibiotic_db = whatbacteria::taxon_susceptibility,
-                                           phenotype_db = whatbacteria::taxon_phenotypes) {
-  gram_stain_db <- whatbacteria::taxon_phenotypes[,c("taxon", "rank", "gram_stain")]
+antibiotic_susceptibility_aminoglycoside <- function(
+  lineage,
+  antibiotic_db = whatbacteria::taxon_susceptibility,
+  phenotype_db = whatbacteria::taxon_phenotypes
+) {
+  gram_stain_db <- whatbacteria::taxon_phenotypes[, c("taxon", "rank", "gram_stain")]
   colnames(gram_stain_db)[3] <- "value"
   gram_stain_phenotype <- whatbacteria::match_annotation(lineage, gram_stain_db)
 
-  aerobic_status_db <- whatbacteria::taxon_phenotypes[,c("taxon", "rank", "aerobic_status")]
+  aerobic_status_db <- whatbacteria::taxon_phenotypes[, c("taxon", "rank", "aerobic_status")]
   colnames(aerobic_status_db)[3] <- "value"
   aerobic_status_phenotype <- whatbacteria::match_annotation(lineage, aerobic_status_db)
 
   combined_phenotype <- ifelse(
     is.na(gram_stain_phenotype) | is.na(aerobic_status_phenotype),
     NA_character_,
-    paste(gram_stain_phenotype, aerobic_status_phenotype))
+    paste(gram_stain_phenotype, aerobic_status_phenotype)
+  )
   susceptibility <- c(
     "Gram-negative aerobe" = "susceptible",
     "Gram-negative facultative anaerobe" = "susceptible",
     "Gram-negative obligate anaerobe" = "resistant",
     "Gram-positive aerobe" = "resistant",
     "Gram-positive facultative anaerobe" = "resistant",
-    "Gram-positive obligate anaerobe" = "resistant")
+    "Gram-positive obligate anaerobe" = "resistant"
+  )
   ph_sus <- susceptibility[combined_phenotype]
 
   abx_sus <- antibiotic_susceptibility(
     lineage = lineage,
     antibiotic = "aminoglycoside",
-    db = antibiotic_db)
+    db = antibiotic_db
+  )
 
   ifelse(is.na(abx_sus), ph_sus, abx_sus)
 }

@@ -23,12 +23,15 @@
 #' @examples
 #' antibiotic_susceptibility(
 #'   c("Enterococcus faecalis", "Lactobacillus", "Lactobacillus delbrueckii"),
-#'   "vancomycin")
+#'   "vancomycin"
+#' )
 #' @name antibiotic_susceptibility
 #' @export
-antibiotic_susceptibility <- function (lineage,
-                                       antibiotic,
-                                       db = whatbacteria::taxon_susceptibility) {
+antibiotic_susceptibility <- function(
+  lineage,
+  antibiotic,
+  db = whatbacteria::taxon_susceptibility
+) {
   whatbacteria::what_antibiotic(lineage, antibiotic, db)
 }
 
@@ -64,13 +67,16 @@ antibiotic_susceptibility <- function (lineage,
 #' phenotype_susceptibility(
 #'   c("Bacteroidetes", "Firmicutes", "Firmicutes; Negativicutes"),
 #'   "gram_stain",
-#'   c("Gram-positive" = "susceptible", "Gram-negative" = "resistant"))
+#'   c("Gram-positive" = "susceptible", "Gram-negative" = "resistant")
+#' )
 #' @name phenotype_susceptibility
 #' @export
-phenotype_susceptibility <- function (lineage,
-                                      phenotype,
-                                      susceptibility,
-                                      db = whatbacteria::taxon_phenotypes) {
+phenotype_susceptibility <- function(
+  lineage,
+  phenotype,
+  susceptibility,
+  db = whatbacteria::taxon_phenotypes
+) {
   phenotype_values <- whatbacteria::what_phenotype(lineage, phenotype, db)
   susceptibility_values <- susceptibility[phenotype_values]
   susceptibility_values <- unname(susceptibility_values)

@@ -14,88 +14,108 @@
 #'   "gram_stain", and "aerobic_status"
 #' @name mirix_antibiotic
 #' @examples
-#' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22",]
+#' h22 <- weiss2021_data[weiss2021_data$sample_id %in% "Healthy.22", ]
 #' mirix_vancomycin(h22$proportion, h22$lineage)
 NULL
 
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_vancomycin <- function(abundance,
-                             lineage,
-                             replace_zero = 1e-4,
-                             antibiotic_db = whatbacteria::taxon_susceptibility,
-                             phenotype_db = whatbacteria::taxon_phenotypes) {
+mirix_vancomycin <- function(
+  abundance,
+  lineage,
+  replace_zero = 1e-4,
+  antibiotic_db = whatbacteria::taxon_susceptibility,
+  phenotype_db = whatbacteria::taxon_phenotypes
+) {
   susceptibility <- antibiotic_susceptibility_vancomycin(
-    lineage, antibiotic_db, phenotype_db)
+    lineage, antibiotic_db, phenotype_db
+  )
   mirix(abundance, susceptibility, replace_zero)
 }
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_doxycycline <- function(abundance,
-                               lineage,
-                               replace_zero = 1e-4,
-                               antibiotic_db = whatbacteria::taxon_susceptibility) {
+mirix_doxycycline <- function(
+  abundance,
+  lineage,
+  replace_zero = 1e-4,
+  antibiotic_db = whatbacteria::taxon_susceptibility
+) {
   susceptibility <- antibiotic_susceptibility_tetracycline(
-    lineage, antibiotic_db)
+    lineage, antibiotic_db
+  )
   mirix(abundance, susceptibility, replace_zero)
 }
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_amoxicillin <- function(abundance,
-                             lineage,
-                             replace_zero = 1e-4,
-                             antibiotic_db = whatbacteria::taxon_susceptibility) {
+mirix_amoxicillin <- function(
+  abundance,
+  lineage,
+  replace_zero = 1e-4,
+  antibiotic_db = whatbacteria::taxon_susceptibility
+) {
   susceptibility <- antibiotic_susceptibility_penicillin(
-    lineage, antibiotic_db)
+    lineage, antibiotic_db
+  )
   mirix(abundance, susceptibility, replace_zero)
 }
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_metronidazole <- function(abundance,
-                            lineage,
-                            replace_zero = 1e-4,
-                            phenotype_db = whatbacteria::taxon_phenotypes) {
+mirix_metronidazole <- function(
+  abundance,
+  lineage,
+  replace_zero = 1e-4,
+  phenotype_db = whatbacteria::taxon_phenotypes
+) {
   susceptibility <- phenotype_susceptibility(
     lineage = lineage,
     phenotype = "aerobic_status",
     susceptibility = c(
       "aerobe" = "resistant",
       "facultative anaerobe" = "resistant",
-      "obligate anaerobe" = "susceptible"),
-    db = phenotype_db)
+      "obligate anaerobe" = "susceptible"
+    ),
+    db = phenotype_db
+  )
   mirix(abundance, susceptibility, replace_zero)
 }
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_ciprofloxacin <- function(abundance,
-                          lineage,
-                          replace_zero = 1e-4,
-                          phenotype_db = whatbacteria::taxon_phenotypes) {
+mirix_ciprofloxacin <- function(
+  abundance,
+  lineage,
+  replace_zero = 1e-4,
+  phenotype_db = whatbacteria::taxon_phenotypes
+) {
   susceptibility <- phenotype_susceptibility(
     lineage = lineage,
     phenotype = "aerobic_status",
     susceptibility = c(
       "aerobe" = "susceptible",
       "facultative anaerobe" = "susceptible",
-      "obligate anaerobe" = "resistant"),
-    db = phenotype_db)
+      "obligate anaerobe" = "resistant"
+    ),
+    db = phenotype_db
+  )
   mirix(abundance, susceptibility, replace_zero)
 }
 
 #' @rdname mirix_antibiotic
 #' @export
-mirix_gentamicin <- function(abundance,
-                                 lineage,
-                                 replace_zero = 1e-4,
-                                 antibiotic_db = whatbacteria::taxon_susceptibility,
-                                 phenotype_db = whatbacteria::taxon_phenotypes) {
+mirix_gentamicin <- function(
+  abundance,
+  lineage,
+  replace_zero = 1e-4,
+  antibiotic_db = whatbacteria::taxon_susceptibility,
+  phenotype_db = whatbacteria::taxon_phenotypes
+) {
   susceptibility <- antibiotic_susceptibility_aminoglycoside(
-    lineage, antibiotic_db, phenotype_db)
+    lineage, antibiotic_db, phenotype_db
+  )
   mirix(abundance, susceptibility, replace_zero)
 }
 
@@ -114,12 +134,13 @@ mirix_gentamicin <- function(abundance,
 #' @import whatbacteria
 #' @return The MiRIx value
 #' @export
-mirix <- function (abundance, susceptibility, replace_zero = 1e-4) {
+mirix <- function(abundance, susceptibility, replace_zero = 1e-4) {
   x_susceptible <- sum(abundance[susceptibility %in% "susceptible"])
   x_resistant <- sum(abundance[susceptibility %in% "resistant"])
   if ((x_resistant < replace_zero) && (x_susceptible < replace_zero)) {
     warning(
-      "Numerator and denominator both less than the zero-replacement value.")
+      "Numerator and denominator both less than the zero-replacement value."
+    )
   }
   x_susceptible <- max(x_susceptible, replace_zero)
   x_resistant <- max(x_resistant, replace_zero)
