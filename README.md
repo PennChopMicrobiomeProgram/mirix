@@ -50,9 +50,9 @@ set of healthy children in a similar age group for comparison. Here is a
 summary of the number of samples in each time window:
 
 ``` r
-weiss2021_data %>%
-  distinct(sample_id, study_group, study_window) %>%
-  count(study_group, study_window) %>%
+weiss2021_data |>
+  distinct(sample_id, study_group, study_window) |>
+  count(study_group, study_window) |>
   knitr::kable()
 ```
 
@@ -72,9 +72,9 @@ sample, the sequencing results indicated the following types of
 bacteria:
 
 ``` r
-weiss2021_data %>%
-  filter(sample_id %in% "Sepsis.19019.A") %>%
-  select(lineage, proportion) %>%
+weiss2021_data |>
+  filter(sample_id %in% "Sepsis.19019.A") |>
+  select(lineage, proportion) |>
   knitr::kable()
 ```
 
@@ -112,11 +112,11 @@ Let’s compute the vancomycin response index for each sample in the
 study.
 
 ``` r
-weiss2021_vanc <- weiss2021_data %>%
-  group_by(sample_id, study_group, study_window) %>%
+weiss2021_vanc <- weiss2021_data |>
+  group_by(sample_id, study_group, study_window) |>
   summarise(vanc = mirix_vancomycin(proportion, lineage), .groups = "drop")
 
-weiss2021_vanc %>%
+weiss2021_vanc |>
   ggplot(aes(x=study_window, y = vanc)) +
   geom_boxplot() +
   facet_grid(~ study_group, scales = "free_x", space = "free_x") +
@@ -140,10 +140,10 @@ susceptibility for each lineage. Let’s list out the susceptibility for
 the lineages in the sample from subject 19019:
 
 ``` r
-weiss2021_data %>%
-  filter(sample_id %in% "Sepsis.19019.A") %>%
-  mutate(susceptibility = antibiotic_susceptibility_vancomycin(lineage)) %>%
-  select(lineage, susceptibility) %>%
+weiss2021_data |>
+  filter(sample_id %in% "Sepsis.19019.A") |>
+  mutate(susceptibility = antibiotic_susceptibility_vancomycin(lineage)) |>
+  select(lineage, susceptibility) |>
   knitr::kable()
 ```
 
@@ -183,7 +183,7 @@ cover many taxa encountered in the human microbiome. It is here where we
 note that the *Firmicutes* are generally Gram-positive.
 
 ``` r
-whatbacteria::taxon_phenotypes %>%
+whatbacteria::taxon_phenotypes |>
   filter(taxon %in% "Firmicutes")
 #>        taxon   rank aerobic_status    gram_stain                     doi
 #> 1 Firmicutes Phylum           <NA> Gram-positive 10.1099/00207713-28-1-1
@@ -195,7 +195,7 @@ example, where we note that *Lactobacillus* species are typically
 resistant to vancomycin.
 
 ``` r
-whatbacteria::taxon_susceptibility %>%
+whatbacteria::taxon_susceptibility |>
   filter(taxon %in% "Lactobacillus")
 #>           taxon  rank antibiotic     value                  doi
 #> 1 Lactobacillus Genus vancomycin resistant 10.1128/AEM.01738-18
@@ -222,10 +222,10 @@ We’ll use a healthy control sample, `Healthy.6`, to demonstrate. First,
 we’ll calculate the susceptibility to vancomycin for each lineage.
 
 ``` r
-healthy6_data <- weiss2021_data %>%
-  filter(sample_id %in% "Healthy.6") %>%
-  mutate(taxon = word(lineage, -1)) %>%
-  mutate(taxon = fct_reorder(taxon, proportion)) %>%
+healthy6_data <- weiss2021_data |>
+  filter(sample_id %in% "Healthy.6") |>
+  mutate(taxon = word(lineage, -1)) |>
+  mutate(taxon = fct_reorder(taxon, proportion)) |>
   mutate(susceptibility = antibiotic_susceptibility_vancomycin(lineage))
 ```
 
@@ -234,7 +234,7 @@ based on proportion in the sample, to aid in plotting. Here is a chart
 of the taxon abundances and their susceptibility.
 
 ``` r
-healthy6_data %>%
+healthy6_data |>
   ggplot(aes(x = proportion, y = taxon, shape = susceptibility)) +
   geom_point() +
   scale_x_log10() +
@@ -250,7 +250,7 @@ vancomycin, thus it’s not surprising that the vancomycin index for the
 sample is posgative.
 
 ``` r
-healthy6_data %>%
+healthy6_data |>
   summarise(vanc = mirix_vancomycin(proportion, lineage))
 #> # A tibble: 1 × 1
 #>    vanc
@@ -263,11 +263,11 @@ a negative value, say -0.5? We can use `predict_abundance()` to run the
 calculation.
 
 ``` r
-healthy6_data %>%
-  mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) %>%
-  rename(observed = proportion) %>%
+healthy6_data |>
+  mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) |>
+  rename(observed = proportion) |>
   pivot_longer(
-    c(observed, predicted), names_to = "method", values_to = "abundance") %>%
+    c(observed, predicted), names_to = "method", values_to = "abundance") |>
   ggplot(aes(x = abundance, y = taxon, color = method, shape = susceptibility)) +
   geom_point() +
   scale_x_log10() +
@@ -287,8 +287,8 @@ To finish, let’s re-calculate the vancomycin index for our predicted
 abundances, so we can verify that it has the expected value of -0.5.
 
 ``` r
-healthy6_data %>%
-  mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) %>%
+healthy6_data |>
+  mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) |>
   summarise(vanc = mirix_vancomycin(predicted, lineage))
 #> # A tibble: 1 × 1
 #>    vanc
