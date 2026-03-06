@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%")
+  out.width = "100%"
+)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -32,7 +33,7 @@ susceptibility to an antibiotic.
 You can install the development version of mirix with `devtools`:
 
 ```{r eval=FALSE}
-#install.packages("devtools")
+# install.packages("devtools")
 devtools::install_github("PennChopMicrobiomeProgram/mirix")
 ```
 
@@ -108,9 +109,9 @@ weiss2021_vanc <- weiss2021_data |>
   summarise(vanc = mirix_vancomycin(proportion, lineage), .groups = "drop")
 
 weiss2021_vanc |>
-  ggplot(aes(x=study_window, y = vanc)) +
+  ggplot(aes(x = study_window, y = vanc)) +
   geom_boxplot() +
-  facet_grid(~ study_group, scales = "free_x", space = "free_x") +
+  facet_grid(~study_group, scales = "free_x", space = "free_x") +
   labs(x = "Study window", y = "Vancomycin-specific index")
 ```
 
@@ -231,7 +232,9 @@ healthy6_data |>
   mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) |>
   rename(observed = proportion) |>
   pivot_longer(
-    c(observed, predicted), names_to = "method", values_to = "abundance") |>
+    c(observed, predicted),
+    names_to = "method", values_to = "abundance"
+  ) |>
   ggplot(aes(x = abundance, y = taxon, color = method, shape = susceptibility)) +
   geom_point() +
   scale_x_log10() +
@@ -252,4 +255,3 @@ healthy6_data |>
   mutate(predicted = predict_abundance(-0.5, proportion, susceptibility)) |>
   summarise(vanc = mirix_vancomycin(predicted, lineage))
 ```
-
