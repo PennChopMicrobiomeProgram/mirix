@@ -157,3 +157,10 @@ test_that("mirix_metronidazole and mirix_ciprofloxacin are inverses", {
     -mirix_ciprofloxacin(weiss_healthy$proportion, weiss_healthy$lineage)
   )
 })
+
+test_that("mirix warns when numerator and denominator are both very small", {
+  expect_warning(
+    mirix(c(1e-5, 1e-5), c("resistant", "susceptible")),
+    "Numerator and denominator"
+  )
+})
