@@ -1,101 +1,127 @@
 gram_stain_db <- data.frame(
   taxon = c(
     "Actinobacteria", "Bacteroidetes", "Firmicutes",
-    "Negativicutes", "Proteobacteria"),
+    "Negativicutes", "Proteobacteria"
+  ),
   rank = c("Phylum", "Phylum", "Phylum", "Class", "Phylum"),
   gram_stain = c(
     "Gram-positive", "Gram-negative", "Gram-positive",
-    "Gram-negative", "Gram-negative"),
-  stringsAsFactors = FALSE)
+    "Gram-negative", "Gram-negative"
+  ),
+  stringsAsFactors = FALSE
+)
 
 gram_stain_aerobic_status_db <- data.frame(
   taxon = c(
     "Rothia aerobat", "Enterococcus", "Blautia", "Lactobacillus acidophilus",
-    "Bradyrhizobium", "Rothia", "Actinobacteria"),
+    "Bradyrhizobium", "Rothia", "Actinobacteria"
+  ),
   rank = c(
-    "Species", "Genus", "Genus", "Species", "Genus", "Genus", "Phylum"),
+    "Species", "Genus", "Genus", "Species", "Genus", "Genus", "Phylum"
+  ),
   aerobic_status = c(
     "aerobe", "facultative anaerobe", "obligate anaerobe", NA, "aerobe",
-    "aerobe", NA),
+    "aerobe", NA
+  ),
   gram_stain = c(
     "Gram-positive", "Gram-positive", "Gram-positive", "Gram-positive",
-    "Gram-negative", NA, "Gram-positive"),
-  stringsAsFactors = FALSE)
+    "Gram-negative", NA, "Gram-positive"
+  ),
+  stringsAsFactors = FALSE
+)
 
 vancomycin_db <- data.frame(
   taxon = c(
     "Lactobacillus", "Enterococcus flavescens", "Lactobacillus delbrueckii",
-    "Lactobacillus lactis", "Lactobacillus casei"),
+    "Lactobacillus lactis", "Lactobacillus casei"
+  ),
   rank = c("Genus", "Species", "Species", "Species", "Species"),
   value = c(
-    "resistant", "resistant", "susceptible", "susceptible", "resistant"),
+    "resistant", "resistant", "susceptible", "susceptible", "resistant"
+  ),
   antibiotic = "vancomycin",
-  stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 tetracycline_db <- data.frame(
   taxon = c("Escherichia coli", "Enterococcus faecalis", "Klebsiella"),
   rank = c("Species", "Species", "Genus"),
   value = c("resistant", "resistant", "susceptible"),
   antibiotic = "tetracycline",
-  stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
-penicillin_db <-data.frame(
+penicillin_db <- data.frame(
   taxon = c(
     "Bacteroides", "Stenotrophomonas maltophilia",
     "Enterococcus faecalis", "Enterococcus faecium",
-    "Escherichia coli", "Mycoplasma"),
+    "Escherichia coli", "Mycoplasma"
+  ),
   rank = c("Genus", "Species", "Species", "Species", "Species", "Genus"),
   value = c(
     "resistant", "resistant", "resistant", "resistant", "resistant",
-    "resistant"),
+    "resistant"
+  ),
   antibiotic = "penicillin",
-  stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 aminoglycoside_db <- data.frame(
   taxon = "Staphylococcus",
   rank = "Genus",
   value = "susceptible",
   antibiotic = "aminoglycoside",
-  stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 test_antibiotic_db <- rbind(
-  vancomycin_db, tetracycline_db, penicillin_db, aminoglycoside_db)
+  vancomycin_db, tetracycline_db, penicillin_db, aminoglycoside_db
+)
 
 test_that("antibiotic_susceptibility_vancomycin works for selected taxa", {
   lineage <- c(
     "Firmicutes; Enterococcus faecalis",
     "Firmicutes; Lactobacillus",
-    "Firmicutes; Lactobacillus; Lactobacillus delbrueckii")
+    "Firmicutes; Lactobacillus; Lactobacillus delbrueckii"
+  )
   expect_equal(
     antibiotic_susceptibility_vancomycin(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db,
-      phenotype_db = gram_stain_db),
-    c("susceptible", "resistant", "susceptible"))
+      phenotype_db = gram_stain_db
+    ),
+    c("susceptible", "resistant", "susceptible")
+  )
 })
 
 test_that("antibiotic_susceptibility_tetracycline works for selected taxa", {
   lineage <- c(
     "Firmicutes; Enterococcus faecalis",
     "Firmicutes; Lactobacillus",
-    "Proteobacteria; Klebsiella; Klebsiella pneumoniae")
+    "Proteobacteria; Klebsiella; Klebsiella pneumoniae"
+  )
   expect_equal(
     antibiotic_susceptibility_tetracycline(
       lineage = lineage,
-      antibiotic_db = test_antibiotic_db),
-    c("resistant", "susceptible", "susceptible"))
+      antibiotic_db = test_antibiotic_db
+    ),
+    c("resistant", "susceptible", "susceptible")
+  )
 })
 
 test_that("antibiotic_susceptibility_penicillin works for selected taxa", {
   lineage <- c(
     "Firmicutes; Enterococcus faecalis",
     "Firmicutes; Lactobacillus",
-    "Proteobacteria; Klebsiella; Klebsiella pneumoniae")
+    "Proteobacteria; Klebsiella; Klebsiella pneumoniae"
+  )
   expect_equal(
     antibiotic_susceptibility_penicillin(
       lineage = lineage,
-      antibiotic_db = test_antibiotic_db),
-    c("resistant", "susceptible", "susceptible"))
+      antibiotic_db = test_antibiotic_db
+    ),
+    c("resistant", "susceptible", "susceptible")
+  )
 })
 
 test_that("antibiotic_susceptibility_aminoglycoside works for selected taxa", {
@@ -103,11 +129,14 @@ test_that("antibiotic_susceptibility_aminoglycoside works for selected taxa", {
     "Staphylococcus epidermidis",
     "Rothia", # Not enough info to determine both phenotypes, should be NA
     "Actinobacteria; Rothia",
-    "Bacteroides vulgatus")
+    "Bacteroides vulgatus"
+  )
   expect_equal(
     antibiotic_susceptibility_aminoglycoside(
       lineage = lineage,
       antibiotic_db = test_antibiotic_db,
-      phenotype_db = gram_stain_aerobic_status_db),
-    c("susceptible", NA, "resistant", "resistant"))
+      phenotype_db = gram_stain_aerobic_status_db
+    ),
+    c("susceptible", NA, "resistant", "resistant")
+  )
 })

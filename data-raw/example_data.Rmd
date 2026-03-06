@@ -7,7 +7,8 @@ library(usethis)
 ```{r}
 weiss2021_data <- read_csv(
   "weiss2021_data.csv",
-  col_types = cols(study_window = col_character()))
+  col_types = cols(study_window = col_character())
+)
 ```
 
 ```{r}

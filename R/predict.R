@@ -8,14 +8,14 @@
 #'   \code{index_value} is a vector longer than 1, this function returns a
 #'   matrix, where each column contains the predicted abundances.
 #' @export
-predict_abundance <- function (index_value, abundance, susceptibility) {
+predict_abundance <- function(index_value, abundance, susceptibility) {
   is_resistant <- susceptibility %in% "resistant"
   is_susceptible <- susceptibility %in% "susceptible"
   old_total_resistant <- sum(abundance[is_resistant])
   old_total_susceptible <- sum(abundance[is_susceptible])
   total <- old_total_resistant + old_total_susceptible
 
-  adjust_abundance <- function (val) {
+  adjust_abundance <- function(val) {
     p_susceptible <- logistic(val, base = 10)
     p_resistant <- 1 - p_susceptible
     new_total_resistant <- total * p_resistant
@@ -35,7 +35,7 @@ predict_abundance <- function (index_value, abundance, susceptibility) {
   }
 }
 
-logistic <- function (x, base = exp(1)) {
-  ex <- 10 ^ x
+logistic <- function(x, base = exp(1)) {
+  ex <- base^x
   ex / (ex + 1)
 }
