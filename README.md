@@ -123,7 +123,7 @@ weiss2021_vanc %>%
   labs(x = "Study window", y = "Vancomycin-specific index")
 ```
 
-![](tools/readme/weiss_vancomycin_index-1.png)<!-- -->
+<img src="man/figures/README-weiss_vancomycin_index-1.png" alt="" width="100%" />
 
 For healthy children, the median value of the index is about -0.2,
 whereas it is roughly -0.85 across the samples from children with
@@ -241,7 +241,7 @@ healthy6_data %>%
   scale_shape_manual(values = c(1, 19), na.value = 3)
 ```
 
-![](tools/readme/weiss_healthy6-1.png)<!-- -->
+<img src="man/figures/README-weiss_healthy6-1.png" alt="" width="100%" />
 
 Most taxa in the sample are annotated as susceptible to vancomycin,
 including the most abundant taxon, *Ruminococcaceae*. One taxon, RF39,
@@ -275,7 +275,7 @@ healthy6_data %>%
   scale_color_brewer(palette = "Paired")
 ```
 
-![](tools/readme/weiss_healthy6_prediction-1.png)<!-- -->
+<img src="man/figures/README-weiss_healthy6_prediction-1.png" alt="" width="100%" />
 
 Here, we can see that the abundances have increased for the resistant
 taxa, such as *Bacteroides* (near the top) and *Enterobacteriaceae* (at
